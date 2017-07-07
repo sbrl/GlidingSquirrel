@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GlidingSquirrel
+namespace SBRL.GlidingSquirrel
 {
 	class MainClass
 	{
