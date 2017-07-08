@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
@@ -53,7 +54,10 @@ namespace SBRL.GlidingSquirrel
 
 		public async Task HandleClient(TcpClient client)
 		{
+			StreamReader source = new StreamReader(client.GetStream());
+			StreamWriter destination = new StreamWriter(client.GetStream());
 
+			HttpRequest request = await HttpRequest.FromStream(source);
 		}
 	}
 }

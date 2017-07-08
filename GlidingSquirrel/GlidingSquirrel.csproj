@@ -40,6 +40,8 @@
     <Compile Include="HttpServer.cs" />
     <Compile Include="HttpRequest.cs" />
     <Compile Include="HttpMethod.cs" />
+    <Compile Include="HttpResponse.cs" />
+    <Compile Include="HttpResponseCode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
