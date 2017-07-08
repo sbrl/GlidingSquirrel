@@ -18,6 +18,19 @@ namespace SBRL.GlidingSquirrel
 		{
 		}
 
+		public async Task SetBody(string body)
+		{
+			MemoryStream ms = new MemoryStream();
+			StreamWriter msInput = new StreamWriter(ms) { AutoFlush = true };
+			await msInput.WriteAsync(body);
+			ms.Position = 0;
+			Body = new StreamReader(ms);
+		}
+
+		/// <summary>
+		/// Sends this HttpResponse to the specified destination.
+		/// </summary>
+		/// <param name="destination">The StreamWriter to send the response to.</param>
 		public async Task SendTo(StreamWriter destination)
 		{
 			// Write the first line out

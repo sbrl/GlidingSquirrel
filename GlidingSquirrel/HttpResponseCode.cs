@@ -19,6 +19,7 @@ namespace SBRL.GlidingSquirrel
 		public static HttpResponseCode TemporaryRedirect = new HttpResponseCode(307, "Temporary Redirect");
 		public static HttpResponseCode PremanentRedirect = new HttpResponseCode(308, "Premanent Redirect");
 
+		public static HttpResponseCode BadRequest = new HttpResponseCode(400, "Bad Request");
 		public static HttpResponseCode Unauthorised = new HttpResponseCode(401, "Unauthorised");
 		public static HttpResponseCode Forbidden = new HttpResponseCode(403, "Forbidden");
 		public static HttpResponseCode NotFound = new HttpResponseCode(404, "Not Found");
