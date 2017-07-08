@@ -49,6 +49,7 @@ namespace SBRL.GlidingSquirrel
 			Console.WriteLine("done");
 			Log.WriteLine($"Listening for requests on http://{BindEndpoint}");
 
+			await setup();
 
 			while(true)
 			{
@@ -110,6 +111,8 @@ namespace SBRL.GlidingSquirrel
 			await response.SendTo(destination);
 			client.Close();
 		}
+
+		protected abstract Task setup();
 
 		public abstract Task HandleRequest(HttpRequest request, HttpResponse response);
 	}

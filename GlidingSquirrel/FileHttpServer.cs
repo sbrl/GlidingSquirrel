@@ -9,11 +9,19 @@ namespace SBRL.GlidingSquirrel
 	{
 		public readonly string WebRoot = ".";
 
-		public FileHttpServer(IPAddress inBindAddress, int inPort) : base(inBindAddress, inPort)
+		public FileHttpServer(IPAddress inBindAddress, int inPort, string inWebRoot) : base(inBindAddress, inPort)
+		{
+			WebRoot = inWebRoot;
+		}
+		public FileHttpServer(int inPort, string inWebRoot) : this(IPAddress.IPv6Any, inPort, inWebRoot)
 		{
 		}
-		public FileHttpServer(int inPort) : this(IPAddress.IPv6Any, inPort)
+
+		protected override Task setup()
 		{
+			Log.WriteLine($"Webroot set to {WebRoot}");
+
+			return Task.CompletedTask;
 		}
 
 		public override async Task HandleRequest(HttpRequest request, HttpResponse response)
