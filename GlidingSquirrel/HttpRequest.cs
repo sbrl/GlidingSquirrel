@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Net;
 
 namespace SBRL.GlidingSquirrel
 {
 	public class HttpRequest
 	{
+		public IPEndPoint ClientAddress;
+
 		public float HttpVersion;
 		public HttpMethod Method;
 		public string Url;
@@ -15,13 +18,12 @@ namespace SBRL.GlidingSquirrel
 		public Dictionary<string, string> Headers;
 		public string ContentType {
 			get {
-				return Headers["content-type"] ?? "application/octet-stream";
+				return Headers.ContainsKey("content-type") ? Headers["content-type"] : "application/octet-stream";
 			}
 		}
 		public int ContentLength {
 			get {
-				int result = 0;
-				int.TryParse(Headers["content-length"], out result);
+				int result = Headers.ContainsKey("content-length") ? int.Parse(Headers["content-length"]) : -1;
 				return result;
 			}
 		}
@@ -67,13 +69,16 @@ namespace SBRL.GlidingSquirrel
 		{
 			List<string> lineParts = new List<string>(firstLine.Split(' '));
 
+			float httpVersion = float.Parse(lineParts.Last().Split('/')[1]);
+			HttpMethod httpMethod = MethodFromString(lineParts.First());
+
+			lineParts.RemoveAt(0); lineParts.RemoveAt(lineParts.Count - 1);
+			string requestUrl = lineParts.Aggregate((string one, string two) => $"{one} {two}");
+
 			return (
-				float.Parse(lineParts.Last().Split('/')[1]),
-				MethodFromString(lineParts.First()),
-				lineParts
-					.Skip(1)
-					.TakeWhile((string part, int index) => index < lineParts.Count)
-					.Aggregate((string one, string two) => $"{one} {two}")
+				httpVersion,
+				httpMethod,
+				requestUrl
 			);
 		}
 

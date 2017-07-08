@@ -26,16 +26,35 @@ namespace SBRL.GlidingSquirrel
 			}
 
 			string filePath = getFilePathFromRequestUrl(request.Url);
-			FileInfo requestFileStat = new FileInfo(filePath);
-			if(!requestFileStat.Exists)
+			if(!File.Exists(filePath))
 			{
 				response.ResponseCode = HttpResponseCode.NotFound;
+				await response.SetBody($"Error: The file path '{request.Url}' could not be found.\n");
+				return;
+			}
+
+			FileInfo requestFileStat = null;
+			try {
+				requestFileStat = new FileInfo(filePath);
+			}
+			catch(UnauthorizedAccessException error) {
+				response.ResponseCode = HttpResponseCode.Forbidden;
+				await response.SetBody(
+					"Unfortunately, the server was unable to access the file requested.\n" + 
+					"Details:\n\n" + 
+					error.ToString() + 
+					"\n"
+				);
+				return;
 			}
 
 			response.Headers.Add("content-type", mimeLookup.Lookup(filePath));
 			response.Headers.Add("content-length", requestFileStat.Length.ToString());
 
-			response.Body = new StreamReader(filePath);
+			if(request.Method == HttpMethod.GET)
+			{
+				response.Body = new StreamReader(filePath);
+			}
 		}
 
 		protected string getFilePathFromRequestUrl(string requestUrl)

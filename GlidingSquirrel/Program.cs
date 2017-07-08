@@ -6,7 +6,8 @@ namespace SBRL.GlidingSquirrel
 	{
 		public static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World!");
+			FileHttpServer server = new FileHttpServer(60606);
+			server.Start().Wait();
 		}
 	}
 }

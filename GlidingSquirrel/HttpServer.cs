@@ -12,8 +12,18 @@ namespace SBRL.GlidingSquirrel
 	{
 		public static readonly string Version = "0.1-alpha";
 
-		public IPAddress BindAddress { get; private set; }
-		public int Port { get; private set; }
+		public readonly IPAddress BindAddress;
+		public readonly int Port;
+
+		public string BindEndpoint {
+			get {
+				string result = BindAddress.ToString();
+				if(result.Contains(":"))
+					result = $"[{result}]";
+				result += $":{Port}";
+				return result;
+			}
+		}
 
 		protected TcpListener server;
 
@@ -30,7 +40,15 @@ namespace SBRL.GlidingSquirrel
 
 		public async Task Start()
 		{
+			Log.WriteLine($"GlidingSquirrel v{Version}");
+			Log.Write("Starting server - ");
+
 			server = new TcpListener(new IPEndPoint(BindAddress, Port));
+			server.Start();
+
+			Console.WriteLine("done");
+			Log.WriteLine($"Listening for requests on http://{BindEndpoint}");
+
 
 			while(true)
 			{
@@ -63,6 +81,7 @@ namespace SBRL.GlidingSquirrel
 			StreamWriter destination = new StreamWriter(client.GetStream()) { AutoFlush = true };
 
 			HttpRequest request = await HttpRequest.FromStream(source);
+			request.ClientAddress = client.Client.RemoteEndPoint as IPEndPoint;
 			HttpResponse response = new HttpResponse();
 
 			response.Headers.Add("server", $"GlidingSquirrel/{Version}");
@@ -79,6 +98,14 @@ namespace SBRL.GlidingSquirrel
 					$"{error.ToString()}"
 				);
 			}
+
+			Log.WriteLine(
+				"{0} [{1}] [{2}] {3}",
+				request.ClientAddress,
+				request.Method.ToString(),
+				response.ResponseCode,
+				request.Url
+			);
 
 			await response.SendTo(destination);
 			client.Close();

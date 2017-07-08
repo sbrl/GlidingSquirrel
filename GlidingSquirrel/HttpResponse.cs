@@ -25,6 +25,7 @@ namespace SBRL.GlidingSquirrel
 			await msInput.WriteAsync(body);
 			ms.Position = 0;
 			Body = new StreamReader(ms);
+			Headers.Add("content-length", body.Length.ToString());
 		}
 
 		/// <summary>
@@ -46,11 +47,20 @@ namespace SBRL.GlidingSquirrel
 
 			await destination.WriteAsync("\r\n");
 
-			// Use a buffer to send the file in chunks
-			byte[] buffer = new byte[ReadBufferSize];
-			int lastReadSize;
-			while((lastReadSize = await Body.BaseStream.ReadAsync(buffer, 0, ReadBufferSize)) < ReadBufferSize)
-				await destination.BaseStream.WriteAsync(buffer, 0, lastReadSize);
+			if(Body != null)
+			{
+				// Use a buffer to send the file in chunks
+				byte[] buffer = new byte[ReadBufferSize];
+				int lastReadSize;
+				while(true)
+				{
+					lastReadSize = await Body.BaseStream.ReadAsync(buffer, 0, ReadBufferSize);
+					await destination.BaseStream.WriteAsync(buffer, 0, lastReadSize);
+
+					if(lastReadSize < ReadBufferSize)
+						break;
+				}
+			}
 		}
 	}
 }

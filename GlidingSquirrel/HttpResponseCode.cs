@@ -12,6 +12,11 @@ namespace SBRL.GlidingSquirrel
 			Message = inMessage;
 		}
 
+		public override string ToString()
+		{
+			return $"{Code} {Message}";
+		}
+
 		// todo Fill more of these out
 		public static HttpResponseCode Ok = new HttpResponseCode(200, "OK");
 

@@ -46,6 +46,8 @@
     <Compile Include="HttpResponse.cs" />
     <Compile Include="HttpResponseCode.cs" />
     <Compile Include="FileHttpServer.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Env.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
