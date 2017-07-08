@@ -56,7 +56,7 @@ namespace SBRL.GlidingSquirrel
 				return;
 			}
 
-			response.Headers.Add("content-type", mimeLookup.Lookup(filePath));
+			response.Headers.Add("content-type", LookupMimeType(filePath));
 			response.Headers.Add("content-length", requestFileStat.Length.ToString());
 
 			if(request.Method == HttpMethod.GET)

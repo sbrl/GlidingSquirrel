@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -27,7 +28,10 @@ namespace SBRL.GlidingSquirrel
 
 		protected TcpListener server;
 
-		protected Mime mimeLookup = new Mime();
+		private Mime mimeLookup = new Mime();
+		public Dictionary<string, string> MimeTypeOverrides = new Dictionary<string, string>() {
+			[".html"] = "text/html"
+		};
 
 		public HttpServer(IPAddress inBindAddress, int inPort)
 		{
@@ -58,6 +62,27 @@ namespace SBRL.GlidingSquirrel
 			}
 		}
 
+		/// <summary>
+		/// Fetches the mime type for a given file path.
+		/// This method applies  
+		/// </summary>
+		/// <returns>The mime type for the specified file path.</returns>
+		/// <param name="filePath">The file path to lookup.</param>
+		public string LookupMimeType(string filePath)
+		{
+			string fileExtension = Path.GetExtension(filePath);
+			if(MimeTypeOverrides.ContainsKey(fileExtension))
+				return MimeTypeOverrides[fileExtension];
+			
+			return mimeLookup.Lookup(filePath);
+		}
+
+		/// <summary>
+		/// Handles requests from a specified client.
+		/// This is the root method that is called when spawning a new thread to
+		/// handle the client.
+		/// </summary>
+		/// <param name="transferredClient">The client to handle.</param>
 		protected async void HandleClientThreadRoot(object transferredClient)
 		{
 			TcpClient client = transferredClient as TcpClient;
