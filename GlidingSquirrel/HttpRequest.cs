@@ -18,13 +18,17 @@ namespace SBRL.GlidingSquirrel
 		public Dictionary<string, string> Headers;
 		public string ContentType {
 			get {
-				return Headers.ContainsKey("content-type") ? Headers["content-type"] : "application/octet-stream";
+				return GetHeaderValue("content-type", "application/octet-stream");
 			}
 		}
 		public int ContentLength {
 			get {
-				int result = Headers.ContainsKey("content-length") ? int.Parse(Headers["content-length"]) : -1;
-				return result;
+				return int.Parse(GetHeaderValue("content-length", "-1"));
+			}
+		}
+		public string Host {
+			get {
+				return GetHeaderValue("host", "");
 			}
 		}
 
@@ -34,6 +38,53 @@ namespace SBRL.GlidingSquirrel
 		public HttpRequest()
 		{
 		}
+
+		public string GetHeaderValue(string header, string defaultValue)
+		{
+			if(Headers.ContainsKey(header))
+				return header;
+			return defaultValue;
+		}
+
+		/// <summary>
+		/// Works out whether this request will accept a given mime type as a response.
+		/// </summary>
+		/// <param name="targetMimeType">The mime type to check.</param>
+		/// <returns>Whether the specified mime type is acceptable as a response to this request..</returns>
+		public bool Accepts(string targetMimeType)
+		{
+			List<string> acceptedMimes = new List<string>(GetHeaderValue("accept", "")
+				.Split(',')
+				.Select((string acceptedMimeType) => acceptedMimeType.Split(';')[0]));
+
+			string[] targetMimeParts = targetMimeType.Split('/');
+
+			if(targetMimeType.Length != 2)
+				throw new ArgumentException("Error: Mime types should contain exactly 1 forward slash.");
+
+			foreach(string acceptedMimeType in acceptedMimes)
+			{
+				string[] acceptedMimeParts = acceptedMimeType.Split('/');
+
+				// Ignore invalid mime types
+				if(acceptedMimeParts.Length != 2)
+					continue;
+
+				if(targetMimeType == acceptedMimeType)
+					return true;
+				
+				if(acceptedMimeParts[0] == "*" && acceptedMimeParts[1] == "*")
+					return true;
+
+				if(targetMimeParts[0] == acceptedMimeParts[0] && acceptedMimeParts[1] == "*")
+					return true;
+				
+			}
+
+			return false;
+		}
+
+		//--------------------------------------------------------------------------------------
 
 		public static async Task<HttpRequest> FromStream(StreamReader source)
 		{
