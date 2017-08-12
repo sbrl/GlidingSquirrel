@@ -60,12 +60,16 @@
     <Compile Include="Http\HttpResponseCode.cs" />
     <Compile Include="Http\HttpServer.cs" />
     <Compile Include="Http\PresetValues.cs" />
+    <Compile Include="Websocket\WebsocketServer.cs" />
+    <Compile Include="Websocket\WebsocketClient.cs" />
+    <Compile Include="Websocket\WebsocketEvents.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Http\" />
+    <Folder Include="Websocket\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
