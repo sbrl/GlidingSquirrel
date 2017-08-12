@@ -82,6 +82,8 @@ namespace SBRL.GlidingSquirrel.Http
 
 			// Parse the first line
 			string firstLine = await source.ReadLineAsync();
+			if(firstLine == null)
+				return null;
 			var firstLineData = ParseFirstLine(firstLine);
 
 			request.HttpVersion = firstLineData.httpVersion;

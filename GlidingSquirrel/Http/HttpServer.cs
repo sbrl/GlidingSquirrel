@@ -29,7 +29,16 @@ namespace SBRL.GlidingSquirrel.Http
 
 		protected TcpListener server;
 
+		/// <summary>
+		/// The maximum allowed length for urls.
+		/// </summary>
 		public int MaximumUrlLength = 1024 * 16; // Default: 16kb
+		/// <summary>
+		/// The maximum allowed time to wait for data from the client, in milliseconds.
+		/// After this time has elapsed the connection will be closed.
+		/// Note that this doesn't affect a connection once a websocket has been fully initialised.
+		/// </summary>
+		public int IdleTimeout = 1000 * 60;
 
 		private Mime mimeLookup = new Mime();
 		public Dictionary<string, string> MimeTypeOverrides = new Dictionary<string, string>() {
@@ -106,47 +115,68 @@ namespace SBRL.GlidingSquirrel.Http
 
 		public async Task HandleClient(TcpClient client)
 		{
+			client.ReceiveTimeout = IdleTimeout;
 			StreamReader source = new StreamReader(client.GetStream());
 			StreamWriter destination = new StreamWriter(client.GetStream()) { AutoFlush = true };
 
-			HttpRequest request = await HttpRequest.FromStream(source);
-			request.ClientAddress = client.Client.RemoteEndPoint as IPEndPoint;
-			HttpResponse response = new HttpResponse();
+			int requestsMade = 0;
 
-			// Respond with the same protocol version that the request asked for
-			response.HttpVersion = request.HttpVersion;
-			// Tell everyone what version of the gliding squirrel we are running
-			response.Headers.Add("server", $"GlidingSquirrel/{Version}");
-			// Add the date header
-			response.Headers.Add("date", DateTime.Now.ToString("R"));
-			// We don't support keep-alive just yet
-			response.Headers.Add("connection", Connection.Close);
-			// Make sure compression works as expected
-			//response.Headers.Add("vary", "accept-encoding");
-
-			// Delete the connection header if we're running http 1.0 - ref RFC2616 sec 14.10, final paragraph
-			if(request.HttpVersion <= 1.0f && request.Headers.ContainsKey("connection"))
+			while(true)
 			{
+				requestsMade++;
+
+				HttpRequest request = await HttpRequest.FromStream(source);
+				// If the request is null, then something went wrong! Well, the connection was probably closed by the client.
+				if(request == null)
+					break;
+				request.ClientAddress = client.Client.RemoteEndPoint as IPEndPoint;
+				HttpResponse response = new HttpResponse();
+
+				// Respond with the same protocol version that the request asked for
+				response.HttpVersion = request.HttpVersion;
+				// Tell everyone what version of the gliding squirrel we are running
+				response.Headers.Add("server", $"GlidingSquirrel/{Version}");
+				// Add the date header
+				response.Headers.Add("date", DateTime.Now.ToString("R"));
+				// We don't support keep-alive just yet
+				response.Headers.Add("connection", Connection.KeepAlive);
+				// Make sure compression works as expected
+				//response.Headers.Add("vary", "accept-encoding");
+
+				// Delete the connection header if we're running http 1.0 - ref RFC2616 sec 14.10, final paragraph
+				if(request.HttpVersion <= 1.0f && request.Headers.ContainsKey("connection"))
+				{
+					Log.WriteLine(
+						"{0} Removing rogue connection header (value: {1}) from request",
+						request.ClientAddress,
+						request.Headers["connection"]
+					);
+					request.Headers.Remove("connection");
+				}
+
+				await doHandleRequest(request, response);
+
 				Log.WriteLine(
-					"{0} Removing rogue connection header (value: {1}) from request",
+					"{0} [{1}:HTTP {2} {3}] [{4}] {5}",
 					request.ClientAddress,
-					request.Headers["connection"]
+					requestsMade,
+					request.HttpVersion.ToString("0.0"),
+					request.Method.ToString(),
+					response.ResponseCode,
+					request.Url
 				);
-				request.Headers.Remove("connection");
+
+				await response.SendTo(destination);
+
+				if(
+					request.HttpVersion <= 1.0f ||
+					(
+						request.Headers.ContainsKey("connection") &&
+						request.Headers["connection"] == "close"
+					)
+				)
+					break;
 			}
-
-			await doHandleRequest(request, response);
-
-			Log.WriteLine(
-				"{0} [HTTP {1} {2}] [{3}] {4}",
-				request.ClientAddress,
-				request.HttpVersion.ToString("0.0"),
-				request.Method.ToString(),
-				response.ResponseCode,
-				request.Url
-			);
-
-			await response.SendTo(destination);
 			client.Close();
 		}
 
