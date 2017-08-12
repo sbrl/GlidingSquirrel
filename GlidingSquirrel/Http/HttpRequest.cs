@@ -5,45 +5,35 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Net;
 
-namespace SBRL.GlidingSquirrel
+namespace SBRL.GlidingSquirrel.Http
 {
-	public class HttpRequest
+	public class HttpRequest : HttpMessage
 	{
 		public IPEndPoint ClientAddress;
 
-		public float HttpVersion;
 		public HttpMethod Method;
 		public string Url;
 
-		public Dictionary<string, string> Headers;
-		public string ContentType {
-			get {
-				return GetHeaderValue("content-type", "application/octet-stream");
-			}
-		}
-		public int ContentLength {
-			get {
-				return int.Parse(GetHeaderValue("content-length", "-1"));
-			}
-		}
+
 		public string Host {
 			get {
 				return GetHeaderValue("host", "");
 			}
 		}
-
-		public StreamReader Body;
-
-
-		public HttpRequest()
-		{
+		public string UserAgent {
+			get {
+				return GetHeaderValue("user-agent", "");
+			}
+		}
+		public string Accepts {
+			get {
+				return GetHeaderValue("accepts", "");
+			}
 		}
 
-		public string GetHeaderValue(string header, string defaultValue)
+
+		public HttpRequest() : base()
 		{
-			if(Headers.ContainsKey(header))
-				return header;
-			return defaultValue;
 		}
 
 		/// <summary>
@@ -51,11 +41,11 @@ namespace SBRL.GlidingSquirrel
 		/// </summary>
 		/// <param name="targetMimeType">The mime type to check.</param>
 		/// <returns>Whether the specified mime type is acceptable as a response to this request..</returns>
-		public bool Accepts(string targetMimeType)
+		public bool WillAccept(string targetMimeType)
 		{
-			List<string> acceptedMimes = new List<string>(GetHeaderValue("accept", "")
-				.Split(',')
-				.Select((string acceptedMimeType) => acceptedMimeType.Split(';')[0]));
+			List<string> acceptedMimes = new List<string>(
+				Accepts.Split(',').Select((string acceptedMimeType) => acceptedMimeType.Split(';')[0])
+			);
 
 			string[] targetMimeParts = targetMimeType.Split('/');
 

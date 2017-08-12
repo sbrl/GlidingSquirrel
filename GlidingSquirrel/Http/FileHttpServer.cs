@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace SBRL.GlidingSquirrel
+namespace SBRL.GlidingSquirrel.Http
 {
 	public class FileHttpServer : HttpServer
 	{

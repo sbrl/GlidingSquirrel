@@ -1,5 +1,6 @@
 ﻿using System;
-namespace SBRL.GlidingSquirrel
+
+namespace SBRL.GlidingSquirrel.Http
 {
 	public enum HttpMethod
 	{

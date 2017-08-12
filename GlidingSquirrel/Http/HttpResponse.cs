@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace SBRL.GlidingSquirrel
+namespace SBRL.GlidingSquirrel.Http
 {
-	public class HttpResponse
+	public class HttpResponse : HttpMessage
 	{
-		public float HttpVersion = 1.0f;
 		public HttpResponseCode ResponseCode = HttpResponseCode.Ok;
-		public Dictionary<string, string> Headers = new Dictionary<string, string>();
 
-		public StreamReader Body;
 		public int ReadBufferSize = 32768;
 
-		public HttpResponse()
+		public HttpResponse() : base()
 		{
 		}
 
