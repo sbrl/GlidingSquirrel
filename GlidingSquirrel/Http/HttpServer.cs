@@ -12,7 +12,7 @@ namespace SBRL.GlidingSquirrel.Http
 { 
 	public abstract class HttpServer
 	{
-		public static readonly string Version = "0.1-alpha";
+		public static readonly string Version = "0.2-alpha";
 
 		public readonly IPAddress BindAddress;
 		public readonly int Port;
@@ -115,8 +115,10 @@ namespace SBRL.GlidingSquirrel.Http
 
 			// Respond with the same protocol version that the request asked for
 			response.HttpVersion = request.HttpVersion;
-			// Tell everyone what version of we are
+			// Tell everyone what version of the gliding squirrel we are running
 			response.Headers.Add("server", $"GlidingSquirrel/{Version}");
+			// Add the date header
+			response.Headers.Add("date", DateTime.Now.ToString("R"));
 			// We don't support keep-alive just yet
 			response.Headers.Add("connection", Connection.Close);
 
