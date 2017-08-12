@@ -113,13 +113,19 @@ namespace SBRL.GlidingSquirrel.Http
 			request.ClientAddress = client.Client.RemoteEndPoint as IPEndPoint;
 			HttpResponse response = new HttpResponse();
 
+			// Respond with the same protocol version that the request asked for
+			response.HttpVersion = request.HttpVersion;
+			// Tell everyone what version of we are
 			response.Headers.Add("server", $"GlidingSquirrel/{Version}");
+			// We don't support keep-alive just yet
+			response.Headers.Add("connection", Connection.Close);
 
 			await doHandleRequest(request, response);
 
 			Log.WriteLine(
-				"{0} [{1}] [{2}] {3}",
+				"{0} [HTTP {1} {2}] [{3}] {4}",
 				request.ClientAddress,
+				request.HttpVersion.ToString("0.0"),
 				request.Method.ToString(),
 				response.ResponseCode,
 				request.Url

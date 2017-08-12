@@ -38,4 +38,19 @@ namespace SBRL.GlidingSquirrel.Http
 			return string.Join(", ", transferValues);
 		}
 	}
+
+	/// <summary>
+	/// Values for the connection header.
+	/// </summary>
+	public static class Connection
+	{
+		/// <summary>
+		/// The connection should be closed as soon as the request has been served.
+		/// </summary>
+		public static readonly string Close = "close";
+		/// <summary>
+		/// The connection may be kept open after the request has been served for future requests.
+		/// </summary>
+		public static readonly string KeepAlive = "keep-alive";
+	}
 }
