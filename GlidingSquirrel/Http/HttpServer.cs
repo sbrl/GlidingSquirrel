@@ -121,6 +121,19 @@ namespace SBRL.GlidingSquirrel.Http
 			response.Headers.Add("date", DateTime.Now.ToString("R"));
 			// We don't support keep-alive just yet
 			response.Headers.Add("connection", Connection.Close);
+			// Make sure compression works as expected
+			//response.Headers.Add("vary", "accept-encoding");
+
+			// Delete the connection header if we're running http 1.0 - ref RFC2616 sec 14.10, final paragraph
+			if(request.HttpVersion <= 1.0f && request.Headers.ContainsKey("connection"))
+			{
+				Log.WriteLine(
+					"{0} Removing rogue connection header (value: {1}) from request",
+					request.ClientAddress,
+					request.Headers["connection"]
+				);
+				request.Headers.Remove("connection");
+			}
 
 			await doHandleRequest(request, response);
 
