@@ -4,11 +4,14 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 
 namespace SBRL.GlidingSquirrel.Http
 {
 	public class HttpRequest : HttpMessage
 	{
+        public TcpClient ClientConnection;
+
 		public IPEndPoint ClientAddress;
 
 		public HttpMethod Method;

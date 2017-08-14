@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using SBRL.GlidingSquirrel.Http;
 
@@ -12,7 +13,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		public List<WebsocketClient> Clients = new List<WebsocketClient>();
 
 
-		public WebsocketServer()
+        public WebsocketServer(IPAddress inBindAddress, int inPort) : base(inBindAddress, inPort)
 		{
 		}
 
@@ -25,7 +26,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 			if(!request.Headers.ContainsKey("upgrade") || request.Headers["upgrade"] != "websocket")
 				return;
 
-
+            WebsocketClient newClient = await WebsocketClient.AfterServerNegotiation(request, response);
 		}
 
 		protected override Task setup()
