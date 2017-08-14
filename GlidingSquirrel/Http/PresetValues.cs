@@ -52,5 +52,9 @@ namespace SBRL.GlidingSquirrel.Http
 		/// The connection may be kept open after the request has been served for future requests.
 		/// </summary>
 		public static readonly string KeepAlive = "keep-alive";
+		/// <summary>
+		/// The connection is upgrading to a websocket.
+		/// </summary>
+		public static readonly string Upgrade = "upgrade";
 	}
 }
