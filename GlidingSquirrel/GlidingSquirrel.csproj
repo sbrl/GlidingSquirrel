@@ -63,6 +63,7 @@
     <Compile Include="Websocket\WebsocketServer.cs" />
     <Compile Include="Websocket\WebsocketClient.cs" />
     <Compile Include="Websocket\WebsocketEvents.cs" />
+    <Compile Include="Websocket\WebsocketFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
