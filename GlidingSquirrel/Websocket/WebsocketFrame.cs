@@ -34,7 +34,7 @@ namespace SBRL.GlidingSquirrel.Websocket
         /// <summary>
         /// Whether the FIN bit is set in the websocket frame.
         /// </summary>
-        public bool Fin { get; set; }
+        public bool Fin { get; private set; }
 		/// <summary>
 		/// Whether the RSV1 bit is set in the websocket frame.
 		/// </summary>
@@ -55,7 +55,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// <summary>
 		/// The frame type of this websocket frame.
 		/// </summary>
-		public int Opcode { get; set; }
+		public int Opcode { get; private set; }
 		/// <summary>
 		/// The key used ot mask the payload.
 		/// </summary>
@@ -68,6 +68,9 @@ namespace SBRL.GlidingSquirrel.Websocket
             get {
                 return Fin;
             }
+			set {
+				Fin = value;
+			}
         }
 
         public WebsocketFrameType Type
@@ -75,6 +78,9 @@ namespace SBRL.GlidingSquirrel.Websocket
             get {
                 return (WebsocketFrameType)Enum.Parse(typeof(WebsocketFrameType), Opcode.ToString());
             }
+			set {
+				Opcode = (int)value;
+			}
         }
 
         public byte[] RawPayload;

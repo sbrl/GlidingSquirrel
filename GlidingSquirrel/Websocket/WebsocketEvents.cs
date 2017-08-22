@@ -29,4 +29,9 @@ namespace SBRL.GlidingSquirrel.Websocket
         public byte[] Payload;
 
     }
+
+	public class ClientDisconnectedEventArgs : EventArgs
+	{
+
+	}
 }
