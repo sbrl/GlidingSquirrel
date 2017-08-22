@@ -13,6 +13,16 @@ namespace SBRL.GlidingSquirrel.Websocket
 		Bit64 = 64
 	}
 
+    public enum WebsocketFrameType
+    {
+        ContinuationFrame = 0x0,
+        TextData = 0x1,
+        BinaryData = 0x2,
+
+        Ping = 0x9,
+        Pong = 0xA
+    }
+
 	public class WebsocketFrame
 	{
 		/// <summary>
@@ -20,10 +30,11 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		public static readonly int MaximumPayloadSize = int.MaxValue;
 
-		/// <summary>
-		/// Whether the FIN bit is set in the websocket frame.
-		/// </summary>
-		public bool Fin { get; set; }
+        #region Raw Frame Data
+        /// <summary>
+        /// Whether the FIN bit is set in the websocket frame.
+        /// </summary>
+        public bool Fin { get; set; }
 		/// <summary>
 		/// Whether the RSV1 bit is set in the websocket frame.
 		/// </summary>
@@ -50,13 +61,30 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		public byte[] MaskingKey;
 
-		public byte[] RawPayload;
+        #endregion
+
+        public bool IsLastFrame
+        {
+            get {
+                return Fin;
+            }
+        }
+
+        public WebsocketFrameType Type
+        {
+            get {
+                return (WebsocketFrameType)Enum.Parse(typeof(WebsocketFrameType), Opcode.ToString());
+            }
+        }
+
+        public byte[] RawPayload;
 
 		public string Payload {
 			get {
 				return Encoding.UTF8.GetString(RawPayload);
 			}
 		}
+
 
 		public WebsocketFrame()
 		{

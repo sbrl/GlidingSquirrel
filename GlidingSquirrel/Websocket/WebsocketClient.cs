@@ -18,11 +18,17 @@ namespace SBRL.GlidingSquirrel.Websocket
 		}
 	}
 
+    public delegate void TextMessageEventHandler(object sender, TextMessageEventArgs eventArgs);
+    public delegate void BinaryMessageEventHandler(object sender, BinaryMessageEventArgs eventArgs);
+
 	public class WebsocketClient
 	{
 		private TcpClient connection;
 		private StreamReader incoming;
 		private StreamWriter outgoing;
+
+        public event TextMessageEventHandler OnTextMessage;
+        public event BinaryMessageEventHandler OnBinaryMessage;
 
         /// <summary>
         /// Creates a new blank Websocket connection.
@@ -39,6 +45,25 @@ namespace SBRL.GlidingSquirrel.Websocket
         public WebsocketClient(string remoteAddress)
         {
             
+        }
+
+        protected async Task handleNextFrame(object sender, NextFrameEventArgs nextFrameEventArgs)
+        {
+            WebsocketFrame nextFrame = nextFrameEventArgs.Frame;
+
+            switch(nextFrame.Type) {
+                case WebsocketFrameType.ContinuationFrame:
+                    throw new Exception("Error: Can't process a continuation frame when there's" +
+                "nothing to continue!");
+
+                case WebsocketFrameType.TextData:
+                    if(nextFrame.IsLastFrame)
+                        OnTextMessage(this, new TextMessageEventArgs() { Payload = nextFrame.Payload });
+
+                    throw new NotImplementedException("Error: Frame fragmentation hasn't been implemented yet.");
+
+                    break;
+            }
         }
 
         /// <summary>

@@ -11,4 +11,22 @@ namespace SBRL.GlidingSquirrel.Websocket
 			ConnectingClient = inConnectingClient;
 		}
 	}
+
+    public class NextFrameEventArgs : EventArgs
+    {
+        public WebsocketFrame Frame;
+
+    }
+
+    public class TextMessageEventArgs : EventArgs
+    {
+        public string Payload;
+
+    }
+
+    public class BinaryMessageEventArgs : EventArgs
+    {
+        public byte[] Payload;
+
+    }
 }
