@@ -6,7 +6,7 @@ using SBRL.GlidingSquirrel.Http;
 
 namespace SBRL.GlidingSquirrel.Websocket
 {
-	public delegate void ClientConnectedEventHandler(object sender, ClientConnectedEventArgs ev);
+	public delegate Task ClientConnectedEventHandler(object sender, ClientConnectedEventArgs ev);
 
 	public abstract class WebsocketServer : HttpServer
 	{
@@ -20,7 +20,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 
 		public event ClientConnectedEventHandler OnClientConnected;
-
+		public event ClientDisconnectedEventHandler OnClientDisconnected;
 
 		public override async Task HandleRequest(HttpRequest request, HttpResponse response)
 		{
@@ -28,6 +28,20 @@ namespace SBRL.GlidingSquirrel.Websocket
 				return;
 
             WebsocketClient newClient = await WebsocketClient.WithServerNegotiation(request, response);
+
+			await OnClientConnected(this, new ClientConnectedEventArgs() { ConnectingClient = newClient });
+			Clients.Add(newClient);
+
+
+			await newClient.Listen();
+		}
+
+		protected async Task handleClientDisconnection(object sender, ClientDisconnectedEventArgs eventArgs)
+		{
+			WebsocketClient disconnectedClient = (WebsocketClient)sender;
+			Clients.Remove(disconnectedClient);
+
+			await OnClientDisconnected(sender, eventArgs);
 		}
 
 		protected override Task setup()

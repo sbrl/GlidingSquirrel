@@ -21,19 +21,25 @@ namespace SBRL.GlidingSquirrel.Websocket
 		}
 	}
 
-    public delegate void TextMessageEventHandler(object sender, TextMessageEventArgs eventArgs);
-	public delegate void BinaryMessageEventHandler(object sender, BinaryMessageEventArgs eventArgs);
-	public delegate void ClientDisconnectedEventHandler(object sender, ClientDisconnectedEventArgs eventArgs);
+	public delegate Task NextFrameEventHandler(object sender, NextFrameEventArgs eventArgs);
+
+    public delegate Task TextMessageEventHandler(object sender, TextMessageEventArgs eventArgs);
+	public delegate Task BinaryMessageEventHandler(object sender, BinaryMessageEventArgs eventArgs);
+	public delegate Task ClientDisconnectedEventHandler(object sender, ClientDisconnectedEventArgs eventArgs);
 
 	public class WebsocketClient
 	{
 		private TcpClient connection;
+		private bool closingConnection = false;
+
 
 		public IPEndPoint RemoteEndpoint {
 			get {
 				return (IPEndPoint)connection.Client.RemoteEndPoint;
 			}
 		}
+
+		public event NextFrameEventHandler OnFrameRecieved;
 
 		public event TextMessageEventHandler OnTextMessage;
 		public event BinaryMessageEventHandler OnBinaryMessage;
@@ -54,7 +60,22 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// <param name="remoteAddress">Remote address.</param>
 		public WebsocketClient(string remoteAddress)
 		{
+			OnFrameRecieved += handleNextFrame;
+		}
 
+		public async Task Listen()
+		{
+			while(true)
+			{
+				WebsocketFrame nextFrame = await WebsocketFrame.Decode(connection.GetStream());
+
+				await OnFrameRecieved(this, new NextFrameEventArgs() { Frame = nextFrame });
+
+				if(!connection.Connected || closingConnection)
+					break;
+			}
+
+			await OnDisconnection(this, new ClientDisconnectedEventArgs());
 		}
 
 		/// <summary>
@@ -92,8 +113,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 					await sendFrame(nextFrame);
 
 					break;
-
-
+					
 				case WebsocketFrameType.Pong:
 					Log.WriteLine("[GlidingSquirrel/Websocket/FrameHandler] Received pong from {0}", RemoteEndpoint);
 					break;
@@ -113,7 +133,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 						recievedMessage += nextSeqFrame.Payload;
 					}
 
-					OnTextMessage(this, new TextMessageEventArgs() {
+					await OnTextMessage(this, new TextMessageEventArgs() {
 						Payload = recievedMessage
 					});
 
@@ -146,7 +166,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 						reassembledPosition += chunk.LongLength;
 					}
 
-					OnBinaryMessage(this, new BinaryMessageEventArgs() { Payload = reassembledPayload });
+					await OnBinaryMessage(this, new BinaryMessageEventArgs() { Payload = reassembledPayload });
 
 					break;
 			}
@@ -155,8 +175,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		public void Close()
 		{
 			connection.Close();
-
-			
+			closingConnection = true;
 		}
 
 		#region Handshake

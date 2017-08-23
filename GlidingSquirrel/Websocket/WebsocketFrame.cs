@@ -6,7 +6,7 @@ using System.IO;
 
 namespace SBRL.GlidingSquirrel.Websocket
 {
-	enum PayloadLengthType
+	public enum PayloadLengthType
 	{
 		Bit7 = 0,
 		Bit16 = 16,
@@ -60,6 +60,8 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// The key used ot mask the payload.
 		/// </summary>
 		public byte[] MaskingKey;
+
+		public PayloadLengthType PayloadLengthType;
 
         #endregion
 
@@ -191,6 +193,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 					payloadLength = BitConverter.ToUInt64(headerBuffer, 4);
 					break;
 			}
+			result.PayloadLengthType = payloadLengthType;
 
 			if(result.Masked)
 			{
