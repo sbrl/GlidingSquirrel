@@ -32,6 +32,11 @@ namespace SBRL.GlidingSquirrel.Websocket
 		private TcpClient connection;
 		private bool closingConnection = false;
 
+		/// <summary>
+		/// The maximum size of any websocket frames sent to this client.
+		/// Defaults to 2MiB.
+		/// </summary>
+		public int MaximumTransmissionSize { get; set; } = 2 * 1024 * 1024;
 
 		public IPEndPoint RemoteEndpoint {
 			get {
