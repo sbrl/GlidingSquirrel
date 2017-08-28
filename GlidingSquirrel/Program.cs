@@ -6,10 +6,16 @@ using SBRL.GlidingSquirrel.Http;
 
 namespace SBRL.GlidingSquirrel
 {
+    enum OperationMode
+    {
+        FileHttp,
+        EchoWebsocket
+    }
 	class MainClass
 	{
 		public static void Main(string[] args)
 		{
+            OperationMode mode = OperationMode.FileHttp;
 			string webrootPath = ".";
 			int port = 60606;
 
@@ -26,8 +32,13 @@ namespace SBRL.GlidingSquirrel
 				{
 					case "-p":
 					case "--port":
-						port = int.Parse(args[i]);
+						port = int.Parse(args[++i]);
 						break;
+
+                    case "-m":
+                    case "--mode":
+                        mode = (OperationMode)Enum.Parse(typeof(OperationMode), args[++i]);
+                        break;
 					
 					case "-h":
 					case "--help":
@@ -39,10 +50,11 @@ namespace SBRL.GlidingSquirrel
 						Console.WriteLine("GlidingSquirrel [options] [webroot]");
 						Console.WriteLine();
 						Console.WriteLine("Options:");
-						Console.WriteLine("    --help                Shows this help message.");
+						Console.WriteLine("    --help                Shows this help message");
 						Console.WriteLine("    --version             Display the version of GlidingSquirrel and then exit");
-						Console.WriteLine("    --port {port-number}  Sets the port number to listen on.");
-						Console.WriteLine();
+						Console.WriteLine("    --port {port-number}  Sets the port number to listen on");
+                        Console.WriteLine("    --mode {mode}         Sets the operating mode. Possible values: FileHttp, EchoWebsocket");
+                        Console.WriteLine();
 						return;
 					
 					case "-v":
@@ -64,8 +76,17 @@ namespace SBRL.GlidingSquirrel
 			if(extraArgs.Count > 0)
 				webrootPath = args.First();
 
-			FileHttpServer server = new FileHttpServer(port, webrootPath);
-			server.Start().Wait();
+            switch(mode)
+            {
+				case OperationMode.FileHttp:
+					FileHttpServer server = new FileHttpServer(port, webrootPath);
+					server.Start().Wait();
+                    break;
+
+                case OperationMode.EchoWebsocket:
+
+                    break;
+            }
 		}
 	}
 }
