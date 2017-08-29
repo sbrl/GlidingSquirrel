@@ -30,28 +30,28 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		public static readonly int MaximumPayloadSize = int.MaxValue;
 
-        #region Raw Frame Data
-        /// <summary>
-        /// Whether the FIN bit is set in the websocket frame.
-        /// </summary>
-        public bool Fin { get; private set; }
+		#region Raw Frame Data
+		/// <summary>
+		/// Whether the FIN bit is set in the websocket frame.
+		/// </summary>
+		public bool Fin { get; private set; } = true;
 		/// <summary>
 		/// Whether the RSV1 bit is set in the websocket frame.
 		/// </summary>
-		public bool Rsv1 { get; set; }
+		public bool Rsv1 { get; set; } = false;
 		/// <summary>
 		/// Whether the RSV2 bit is set in the websocket frame.
 		/// </summary>
-		public bool Rsv2 { get; set; }
+		public bool Rsv2 { get; set; } = false;
 		/// <summary>
 		/// Whether the RSV3 bit is set in the websocket frame.
 		/// </summary>
-		public bool Rsv3 { get; set; }
+		public bool Rsv3 { get; set; } = false;
 
 		/// <summary>
 		/// Whether the websocket frame's payload is (or was) masked.
 		/// </summary>
-		public bool Masked { get; set; }
+		public bool Masked { get; set; } = false;
 		/// <summary>
 		/// The frame type of this websocket frame.
 		/// </summary>
@@ -75,21 +75,23 @@ namespace SBRL.GlidingSquirrel.Websocket
 			}
         }
 
-        public WebsocketFrameType Type
-        {
-            get {
-                return (WebsocketFrameType)Enum.Parse(typeof(WebsocketFrameType), Opcode.ToString());
-            }
+		public WebsocketFrameType Type {
+			get {
+				return (WebsocketFrameType)Enum.Parse(typeof(WebsocketFrameType), Opcode.ToString());
+			}
 			set {
 				Opcode = (int)value;
 			}
-        }
+		}
 
-        public byte[] RawPayload;
+		public byte[] RawPayload;
 
 		public string Payload {
 			get {
 				return Encoding.UTF8.GetString(RawPayload);
+			}
+			set {
+				RawPayload = Encoding.UTF8.GetBytes(value);
 			}
 		}
 

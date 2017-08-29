@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<title>Websockets Echo Server Demo</title>
+	</head>
+	<body>
+		<h1>Websockets Echo Server Demo</h1>
+		
+		<ul class="message-log">
+			
+		</ul>
+		
+		<input type="text" id="message-box" />
+		<button id="message-send-button">Send</button>
+		
+		<!---------------->
+		<style>
+			html, body { font-size: 100%; }
+			body
+			{
+			    font-family: sans-serif;
+			}
+		</style>
+		<script>
+			window.addEventListener("load", function(event) {
+				const connection = new WebSocket(`ws://${location.host}/echo`);
+				
+				connection.addEventListener("open", function(event) {
+					logMessage("<em>Connection to server established!");
+				});
+				connection.addEventListener("close", function(event) {
+					logMessage("<em>Connection to server list.");
+				});
+				connection.addEventListener("message", function(event) {
+					logMessage(`<strong>Server:</strong> ${event.data}`);
+				});
+				
+				document.getElementById("message-box").addEventListener("keyup", function(event) {
+					if(event.keyCode === 13)
+						sendMessage();
+				});
+				
+				document.getElementById("message-send-button").addEventListener("click", sendMessage);
+			});
+			
+			function sendMessage()
+			{
+				var messageBox = document.getElementById("message-box");
+				
+				connection.send(
+					messageBox.value
+				);
+				logMessage(`<strong>You</strong> ${messageBox.value}`);
+				
+				messageBox.value = "";
+			}
+			
+			function logMessage(message)
+			{
+				var newItem = document.createElement("li");
+				newItem.innerHTML = `[${new Date()}] ${message}`;
+				document.getElementById("message-log").appendChild(newItem);
+			}
+		</script>
+	</head>
+</html>

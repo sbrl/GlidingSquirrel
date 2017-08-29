@@ -64,6 +64,8 @@
     <Compile Include="Websocket\WebsocketEvents.cs" />
     <Compile Include="Websocket\WebsocketFrame.cs" />
     <Compile Include="Modes\FileHttpServer.cs" />
+    <Compile Include="Modes\EchoWebsocketServer.cs" />
+    <Compile Include="Utilities\EmbeddedFiles.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -72,6 +74,11 @@
     <Folder Include="Http\" />
     <Folder Include="Websocket\" />
     <Folder Include="Modes\" />
+    <Folder Include="Modes\Resources\" />
+    <Folder Include="Utilities\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modes\Resources\EchoWebsocketClient.html" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

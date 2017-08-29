@@ -32,6 +32,10 @@ namespace SBRL.GlidingSquirrel.Websocket
 		private TcpClient connection;
 		private bool closingConnection = false;
 
+		protected Random rand = new Random();
+
+		public DateTime LastCommunication = DateTime.Now;
+
 		/// <summary>
 		/// The maximum size of any websocket frames sent to this client.
 		/// Defaults to 2MiB.
@@ -68,6 +72,9 @@ namespace SBRL.GlidingSquirrel.Websocket
 			OnFrameRecieved += handleNextFrame;
 		}
 
+
+		#region Frame Handling
+
 		public async Task Listen()
 		{
 			while(true)
@@ -75,6 +82,8 @@ namespace SBRL.GlidingSquirrel.Websocket
 				WebsocketFrame nextFrame = await WebsocketFrame.Decode(connection.GetStream());
 
 				await OnFrameRecieved(this, new NextFrameEventArgs() { Frame = nextFrame });
+
+				LastCommunication = DateTime.Now;
 
 				if(!connection.Connected || closingConnection)
 					break;
@@ -96,6 +105,8 @@ namespace SBRL.GlidingSquirrel.Websocket
 		{
 			WebsocketFrame nextFrame = nextFrameEventArgs.Frame;
 			WebsocketFrame nextSeqFrame;
+
+			// todo close the connection properly here
 
 			switch(nextFrame.Type)
 			{
@@ -177,13 +188,78 @@ namespace SBRL.GlidingSquirrel.Websocket
 			}
 		}
 
+		#endregion
+
+
+		#region Interface Methods
+
+		/// <summary>
+		/// Sends the specified string to this client in a text frame.
+		/// </summary>
+		/// <param name="message">The message to send.</param>
+		public async Task Send(string message)
+		{
+			WebsocketFrame frame = new WebsocketFrame() {
+				IsLastFrame = true,
+				Type = WebsocketFrameType.TextData,
+				Payload = message
+			};
+
+			await sendFrame(frame);
+		}
+
+		/// <summary>
+		/// Sends the given byte array to this client in a binary frame.
+		/// </summary>
+		/// <param name="payload">The payload to send.</param>
+		public async Task Send(byte[] payload)
+		{
+			WebsocketFrame frame = new WebsocketFrame() {
+				IsLastFrame = true,
+				Type = WebsocketFrameType.BinaryData,
+				RawPayload = payload
+			};
+			await sendFrame(frame);
+		}
+
+		/// <summary>
+		/// Send a ping frame to this client.
+		/// The websocket server handles sending these automagically, so you shouldn't
+		/// need to call this method directly.
+		/// </summary>
+		public async Task Ping()
+		{
+
+			WebsocketFrame pingFrame = new WebsocketFrame() {
+				Type = WebsocketFrameType.Ping,
+				RawPayload = new byte[64]
+			};
+			rand.NextBytes(pingFrame.RawPayload);
+
+			await sendFrame(pingFrame);
+		}
+
+		/// <summary>
+		/// Gracefully closses the connection to thsi Websocket client.
+		/// </summary>
 		public void Close()
 		{
 			connection.Close();
 			closingConnection = true;
 		}
+		/// <summary>
+		/// Destroys this connection as fast as possible.
+		/// Useful when a client is misbehaving.
+		/// </summary>
+		public void Destroy()
+		{
+			connection.Close();
+			closingConnection = true;
+		}
 
-		#region Handshake
+		#endregion
+
+		#region Handshake Logic
 
 		/// <summary>
 		/// Handles an incoming Websocket client request and performing the associated handshake.

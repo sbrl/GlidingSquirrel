@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using SBRL.GlidingSquirrel.Http;
 
@@ -18,6 +19,12 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// A list of currently connected clients.
 		/// </summary>
 		public List<WebsocketClient> Clients = new List<WebsocketClient>();
+
+		/// <summary>
+		/// The time that a client is allowed to remain idle beforer a ping packet is sent to it.
+		/// Defaults to 1 minute.
+		/// </summary>
+		public TimeSpan PingInterval = TimeSpan.FromSeconds(60);
 
         public WebsocketServer(IPAddress inBindAddress, int inPort) : base(inBindAddress, inPort)
 		{
@@ -42,13 +49,66 @@ namespace SBRL.GlidingSquirrel.Websocket
 				return;
 			}
 
-            WebsocketClient newClient = await WebsocketClient.WithServerNegotiation(request, response);
+			try
+			{
+				WebsocketClient newClient = await WebsocketClient.WithServerNegotiation(request, response);
 
-			await OnClientConnected(this, new ClientConnectedEventArgs() { ConnectingClient = newClient });
-			Clients.Add(newClient);
+				await OnClientConnected(this, new ClientConnectedEventArgs() { ConnectingClient = newClient });
+				Clients.Add(newClient);
 
 
-			await newClient.Listen();
+				await newClient.Listen();
+			}
+			catch(Exception error)
+			{
+				Log.WriteLine("[GlidingSquirrel/WebsocketClient] Error: {0}", error);
+			}
+		}
+
+
+		protected override Task setup()
+		{
+			ThreadPool.QueueUserWorkItem(doMaintenance);
+
+			return Task.CompletedTask;
+		}
+
+		protected async Task handleClientDisconnection(object sender, ClientDisconnectedEventArgs eventArgs)
+		{
+			WebsocketClient disconnectedClient = (WebsocketClient)sender;
+			Clients.Remove(disconnectedClient);
+
+			await OnClientDisconnected(sender, eventArgs);
+		}
+
+		/// <summary>
+		/// Performs maintenance at regular intervals.
+		/// </summary>
+		protected async void doMaintenance(object state)
+		{
+			while(true)
+			{
+				try
+				{
+					List<Task> pingTasks = new List<Task>();
+					foreach(WebsocketClient client in Clients)
+					{
+						if(DateTime.Now - client.LastCommunication >= PingInterval)
+							pingTasks.Add(client.Ping());
+
+					}
+
+					Task.WaitAll(pingTasks.ToArray());
+				}
+				catch(Exception error)
+				{
+					Log.WriteLine("[WebsocketServer/Maintenance] {0}", error);
+				}
+
+				await Task.Delay((int)PingInterval.TotalSeconds / 4);
+			}
+
+			Log.WriteLine("[WebsocketServer/Maintenance] Ending maintenance loop.");
 		}
 
 		/// <summary>
@@ -70,13 +130,5 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// <param name="eventArgs">The client disconnected event arguments.</param>
 		public abstract Task HandleClientDisconnected(object sender, ClientDisconnectedEventArgs eventArgs);
 
-
-		protected async Task handleClientDisconnection(object sender, ClientDisconnectedEventArgs eventArgs)
-		{
-			WebsocketClient disconnectedClient = (WebsocketClient)sender;
-			Clients.Remove(disconnectedClient);
-
-			await OnClientDisconnected(sender, eventArgs);
-		}
 	}
 }

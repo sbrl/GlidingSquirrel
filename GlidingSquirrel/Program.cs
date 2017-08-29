@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Net;
 using SBRL.GlidingSquirrel.Http;
 using SBRL.GlidingSquirrel.Modes;
+using SBRL.Utilities;
 
 namespace SBRL.GlidingSquirrel
 {
@@ -85,7 +86,9 @@ namespace SBRL.GlidingSquirrel
                     break;
 
                 case OperationMode.EchoWebsocket:
-
+					EmbeddedFiles.WriteResourceList();
+					EchoWebsocketServer websocketServer = new EchoWebsocketServer(IPAddress.IPv6Any, 40808);
+					websocketServer.Start().Wait();
                     break;
             }
 		}
