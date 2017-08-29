@@ -3,7 +3,9 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace SBRL.GlidingSquirrel.Http
+using SBRL.GlidingSquirrel.Http;
+
+namespace SBRL.GlidingSquirrel.Modes
 {
 	public class FileHttpServer : HttpServer
 	{

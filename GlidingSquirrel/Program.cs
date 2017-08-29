@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using SBRL.GlidingSquirrel.Http;
+using SBRL.GlidingSquirrel.Modes;
 
 namespace SBRL.GlidingSquirrel
 {
