@@ -129,7 +129,10 @@ namespace SBRL.GlidingSquirrel.Http
 				// If the request is null, then something went wrong! Well, the connection was probably closed by the client.
 				if(request == null)
 					break;
+
+				request.ClientConnection = client;
 				request.ClientAddress = client.Client.RemoteEndPoint as IPEndPoint;
+
 				HttpResponse response = new HttpResponse();
 
 				// Respond with the same protocol version that the request asked for
@@ -154,7 +157,8 @@ namespace SBRL.GlidingSquirrel.Http
 					request.Headers.Remove("connection");
 				}
 
-				await doHandleRequest(request, response);
+				if(!await doHandleRequest(request, response))
+					break;
 
 				Log.WriteLine(
 					"{0} [{1}:HTTP {2} {3}] [{4}] {5}",
@@ -180,7 +184,7 @@ namespace SBRL.GlidingSquirrel.Http
 			client.Close();
 		}
 
-		public async Task doHandleRequest(HttpRequest request, HttpResponse response)
+		public async Task<bool> doHandleRequest(HttpRequest request, HttpResponse response)
 		{
 			// Check the http version of the request
 			if(request.HttpVersion < 1.0f || request.HttpVersion >= 2.0f)
@@ -189,7 +193,7 @@ namespace SBRL.GlidingSquirrel.Http
 				response.ContentType = "text/plain";
 				await response.SetBody($"Error: HTTP version {request.HttpVersion} isn't supportedby this server.\r\n" +
 					"Supported versions: 1.0, 1.1");
-				return;
+				return false;
 			}
 			// Check the length of the url
 			if(request.Url.Length > MaximumUrlLength)
@@ -198,7 +202,7 @@ namespace SBRL.GlidingSquirrel.Http
 				response.ContentType = "text/plain";
 				await response.SetBody($"Error: That request url was too long (this " +
 					$"server's limit is {MaximumUrlLength} characters)");
-				return;
+				return false;
 			}
 
 			// Make sure that the content-length header is specified if it's needed
@@ -211,12 +215,13 @@ namespace SBRL.GlidingSquirrel.Http
 				response.ContentType = "text/plain";
 				await response.SetBody("Error: You appear to be uploading something, but didn't " +
 					"specify the content-length header.");
-				return;
+				return false;
 			}
 
 			try
 			{
-				await HandleRequest(request, response);
+				if(!await HandleRequest(request, response))
+					return false;
 			}
 			catch(Exception error)
 			{
@@ -235,10 +240,12 @@ namespace SBRL.GlidingSquirrel.Http
 					$"header ({request.GetHeaderValue("accepts", "")})");
 				response.ContentType = "text/plain";
 			}
+
+			return true;
 		}
 
 		protected abstract Task setup();
 
-		public abstract Task HandleRequest(HttpRequest request, HttpResponse response);
+		public abstract Task<bool> HandleRequest(HttpRequest request, HttpResponse response);
 	}
 }

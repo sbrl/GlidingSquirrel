@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using SBRL.GlidingSquirrel.Http;
 using SBRL.GlidingSquirrel.Modes;
+using SBRL.GlidingSquirrel.Websocket;
 using SBRL.Utilities;
 
 namespace SBRL.GlidingSquirrel
@@ -11,7 +12,8 @@ namespace SBRL.GlidingSquirrel
     enum OperationMode
     {
         FileHttp,
-        EchoWebsocket
+        EchoWebsocket,
+		CompleteWebsocketChallenge
     }
 	class MainClass
 	{
@@ -87,9 +89,15 @@ namespace SBRL.GlidingSquirrel
 
                 case OperationMode.EchoWebsocket:
 					EmbeddedFiles.WriteResourceList();
-					EchoWebsocketServer websocketServer = new EchoWebsocketServer(IPAddress.IPv6Any, 40808);
+					EchoWebsocketServer websocketServer = new EchoWebsocketServer(IPAddress.Any, 9001);
 					websocketServer.Start().Wait();
                     break;
+
+				case OperationMode.CompleteWebsocketChallenge:
+					Console.WriteLine(
+						WebsocketClient.CompleteWebsocketKeyChallenge(extraArgs[0])
+					);
+					break;
             }
 		}
 	}

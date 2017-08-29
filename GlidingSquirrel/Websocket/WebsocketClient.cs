@@ -37,6 +37,11 @@ namespace SBRL.GlidingSquirrel.Websocket
 		public DateTime LastCommunication = DateTime.Now;
 
 		/// <summary>
+		/// The code with which this websocket client connection exited with.
+		/// </summary>
+		public int ExitCode = -1;
+
+		/// <summary>
 		/// The maximum size of any websocket frames sent to this client.
 		/// Defaults to 2MiB.
 		/// </summary>
@@ -272,7 +277,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 				throw new WebsocketClientHandshakeException("Error: That request didn't contain the required sec-websocket-key header.");
 			if(!request.Headers.ContainsKey("upgrade") || request.Headers["upgrade"] != "websocket")
 				throw new WebsocketClientHandshakeException("Error: That request didn't contain the required upgrade header set to 'websocket'.");
-			if(!request.Headers.ContainsKey("connection") || request.Headers["connection"] != Connection.Upgrade)
+			if(!request.Headers.ContainsKey("connection") || !Connection.Contains(request.Headers["connection"], Connection.Upgrade))
 				throw new WebsocketClientHandshakeException("Error: That request didn't contain the required connection header set to 'upgrade'.");
 			if(!request.Headers.ContainsKey("sec-websocket-version") || request.Headers["sec-websocket-version"] != "13")
 			{
@@ -288,11 +293,11 @@ namespace SBRL.GlidingSquirrel.Websocket
 			};
 
 			response.ResponseCode = HttpResponseCode.SwitchingProtocols;
-			response.Headers.Add("upgrade", "websocket");
-			response.Headers.Add("connection", Connection.Upgrade);
+			response.Headers["upgrade"] = "websocket";
+			response.Headers["connection"] = Connection.Upgrade;
 			response.Headers.Add(
 				"sec-websocket-accept",
-				completeWebsocketKeyChallenge(request.GetHeaderValue("sec-websocket-key", ""))
+				CompleteWebsocketKeyChallenge(request.GetHeaderValue("sec-websocket-key", ""))
 			);
 
 			StreamWriter outgoing = new StreamWriter(
@@ -312,7 +317,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		/// <param name="key">The challenge key to calculate the response for.</param>
 		/// <returns>The websoocket key challenge.</returns>
-		protected static string completeWebsocketKeyChallenge(string key)
+		public static string CompleteWebsocketKeyChallenge(string key)
 		{
 			if(key.Trim().Length == 0)
 				throw new WebsocketClientHandshakeException("Error: That sec-websocket-key is invalid.");

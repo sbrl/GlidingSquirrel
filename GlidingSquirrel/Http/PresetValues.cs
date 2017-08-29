@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace SBRL.GlidingSquirrel.Http
 {
@@ -56,5 +57,16 @@ namespace SBRL.GlidingSquirrel.Http
 		/// The connection is upgrading to a websocket.
 		/// </summary>
 		public static readonly string Upgrade = "upgrade";
+
+		public static bool Contains(string connectionHeaderValue, string targetHeaderValue)
+		{
+			string[] parts = Regex.Split(connectionHeaderValue.Trim().ToLower(), ", ?");
+			foreach(string part in parts)
+			{
+				if(part == targetHeaderValue)
+					return true;
+			}
+			return false;
+		}
 	}
 }

@@ -19,7 +19,7 @@ namespace SBRL.GlidingSquirrel.Modes
 			WebsocketClient client = eventArgs.ConnectingClient;
 			// Send a welcome message
 			await client.Send(
-				"Welcome to this sample websockets server!" +
+				"Welcome to this sample websockets server!<br />\n" +
 				"This server will echo any frames you send it."
 			);
 
