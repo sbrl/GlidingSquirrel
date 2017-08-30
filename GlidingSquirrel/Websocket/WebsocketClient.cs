@@ -86,9 +86,13 @@ namespace SBRL.GlidingSquirrel.Websocket
 			{
 				WebsocketFrame nextFrame = await WebsocketFrame.Decode(connection.GetStream());
 
-				await OnFrameRecieved(this, new NextFrameEventArgs() { Frame = nextFrame });
+				if(nextFrame == null)
+					break;
 
+
+				await OnFrameRecieved(this, new NextFrameEventArgs() { Frame = nextFrame });
 				LastCommunication = DateTime.Now;
+
 
 				if(!connection.Connected || closingConnection)
 					break;
@@ -275,13 +279,14 @@ namespace SBRL.GlidingSquirrel.Websocket
 		{
 			if(!request.Headers.ContainsKey("sec-websocket-key"))
 				throw new WebsocketClientHandshakeException("Error: That request didn't contain the required sec-websocket-key header.");
-			if(!request.Headers.ContainsKey("upgrade") || request.Headers["upgrade"] != "websocket")
+			if(!request.Headers.ContainsKey("upgrade") || request.Headers["upgrade"].ToLower() != "websocket")
 				throw new WebsocketClientHandshakeException("Error: That request didn't contain the required upgrade header set to 'websocket'.");
 			if(!request.Headers.ContainsKey("connection") || !Connection.Contains(request.Headers["connection"], Connection.Upgrade))
 				throw new WebsocketClientHandshakeException("Error: That request didn't contain the required connection header set to 'upgrade'.");
 			if(!request.Headers.ContainsKey("sec-websocket-version") || request.Headers["sec-websocket-version"] != "13")
 			{
-				response.Headers.Add("sec-websocket-version", "13");
+				response.Headers.Add("Sec-WebSocket-Version", "13");
+				// todo handle this properly
 				throw new WebsocketClientHandshakeException("Error: That request didn't contain the required sec-websocket-version header set to '13'.");
 			}
 
@@ -292,17 +297,17 @@ namespace SBRL.GlidingSquirrel.Websocket
 				connection = request.ClientConnection
 			};
 
-			response.ResponseCode = HttpResponseCode.SwitchingProtocols;
-			response.Headers["upgrade"] = "websocket";
-			response.Headers["connection"] = Connection.Upgrade;
+			response.ResponseCode = HttpResponseCode.SwitchingProtocotolsWebsocket;
+			response.Headers["Upgrade"] = "websocket";
+			response.Headers["Connection"] = Connection.Upgrade;
 			response.Headers.Add(
-				"sec-websocket-accept",
+				"Sec-WebSocket-Accept",
 				CompleteWebsocketKeyChallenge(request.GetHeaderValue("sec-websocket-key", ""))
 			);
 
 			StreamWriter outgoing = new StreamWriter(
 				request.ClientConnection.GetStream(),
-				Encoding.UTF8,
+				new UTF8Encoding(false),
 				1024,
 				true
 			) { AutoFlush = true };

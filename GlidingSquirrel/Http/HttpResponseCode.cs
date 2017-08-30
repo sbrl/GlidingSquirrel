@@ -21,6 +21,7 @@ namespace SBRL.GlidingSquirrel.Http
 		// todo Fill more of these out
 		public static HttpResponseCode Continue = new HttpResponseCode(100, "Continue");
 		public static HttpResponseCode SwitchingProtocols = new HttpResponseCode(101, "Switching Protocols");
+		public static HttpResponseCode SwitchingProtocotolsWebsocket = new HttpResponseCode(101, "Web Socket Protocol Handshake");
 
 		public static HttpResponseCode Ok = new HttpResponseCode(200, "OK");
 

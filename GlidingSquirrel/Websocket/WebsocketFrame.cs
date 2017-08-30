@@ -167,7 +167,8 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 			// Read the websocket header
 			byte[] headerBuffer = new byte[4];
-			await clientStream.ReadAsync(headerBuffer, 0, 2);
+			if(await clientStream.ReadAsync(headerBuffer, 0, 2) == 0)
+				return null;
 
 			result.Fin = (headerBuffer[0] & 128) == 128;
 			result.Rsv1 = (headerBuffer[0] & 64) == 64;

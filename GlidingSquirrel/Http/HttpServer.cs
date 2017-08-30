@@ -138,11 +138,11 @@ namespace SBRL.GlidingSquirrel.Http
 				// Respond with the same protocol version that the request asked for
 				response.HttpVersion = request.HttpVersion;
 				// Tell everyone what version of the gliding squirrel we are running
-				response.Headers.Add("server", $"GlidingSquirrel/{Version}");
+				response.Headers.Add("Server", $"GlidingSquirrel/{Version}");
 				// Add the date header
-				response.Headers.Add("date", DateTime.Now.ToString("R"));
+				response.Headers.Add("Date", DateTime.Now.ToString("R"));
 				// We don't support keep-alive just yet
-				response.Headers.Add("connection", Connection.KeepAlive);
+				response.Headers.Add("Connection", Connection.KeepAlive);
 				// Make sure compression works as expected
 				//response.Headers.Add("vary", "accept-encoding");
 

@@ -56,14 +56,14 @@ namespace SBRL.GlidingSquirrel.Http
 		/// <summary>
 		/// The connection is upgrading to a websocket.
 		/// </summary>
-		public static readonly string Upgrade = "upgrade";
+		public static readonly string Upgrade = "Upgrade";
 
 		public static bool Contains(string connectionHeaderValue, string targetHeaderValue)
 		{
 			string[] parts = Regex.Split(connectionHeaderValue.Trim().ToLower(), ", ?");
 			foreach(string part in parts)
 			{
-				if(part == targetHeaderValue)
+				if(part == targetHeaderValue.ToLower())
 					return true;
 			}
 			return false;

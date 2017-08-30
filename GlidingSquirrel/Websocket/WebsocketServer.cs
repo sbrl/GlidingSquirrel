@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
+using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using SBRL.GlidingSquirrel.Http;
@@ -43,7 +45,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 		public sealed override async Task<bool> HandleRequest(HttpRequest request, HttpResponse response)
 		{
-			if(!request.Headers.ContainsKey("upgrade") || request.Headers["upgrade"] != "websocket")
+			if(!request.Headers.ContainsKey("upgrade") || request.Headers["upgrade"].ToLower() != "websocket")
 			{
 				await HandleHttpRequest(request, response);
 				return true;
@@ -54,13 +56,21 @@ namespace SBRL.GlidingSquirrel.Websocket
 			{
 				client = await WebsocketClient.WithServerNegotiation(request, response);
 
-				await OnClientConnected(this, new ClientConnectedEventArgs() { ConnectingClient = client });
-				Clients.Add(client);
-
 				Log.WriteLine("[GlidingSquirrel/Websockets] New client connected from {0}.", client.RemoteEndpoint);
+
+				//await OnClientConnected(this, new ClientConnectedEventArgs() { ConnectingClient = client });
+				Clients.Add(client);
 
 				await client.Listen();
 
+			}
+			catch(IOException error)
+			{
+				Log.WriteLine("[GlidingSquirrel/WebsocketClient] Caught IOException - a client probably disconnected uncleanly");
+			}
+			catch(SocketException error)
+			{
+				Log.WriteLine("[GlidingSquirrel/WebsocketClient] Caught SocketException - a client probably disconnected uncleanly");
 			}
 			catch(Exception error)
 			{

@@ -7,7 +7,7 @@
 	<body>
 		<h1>Websockets Echo Server Demo</h1>
 		
-		<ul class="message-log">
+		<ul id="message-log">
 			
 		</ul>
 		
@@ -27,10 +27,10 @@
 				const connection = new WebSocket(`ws://${location.host}/echo`);
 				
 				connection.addEventListener("open", function(event) {
-					logMessage("<em>Connection to server established!");
+					logMessage("<em>Connection to server established!</em>");
 				});
 				connection.addEventListener("close", function(event) {
-					logMessage("<em>Connection to server list.");
+					logMessage("<em>Connection to server lost.</em>");
 				});
 				connection.addEventListener("message", function(event) {
 					logMessage(`<strong>Server:</strong> ${event.data}`);

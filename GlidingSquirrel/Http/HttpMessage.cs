@@ -42,10 +42,10 @@ namespace SBRL.GlidingSquirrel.Http
 		}
 
 
-		public string GetHeaderValue(string header, string defaultValue)
+		public string GetHeaderValue(string headerName, string defaultValue)
 		{
-			if(Headers.ContainsKey(header))
-				return header;
+			if(Headers.ContainsKey(headerName))
+				return Headers[headerName];
 			return defaultValue;
 		}
 	}

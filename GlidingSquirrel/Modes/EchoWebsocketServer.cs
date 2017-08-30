@@ -39,6 +39,14 @@ namespace SBRL.GlidingSquirrel.Modes
 
 		public override async Task HandleHttpRequest(HttpRequest request, HttpResponse response)
 		{
+			if(request.Url != "/")
+			{
+				response.ResponseCode = HttpResponseCode.NotFound;
+				response.ContentType = "text/plain";
+				await response.SetBody("Couldn't find anything at '{request.Url}'.");
+				return;
+			}
+
 			response.ResponseCode = HttpResponseCode.Ok;
 			response.ContentType = "text/html";
 			await response.SetBody(
