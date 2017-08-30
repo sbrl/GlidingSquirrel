@@ -11,6 +11,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 {
 	class ClientConnectionRequest
 	{
+		public TcpClient RawClient;
 		public HttpRequest Request;
 		public HttpResponse Response;
 	}
@@ -49,20 +50,21 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		public event ClientDisconnectedEventHandler OnClientDisconnected;
 
-		public sealed override async Task<bool> HandleRequest(HttpRequest request, HttpResponse response)
+		public sealed override async Task<HttpConnectionAction> HandleRequest(HttpRequest request, HttpResponse response)
 		{
 			if(!request.Headers.ContainsKey("upgrade") || request.Headers["upgrade"].ToLower() != "websocket")
 			{
 				await HandleHttpRequest(request, response);
-				return true;
+				return HttpConnectionAction.Continue;
 			}
 
 			ThreadPool.QueueUserWorkItem(handleClientConnection, new ClientConnectionRequest() {
+				RawClient = request.ClientConnection,
 				Request = request,
 				Response = response
 			});
 
-			return false;
+			return HttpConnectionAction.LeaveAlone;
 		}
 
 
@@ -77,7 +79,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		{
 			ClientConnectionRequest connectionRequest = rawClientConnectionRequest as ClientConnectionRequest;
 
-			if(connectionRequest == null || connectionRequest.Request == null || connectionRequest.Response == null)
+			if(connectionRequest == null || connectionRequest.RawClient == null || connectionRequest.Request == null)
 			{
 				Log.WriteLine(
 					"[GlidingSquirrel/Websockets] Client connection handler called with " +
@@ -86,9 +88,13 @@ namespace SBRL.GlidingSquirrel.Websocket
 			}
 
 			WebsocketClient client = null;
-			try
-			{
-				client = await WebsocketClient.WithServerNegotiation(connectionRequest.Request, connectionRequest.Response);
+			/*try
+			{*/
+				client = await WebsocketClient.WithServerNegotiation(
+					connectionRequest.RawClient,
+					connectionRequest.Request,
+					connectionRequest.Response
+				);
 
 				Log.WriteLine("[GlidingSquirrel/Websockets] New client connected from {0}.", client.RemoteEndpoint);
 
@@ -97,7 +103,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 				await client.Listen();
 
-			}
+			/*}
 			catch(IOException)
 			{
 				Log.WriteLine("[GlidingSquirrel/WebsocketClient] Caught IOException - a client probably disconnected uncleanly");
@@ -109,9 +115,18 @@ namespace SBRL.GlidingSquirrel.Websocket
 			catch(Exception error)
 			{
 				Log.WriteLine("[GlidingSquirrel/WebsocketClient] Error: {0}", error);
-			}
+			}*/
 
-			Log.WriteLine("[GlidingSquirrel/Websockets] Client from {0} disconnected with code {1}.", client.RemoteEndpoint, client.ExitCode);
+			if(client != null) {
+				Log.WriteLine(
+					"[GlidingSquirrel/Websockets] Client from {0} disconnected with code {1}.",
+					client.RemoteEndpoint,
+					client.ExitCode
+				);
+			}
+			else {
+				Log.WriteLine("[GlidingSquirrel/Websockets] Client disconnected with code {0}.", client?.ExitCode ?? -2);
+			}
 		}
 
 		protected async Task handleClientDisconnection(object sender, ClientDisconnectedEventArgs eventArgs)

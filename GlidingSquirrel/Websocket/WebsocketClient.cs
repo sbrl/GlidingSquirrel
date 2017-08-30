@@ -273,43 +273,43 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		/// <returns>A new Websocket client connection with the negotation completed.</returns>
 
-		public static async Task<WebsocketClient> WithServerNegotiation(HttpRequest request, HttpResponse response)
+		public static async Task<WebsocketClient> WithServerNegotiation(TcpClient rawClient, HttpRequest handshakeRequest, HttpResponse handshakeResponse)
 		{
-			if(!request.Headers.ContainsKey("sec-websocket-key"))
+			if(!handshakeRequest.Headers.ContainsKey("sec-websocket-key"))
 				throw new WebsocketClientHandshakeException("Error: That request didn't contain the required sec-websocket-key header.");
-			if(!request.Headers.ContainsKey("upgrade") || request.Headers["upgrade"].ToLower() != "websocket")
+			if(!handshakeRequest.Headers.ContainsKey("upgrade") || handshakeRequest.Headers["upgrade"].ToLower() != "websocket")
 				throw new WebsocketClientHandshakeException("Error: That request didn't contain the required upgrade header set to 'websocket'.");
-			if(!request.Headers.ContainsKey("connection") || !Connection.Contains(request.Headers["connection"], Connection.Upgrade))
+			if(!handshakeRequest.Headers.ContainsKey("connection") || !Connection.Contains(handshakeRequest.Headers["connection"], Connection.Upgrade))
 				throw new WebsocketClientHandshakeException("Error: That request didn't contain the required connection header set to 'upgrade'.");
-			if(!request.Headers.ContainsKey("sec-websocket-version") || request.Headers["sec-websocket-version"] != "13")
+			if(!handshakeRequest.Headers.ContainsKey("sec-websocket-version") || handshakeRequest.Headers["sec-websocket-version"] != "13")
 			{
-				response.Headers.Add("Sec-WebSocket-Version", "13");
+				handshakeResponse.Headers.Add("Sec-WebSocket-Version", "13");
 				// todo handle this properly
 				throw new WebsocketClientHandshakeException("Error: That request didn't contain the required sec-websocket-version header set to '13'.");
 			}
 
 			// Disable the read timeout set to kill idle http connections, as we're setting up a websocket naow!
-			request.ClientConnection.ReceiveTimeout = 0;
+			handshakeRequest.ClientConnection.ReceiveTimeout = 0;
 
 			WebsocketClient client = new WebsocketClient() {
-				connection = request.ClientConnection
+				connection = handshakeRequest.ClientConnection
 			};
 
-			response.ResponseCode = HttpResponseCode.SwitchingProtocotolsWebsocket;
-			response.Headers["Upgrade"] = "websocket";
-			response.Headers["Connection"] = Connection.Upgrade;
-			response.Headers.Add(
+			handshakeResponse.ResponseCode = HttpResponseCode.SwitchingProtocotolsWebsocket;
+			handshakeResponse.Headers["Upgrade"] = "websocket";
+			handshakeResponse.Headers["Connection"] = Connection.Upgrade;
+			handshakeResponse.Headers.Add(
 				"Sec-WebSocket-Accept",
-				CompleteWebsocketKeyChallenge(request.GetHeaderValue("sec-websocket-key", ""))
+				CompleteWebsocketKeyChallenge(handshakeRequest.GetHeaderValue("sec-websocket-key", ""))
 			);
 
 			StreamWriter outgoing = new StreamWriter(
-				request.ClientConnection.GetStream(),
+				rawClient.GetStream(),
 				new UTF8Encoding(false),
 				1024,
 				true
 			) { AutoFlush = true };
-			await response.SendTo(outgoing);
+			await handshakeResponse.SendTo(outgoing);
 			outgoing.Dispose();
 
 			return client;

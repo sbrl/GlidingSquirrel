@@ -9,7 +9,33 @@ using System.Threading.Tasks;
 using MimeSharp;
 
 namespace SBRL.GlidingSquirrel.Http
-{ 
+{
+	/// <summary>
+	/// Describes what Gliding Squirrel should do with a connection once your HandleRequest() method has
+	/// finished building a response.
+	/// </summary>
+	public enum HttpConnectionAction
+	{
+		/// <summary>
+		/// Continues as normal by sending the response to the client,
+		/// and then handling keep-alives as normal.
+		/// </summary>
+		Continue,
+		/// <summary>
+		/// Sends the response to the client, and then kills the connection.
+		/// </summary>
+		SendAndKillConnection,
+		/// <summary>
+		/// Kills the connection without sending the response.
+		/// </summary>
+		KillConnection,
+		/// <summary>
+		/// Assumes that the client connection has been handed off to another connection manager and
+		/// leaves it alone.
+		/// </summary>
+		LeaveAlone
+	}
+
 	public abstract class HttpServer
 	{
 		public static readonly string Version = "0.2-alpha";
@@ -99,9 +125,10 @@ namespace SBRL.GlidingSquirrel.Http
 		{
 			TcpClient client = transferredClient as TcpClient;
 
+			HttpConnectionAction finalAction = HttpConnectionAction.KillConnection;
 			try
 			{
-				await HandleClient(client);
+				finalAction = await HandleClient(client);
 			}
 			catch(Exception error)
 			{
@@ -109,16 +136,18 @@ namespace SBRL.GlidingSquirrel.Http
 			}
 			finally
 			{
-				client.Close();
+				if(finalAction != HttpConnectionAction.LeaveAlone)
+					client.Close();
 			}
 		}
 
-		public async Task HandleClient(TcpClient client)
+		public async Task<HttpConnectionAction> HandleClient(TcpClient client)
 		{
 			client.ReceiveTimeout = IdleTimeout;
 			StreamReader source = new StreamReader(client.GetStream());
 			StreamWriter destination = new StreamWriter(client.GetStream()) { AutoFlush = true };
 
+			HttpConnectionAction nextAction = HttpConnectionAction.Continue;
 			int requestsMade = 0;
 
 			while(true)
@@ -157,7 +186,10 @@ namespace SBRL.GlidingSquirrel.Http
 					request.Headers.Remove("connection");
 				}
 
-				if(!await doHandleRequest(request, response))
+				nextAction = await doHandleRequest(request, response);
+
+				if(nextAction == HttpConnectionAction.LeaveAlone ||
+				   nextAction == HttpConnectionAction.KillConnection)
 					break;
 
 				Log.WriteLine(
@@ -172,6 +204,9 @@ namespace SBRL.GlidingSquirrel.Http
 
 				await response.SendTo(destination);
 
+				if(nextAction == HttpConnectionAction.SendAndKillConnection)
+					break;
+
 				if(
 					request.HttpVersion <= 1.0f ||
 					(
@@ -181,10 +216,14 @@ namespace SBRL.GlidingSquirrel.Http
 				)
 					break;
 			}
-			client.Close();
+
+			if(nextAction != HttpConnectionAction.LeaveAlone)
+				client.Close();
+
+			return nextAction;
 		}
 
-		public async Task<bool> doHandleRequest(HttpRequest request, HttpResponse response)
+		public async Task<HttpConnectionAction> doHandleRequest(HttpRequest request, HttpResponse response)
 		{
 			// Check the http version of the request
 			if(request.HttpVersion < 1.0f || request.HttpVersion >= 2.0f)
@@ -193,7 +232,7 @@ namespace SBRL.GlidingSquirrel.Http
 				response.ContentType = "text/plain";
 				await response.SetBody($"Error: HTTP version {request.HttpVersion} isn't supportedby this server.\r\n" +
 					"Supported versions: 1.0, 1.1");
-				return false;
+				return HttpConnectionAction.SendAndKillConnection;
 			}
 			// Check the length of the url
 			if(request.Url.Length > MaximumUrlLength)
@@ -202,7 +241,7 @@ namespace SBRL.GlidingSquirrel.Http
 				response.ContentType = "text/plain";
 				await response.SetBody($"Error: That request url was too long (this " +
 					$"server's limit is {MaximumUrlLength} characters)");
-				return false;
+				return HttpConnectionAction.SendAndKillConnection;
 			}
 
 			// Make sure that the content-length header is specified if it's needed
@@ -215,13 +254,13 @@ namespace SBRL.GlidingSquirrel.Http
 				response.ContentType = "text/plain";
 				await response.SetBody("Error: You appear to be uploading something, but didn't " +
 					"specify the content-length header.");
-				return false;
+				return HttpConnectionAction.SendAndKillConnection;
 			}
 
+			HttpConnectionAction nextAction = HttpConnectionAction.Continue;
 			try
 			{
-				if(!await HandleRequest(request, response))
-					return false;
+				nextAction = await HandleRequest(request, response);
 			}
 			catch(Exception error)
 			{
@@ -232,7 +271,7 @@ namespace SBRL.GlidingSquirrel.Http
 				);
 			}
 
-			if(request.Accepts.Length > 0 && !request.WillAccept(response.ContentType))
+			if(nextAction != HttpConnectionAction.LeaveAlone && request.Accepts.Length > 0 && !request.WillAccept(response.ContentType))
 			{
 				response.ResponseCode = HttpResponseCode.NotAcceptable;
 				await response.SetBody($"Error: The content available (with the mime type {response.ContentType})" +
@@ -241,11 +280,11 @@ namespace SBRL.GlidingSquirrel.Http
 				response.ContentType = "text/plain";
 			}
 
-			return true;
+			return nextAction;
 		}
 
 		protected abstract Task setup();
 
-		public abstract Task<bool> HandleRequest(HttpRequest request, HttpResponse response);
+		public abstract Task<HttpConnectionAction> HandleRequest(HttpRequest request, HttpResponse response);
 	}
 }

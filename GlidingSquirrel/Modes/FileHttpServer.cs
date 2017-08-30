@@ -26,13 +26,13 @@ namespace SBRL.GlidingSquirrel.Modes
 			return Task.CompletedTask;
 		}
 
-		public override async Task<bool> HandleRequest(HttpRequest request, HttpResponse response)
+		public override async Task<HttpConnectionAction> HandleRequest(HttpRequest request, HttpResponse response)
 		{
 			if(request.Url.Contains(".."))
 			{
 				response.ResponseCode = HttpResponseCode.BadRequest;
 				await response.SetBody("Error the requested path contains dangerous characters.");
-				return true;
+				return HttpConnectionAction.SendAndKillConnection;
 			}
 
 			string filePath = getFilePathFromRequestUrl(request.Url);
@@ -40,7 +40,7 @@ namespace SBRL.GlidingSquirrel.Modes
 			{
 				response.ResponseCode = HttpResponseCode.NotFound;
 				await response.SetBody($"Error: The file path '{request.Url}' could not be found.\n");
-				return true;
+				return HttpConnectionAction.Continue;
 			}
 
 			FileInfo requestFileStat = null;
@@ -55,7 +55,7 @@ namespace SBRL.GlidingSquirrel.Modes
 					error.ToString() + 
 					"\n"
 				);
-				return true;
+				return HttpConnectionAction.Continue;
 			}
 
 			response.Headers.Add("content-type", LookupMimeType(filePath));
@@ -66,7 +66,7 @@ namespace SBRL.GlidingSquirrel.Modes
 				response.Body = new StreamReader(filePath);
 			}
 
-			return true;
+			return HttpConnectionAction.Continue;
 		}
 
 		protected string getFilePathFromRequestUrl(string requestUrl)
