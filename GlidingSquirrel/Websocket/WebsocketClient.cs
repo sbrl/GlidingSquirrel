@@ -89,10 +89,8 @@ namespace SBRL.GlidingSquirrel.Websocket
 				if(nextFrame == null)
 					break;
 
-
 				await OnFrameRecieved(this, new NextFrameEventArgs() { Frame = nextFrame });
 				LastCommunication = DateTime.Now;
-
 
 				if(!connection.Connected || closingConnection)
 					break;
