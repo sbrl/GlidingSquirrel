@@ -141,7 +141,13 @@ namespace SBRL.GlidingSquirrel.Websocket
 			WebsocketFrame nextFrame = nextFrameEventArgs.Frame;
 			WebsocketFrame nextSeqFrame;
 
-			Log.WriteLine("[GlidingSquirrel/WebsocketClient] Got {0} frame from {1}", nextFrame.Type, client.RemoteEndpoint);
+			Log.WriteLine(
+				"[GlidingSquirrel/WebsocketClient] Got {0} frame of length {1} ({2}) from {3}",
+				nextFrame.Type,
+				nextFrame.RawPayload.Length,
+				nextFrame.PayloadLengthType,
+				client.RemoteEndpoint
+			);
 
 			// todo close the connection properly here
 
@@ -238,7 +244,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 				default:
 					Log.WriteLine(
-						"[GlidingSquirrel/WebsocketClient] Got unknown frame with index {0} from {1}",
+						"[GlidingSquirrel/WebsocketClient] Got unknown frame with opcode {0} from {1}",
 						nextFrame.Type,
 						RemoteEndpoint
 					);
