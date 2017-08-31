@@ -66,6 +66,8 @@
     <Compile Include="Modes\FileHttpServer.cs" />
     <Compile Include="Modes\EchoWebsocketServer.cs" />
     <Compile Include="Utilities\EmbeddedFiles.cs" />
+    <Compile Include="Websocket\Values.cs" />
+    <Compile Include="Modes\ChatWebsocketServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -79,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Modes\Resources\EchoWebsocketClient.html" />
+    <EmbeddedResource Include="Modes\Resources\ChatWebsocketClient.html" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

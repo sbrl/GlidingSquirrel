@@ -24,6 +24,6 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 	public class ClientDisconnectedEventArgs : EventArgs
 	{
-
+		public WebsocketCloseReason CloseReason;
 	}
 }

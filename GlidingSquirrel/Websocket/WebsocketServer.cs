@@ -35,7 +35,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		public TimeSpan PingInterval = TimeSpan.FromSeconds(60);
 
-        public WebsocketServer(IPAddress inBindAddress, int inPort) : base(inBindAddress, inPort)
+		public WebsocketServer(IPAddress inBindAddress, int inPort) : base(inBindAddress, inPort)
 		{
 			OnClientConnected += HandleClientConnected;
 			OnClientDisconnected += HandleClientDisconnected;
@@ -49,6 +49,10 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// Occurs when a (websocket) client disconnects.
 		/// </summary>
 		public event ClientDisconnectedEventHandler OnClientDisconnected;
+
+
+		#region Request Handling
+
 
 		public sealed override async Task<HttpConnectionAction> HandleRequest(HttpRequest request, HttpResponse response)
 		{
@@ -88,8 +92,8 @@ namespace SBRL.GlidingSquirrel.Websocket
 			}
 
 			WebsocketClient client = null;
-			/*try
-			{*/
+			try
+			{
 				client = await WebsocketClient.WithServerNegotiation(
 					connectionRequest.RawClient,
 					connectionRequest.Request,
@@ -103,7 +107,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 				await client.Listen();
 
-			/*}
+			}
 			catch(IOException)
 			{
 				Log.WriteLine("[GlidingSquirrel/WebsocketClient] Caught IOException - a client probably disconnected uncleanly");
@@ -115,17 +119,19 @@ namespace SBRL.GlidingSquirrel.Websocket
 			catch(Exception error)
 			{
 				Log.WriteLine("[GlidingSquirrel/WebsocketClient] Error: {0}", error);
-			}*/
+			}
 
-			if(client != null) {
+			if(client != null)
+			{
 				Log.WriteLine(
 					"[GlidingSquirrel/Websockets] Client from {0} disconnected with code {1}.",
 					client.RemoteEndpoint,
 					client.ExitCode
 				);
 			}
-			else {
-				Log.WriteLine("[GlidingSquirrel/Websockets] Client disconnected with code {0}.", client?.ExitCode ?? -2);
+			else
+			{
+				Log.WriteLine("[GlidingSquirrel/Websockets] Client disconnected with code {0}.", client.ExitCode);
 			}
 		}
 
@@ -167,6 +173,85 @@ namespace SBRL.GlidingSquirrel.Websocket
 			Log.WriteLine("[WebsocketServer/Maintenance] Ending maintenance loop.");
 		}
 
+
+		#endregion
+
+		#region Interactive Interface Methods
+
+
+		/// <summary>
+		/// Broadcasts the specified message to all connected clients who aren't
+		/// currently in the process of closing their connection.
+		/// </summary>
+		/// <param name="message">The message to broadcast.</param>
+		public async Task Broadcast(string message)
+		{
+			List<Task> senders = new List<Task>();
+			foreach(WebsocketClient client in Clients)
+			{
+				if(client.IsClosing)
+					continue;
+				senders.Add(client.Send(message));
+			}
+			await Task.WhenAll(senders.ToArray());
+		}
+		/// <summary>
+		/// Broadcasts the specified binary message to all connected clients who aren't
+		/// currently in the process of closing their connection.
+		/// </summary>
+		/// <param name="message">The message to broadcast.</param>
+		public async Task Broadcast(byte[] message)
+		{
+			List<Task> senders = new List<Task>();
+			foreach(WebsocketClient client in Clients)
+			{
+				if(client.IsClosing)
+					continue;
+				senders.Add(client.Send(message));
+			}
+			await Task.WhenAll(senders.ToArray());
+		}
+
+		/// <summary>
+		/// Reflects the specified message to all connected clients who both aren't
+		/// the sender and aren't currently in the process of closing their connection.
+		/// </summary>
+		/// <param name="message">The message to broadcast.</param>
+		public async Task Reflect(WebsocketClient sender, string message)
+		{
+			List<Task> senders = new List<Task>();
+			foreach(WebsocketClient client in Clients)
+			{
+				if(client == sender || client.IsClosing)
+					continue;
+				senders.Add(client.Send(message));
+			}
+			await Task.WhenAll(senders.ToArray());
+		}
+		/// <summary>
+		/// Reflects the specified binary message to all connected clients who both aren't
+		/// the sender and aren't currently in the process of closing their connection.
+		/// </summary>
+		/// <param name="message">The message to broadcast.</param>
+		public async Task Reflect(WebsocketClient sender, byte[] message)
+		{
+			List<Task> senders = new List<Task>();
+			foreach(WebsocketClient client in Clients)
+			{
+				if(client == sender || client.IsClosing)
+					continue;
+				senders.Add(client.Send(message));
+			}
+			await Task.WhenAll(senders.ToArray());
+		}
+
+
+		#endregion
+
+
+		#region Abstract Interface Methods
+
+
 		/// <summary>
 		/// Gets called automatically to handle regular HTTP requests.
 		/// </summary>
@@ -185,6 +270,9 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// <param name="sender">The WebsocketClient object representing the client that has disconnected.</param>
 		/// <param name="eventArgs">The client disconnected event arguments.</param>
 		public abstract Task HandleClientDisconnected(object sender, ClientDisconnectedEventArgs eventArgs);
+
+
+		#endregion
 
 	}
 }

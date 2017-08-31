@@ -27,7 +27,7 @@ namespace SBRL.GlidingSquirrel.Modes
 			client.OnTextMessage += async (object textSender, TextMessageEventArgs textEventArgs) => {
 				await client.Send(textEventArgs.Payload);
 			};
-			client.OnBinaryMessage += async (object binarSender, BinaryMessageEventArgs binaryEventArgs) => {
+			client.OnBinaryMessage += async (object binarySender, BinaryMessageEventArgs binaryEventArgs) => {
 				await client.Send(binaryEventArgs.Payload);
 			};
 		}

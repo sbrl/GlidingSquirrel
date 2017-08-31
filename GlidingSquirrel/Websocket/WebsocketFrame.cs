@@ -6,23 +6,6 @@ using System.IO;
 
 namespace SBRL.GlidingSquirrel.Websocket
 {
-	public enum PayloadLengthType
-	{
-		Bit7 = 0,
-		Bit16 = 16,
-		Bit64 = 64
-	}
-
-    public enum WebsocketFrameType
-    {
-        ContinuationFrame = 0x0,
-        TextData = 0x1,
-        BinaryData = 0x2,
-
-        Ping = 0x9,
-        Pong = 0xA
-    }
-
 	public class WebsocketFrame
 	{
 		/// <summary>
@@ -63,17 +46,16 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 		public PayloadLengthType PayloadLengthType;
 
-        #endregion
+		#endregion
 
-        public bool IsLastFrame
-        {
-            get {
-                return Fin;
-            }
+		public bool IsLastFrame {
+			get {
+				return Fin;
+			}
 			set {
 				Fin = value;
 			}
-        }
+		}
 
 		public WebsocketFrameType Type {
 			get {
@@ -99,6 +81,16 @@ namespace SBRL.GlidingSquirrel.Websocket
 		public WebsocketFrame()
 		{
 		}
+
+		public static WebsocketFrame GenerateCloseFrame(WebsocketCloseReason closeReason)
+		{
+			WebsocketFrame result = new WebsocketFrame();
+			result.Type = WebsocketFrameType.Close;
+			result.RawPayload = BitConverter.GetBytes((ushort)closeReason);
+			return result;
+		}
+
+		#region Sending / Receiving
 
 		public async Task SendTo(NetworkStream clientStream)
 		{
@@ -160,7 +152,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		}
 
 
-		public static async Task<WebsocketFrame> Decode(NetworkStream  clientStream)
+		public static async Task<WebsocketFrame> Decode(NetworkStream clientStream)
 		{
 			// todo change this to use a stream so that we can blow up on payloads that are too large without reading them
 			WebsocketFrame result = new WebsocketFrame();
@@ -218,5 +210,8 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 			return result;
 		}
+
+		#endregion
+
 	}
 }

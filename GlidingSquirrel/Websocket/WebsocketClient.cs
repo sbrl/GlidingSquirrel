@@ -30,16 +30,41 @@ namespace SBRL.GlidingSquirrel.Websocket
 	public class WebsocketClient
 	{
 		private TcpClient connection;
-		private bool closingConnection = false;
 
 		protected Random rand = new Random();
 
 		public DateTime LastCommunication = DateTime.Now;
 
 		/// <summary>
+		/// Whether we've received a close frame from this client.
+		/// </summary>
+		public bool ReceivedCloseFrame { get; private set; } = false;
+		/// <summary>
+		/// Whether we've sent a close frame to this client.
+		/// </summary>
+		public bool SentCloseFrame { get; private set; } = false;
+		/// <summary>
 		/// The code with which this websocket client connection exited with.
 		/// </summary>
-		public int ExitCode = -1;
+		public WebsocketCloseReason ExitCode { get; private set; } = WebsocketCloseReason.NotClosedYet;
+		/// <summary>
+		/// Whether this websocket client is currently in the process of closing it's connection.
+		/// </summary>
+		public bool IsClosing {
+			get {
+				return ReceivedCloseFrame || SentCloseFrame;
+			}
+		}
+		/// <summary>
+		/// Whether this websocket client has closed it connection or not.
+		/// Note that even if the connection is open, you may not be able to send a message.
+		/// See <see cref="IsClosing"/> for more information.
+		/// </summary>
+		public bool IsClosed {
+			get {
+				return (ReceivedCloseFrame && SentCloseFrame) || !connection.Connected;
+			}
+		}
 
 		/// <summary>
 		/// The maximum size of any websocket frames sent to this client.
@@ -47,11 +72,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		public int MaximumTransmissionSize { get; set; } = 2 * 1024 * 1024;
 
-		public IPEndPoint RemoteEndpoint {
-			get {
-				return (IPEndPoint)connection.Client.RemoteEndPoint;
-			}
-		}
+		public IPEndPoint RemoteEndpoint { get; private set; }
 
 		public event NextFrameEventHandler OnFrameRecieved;
 
@@ -81,6 +102,13 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 		#region Frame Handling
 
+		protected void setup()
+		{
+			// Record the remote endpoint
+			// In case the connection gets garbage collected we want to know who it was who was connected!
+			RemoteEndpoint = (IPEndPoint)connection.Client.RemoteEndPoint;
+		}
+
 		public async Task Listen()
 		{
 			while(true)
@@ -93,11 +121,9 @@ namespace SBRL.GlidingSquirrel.Websocket
 				await OnFrameRecieved(this, new NextFrameEventArgs() { Frame = nextFrame });
 				LastCommunication = DateTime.Now;
 
-				if(!connection.Connected || closingConnection)
+				if(IsClosed)
 					break;
 			}
-
-			await OnDisconnection(this, new ClientDisconnectedEventArgs());
 		}
 
 		/// <summary>
@@ -121,6 +147,19 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 			switch(nextFrame.Type)
 			{
+				case WebsocketFrameType.Close:
+					// Close the connection as requested
+					ReceivedCloseFrame = true;
+					if(BitConverter.IsLittleEndian)
+						Array.Reverse(nextFrame.RawPayload);
+
+					WebsocketCloseReason closeReason = WebsocketCloseReason.NoStatusCodePresent;
+					if(nextFrame.RawPayload.Length >= 2)
+						closeReason = (WebsocketCloseReason)BitConverter.ToUInt16(nextFrame.RawPayload, 0);
+					
+					await Close(closeReason);
+					break;	
+
 				case WebsocketFrameType.ContinuationFrame:
 					throw new Exception("Error: Can't process a continuation frame when there's" +
 				"nothing to continue!");
@@ -129,7 +168,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 					if(nextFrame.RawPayload.Length > 125)
 					{
 						// The payload is too long! Drop it like a hot potato
-						Close();
+						await Close(WebsocketCloseReason.FrameTooBig);
 						return;
 					}
 
@@ -196,6 +235,14 @@ namespace SBRL.GlidingSquirrel.Websocket
 					await OnBinaryMessage(this, new BinaryMessageEventArgs() { Payload = reassembledPayload });
 
 					break;
+
+				default:
+					Log.WriteLine(
+						"[GlidingSquirrel/WebsocketClient] Got unknown frame with index {0} from {1}",
+						nextFrame.Type,
+						RemoteEndpoint
+					);
+					break;
 			}
 		}
 
@@ -250,22 +297,65 @@ namespace SBRL.GlidingSquirrel.Websocket
 			await sendFrame(pingFrame);
 		}
 
+
 		/// <summary>
 		/// Gracefully closses the connection to thsi Websocket client.
 		/// </summary>
-		public void Close()
+		public async Task Close(WebsocketCloseReason closeReason)
 		{
-			connection.Close();
-			closingConnection = true;
+			// If we haven't received a close frame yet, give them a chance to send one
+			if(!ReceivedCloseFrame)
+			{
+				OnFrameRecieved += async (object sender, NextFrameEventArgs eventArgs) => {
+					WebsocketFrame frame = eventArgs.Frame;
+					// We're only interested in close frames here
+					if(frame.Type != WebsocketFrameType.Close)
+						return;
+					
+					ReceivedCloseFrame = true;
+					await Destroy();
+				};
+			}
+
+			// Record the reason we're closing this connection
+			ExitCode = closeReason;
+
+			if(!SentCloseFrame) {
+				await sendCloseFrame(closeReason);
+			}
+
+			// If we've completed the closing handshake, go out in style :D
+			if(SentCloseFrame && ReceivedCloseFrame)
+				await Destroy();
 		}
+
+		/// <summary>
+		/// Sends a close frame to this websocket client.
+		/// You don't normally want to call thsi directly - use the normal Close() method instead.
+		/// </summary>
+		/// <param name="closeReason">The reason for closing the connection.</param>
+		private async Task sendCloseFrame(WebsocketCloseReason closeReason)
+		{
+			WebsocketFrame closeFrame = WebsocketFrame.GenerateCloseFrame(closeReason);
+			await closeFrame.SendTo(connection.GetStream());
+			SentCloseFrame = true;
+		}
+
 		/// <summary>
 		/// Destroys this connection as fast as possible.
 		/// Useful when a client is misbehaving.
 		/// </summary>
-		public void Destroy()
+		public async Task Destroy()
 		{
+			// Close the connection
 			connection.Close();
-			closingConnection = true;
+
+			// Fake the fact we've sent & received a closing frame
+			SentCloseFrame = true;
+			ReceivedCloseFrame = true;
+
+			if(OnDisconnection != null)
+				await OnDisconnection(this, new ClientDisconnectedEventArgs() { CloseReason = ExitCode });
 		}
 
 		#endregion
@@ -298,6 +388,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 			WebsocketClient client = new WebsocketClient() {
 				connection = handshakeRequest.ClientConnection
 			};
+			client.setup();
 
 			handshakeResponse.ResponseCode = HttpResponseCode.SwitchingProtocotolsWebsocket;
 			handshakeResponse.Headers["Upgrade"] = "websocket";

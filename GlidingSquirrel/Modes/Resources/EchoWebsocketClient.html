@@ -12,7 +12,9 @@
 		</ul>
 		
 		<input type="text" id="message-box" />
-		<button id="message-send-button">Send</button>
+		<button id="button-sendmessage">Send</button>
+		
+		<button id="button-disconnect">Disconnect</button>
 		
 		<!---------------->
 		<style>
@@ -41,7 +43,11 @@
 						sendMessage();
 				});
 				
-				document.getElementById("message-send-button").addEventListener("click", sendMessage);
+				document.getElementById("button-sendmessage").addEventListener("click", sendMessage);
+				
+				document.getElementById("button-disconnect").addEventListener("click", function(event) {
+					window.connection.close();
+				});
 			});
 			
 			function sendMessage()
