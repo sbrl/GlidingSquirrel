@@ -67,14 +67,15 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		private WebsocketClient()
 		{
+			OnFrameRecieved += handleNextFrame;
 		}
 		/// <summary>
 		/// Creates a new websocket client connection.
 		/// </summary>
 		/// <param name="remoteAddress">Remote address.</param>
-		public WebsocketClient(string remoteAddress)
+		public WebsocketClient(string remoteAddress) : this()
 		{
-			OnFrameRecieved += handleNextFrame;
+			throw new NotImplementedException("Error: Websocket Client connections haven't been implementedd yet!");
 		}
 
 
@@ -110,8 +111,11 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 		protected async Task handleNextFrame(object sender, NextFrameEventArgs nextFrameEventArgs)
 		{
+			WebsocketClient client = sender as WebsocketClient;
 			WebsocketFrame nextFrame = nextFrameEventArgs.Frame;
 			WebsocketFrame nextSeqFrame;
+
+			Log.WriteLine("[GlidingSquirrel/WebsocketClient] Got {0} frame from {1}", nextFrame.Type, client.RemoteEndpoint);
 
 			// todo close the connection properly here
 

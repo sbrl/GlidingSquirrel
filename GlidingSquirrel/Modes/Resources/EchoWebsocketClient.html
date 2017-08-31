@@ -24,15 +24,15 @@
 		</style>
 		<script>
 			window.addEventListener("load", function(event) {
-				const connection = new WebSocket(`ws://${location.host}/echo`);
+				window.connection = new WebSocket(`ws://${location.host}/echo`);
 				
-				connection.addEventListener("open", function(event) {
+				window.connection.addEventListener("open", function(event) {
 					logMessage("<em>Connection to server established!</em>");
 				});
-				connection.addEventListener("close", function(event) {
+				window.connection.addEventListener("close", function(event) {
 					logMessage("<em>Connection to server lost.</em>");
 				});
-				connection.addEventListener("message", function(event) {
+				window.connection.addEventListener("message", function(event) {
 					logMessage(`<strong>Server:</strong> ${event.data}`);
 				});
 				
@@ -48,7 +48,7 @@
 			{
 				var messageBox = document.getElementById("message-box");
 				
-				connection.send(
+				window.connection.send(
 					messageBox.value
 				);
 				logMessage(`<strong>You</strong> ${messageBox.value}`);
