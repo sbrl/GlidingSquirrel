@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<title>Websockets Chat Server Demo</title>
+	</head>
+	<body>
+		<h1>Websockets Chat Server Demo</h1>
+		
+		<ul id="message-log">
+			
+		</ul>
+		
+		<label for="name-box">Your Name:</label>
+		<input type="text" id="name-box" value="Anonymous" />
+		<br />
+		<label for="message-box">Message:</label>
+		<input type="text" id="message-box" placeholder="Enter the message here" />
+		<button id="button-sendmessage">Send</button>
+		<br />
+		<button id="button-disconnect">Disconnect</button>
+		
+		<!---------------->
+		<style>
+			html, body { font-size: 100%; }
+			body
+			{
+			    font-family: sans-serif;
+			}
+			
+			label {
+				font-weight: bold;
+			}
+		</style>
+		<script>
+			window.addEventListener("load", function(event) {
+				window.connection = new WebSocket(`ws://${location.host}/echo`);
+				
+				window.connection.addEventListener("open", function(event) {
+					logMessage("<em>Connection to server established!</em>");
+				});
+				window.connection.addEventListener("close", function(event) {
+					logMessage("<em>Connection to server lost.</em>");
+				});
+				window.connection.addEventListener("message", function(event) {
+					logMessage(`<strong>Server:</strong> ${event.data}`);
+				});
+				
+				document.getElementById("message-box").addEventListener("keyup", function(event) {
+					if(event.keyCode === 13)
+						sendMessage();
+				});
+				
+				document.getElementById("button-sendmessage").addEventListener("click", sendMessage);
+				
+				document.getElementById("button-disconnect").addEventListener("click", function(event) {
+					window.connection.close();
+				});
+			});
+			
+			function sendMessage()
+			{
+				var nameBox = document.getElementById("name-box");
+				var messageBox = document.getElementById("message-box");
+				
+				window.connection.send(
+					`[${nameBox.value}] ${messageBox.value}`
+				);
+				logMessage(`<strong>You</strong> ${messageBox.value}`);
+				
+				messageBox.value = "";
+			}
+			
+			function logMessage(message)
+			{
+				var newItem = document.createElement("li");
+				newItem.innerHTML = `[${new Date()}] ${message}`;
+				document.getElementById("message-log").appendChild(newItem);
+			}
+		</script>
+	</head>
+</html>
