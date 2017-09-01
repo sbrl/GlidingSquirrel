@@ -50,7 +50,7 @@ namespace SBRL.GlidingSquirrel.Modes
 			response.ResponseCode = HttpResponseCode.Ok;
 			response.ContentType = "text/html";
 			await response.SetBody(
-				await EmbeddedFiles.ReadAllTextAsync("SBRL.GlidingSquirrel.Modes.Resources.ChatWebsocketClient.html")
+				await EmbeddedFiles.ReadAllTextAsync("SBRL.GlidingSquirrel.CLI.Modes.Resources.ChatWebsocketClient.html")
 			);
 		}
 
