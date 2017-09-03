@@ -38,11 +38,24 @@ namespace SBRL.GlidingSquirrel.Http
 
 	public abstract class HttpServer
 	{
+		/// <summary>
+		/// The current version of GlidingSquirrel
+		/// </summary>
 		public static readonly string Version = "0.4-alpha";
 
+		/// <summary>
+		/// The address the server will bind to.
+		/// </summary>
 		public readonly IPAddress BindAddress;
+		/// <summary>
+		/// The port the server will listen on.
+		/// </summary>
 		public readonly int Port;
 
+		/// <summary>
+		/// The endpoint the server will listen on. Useful for logging.
+		/// You can change this value via the BindAddress and Port properties.
+		/// </summary>
 		public string BindEndpoint {
 			get {
 				string result = BindAddress.ToString();
@@ -53,6 +66,9 @@ namespace SBRL.GlidingSquirrel.Http
 			}
 		}
 
+		/// <summary>
+		/// The underlying tcp listener.
+		/// </summary>
 		protected TcpListener server;
 
 		/// <summary>
@@ -67,6 +83,9 @@ namespace SBRL.GlidingSquirrel.Http
 		public int IdleTimeout = 1000 * 60;
 
 		private Mime mimeLookup = new Mime();
+		/// <summary>
+		/// Override MIME type mappings. Values specified here will be sued in place of any found in MimeSharp's database.
+		/// </summary>
 		public Dictionary<string, string> MimeTypeOverrides = new Dictionary<string, string>() {
 			[".html"] = "text/html"
 		};
@@ -80,6 +99,9 @@ namespace SBRL.GlidingSquirrel.Http
 		{
 		}
 
+		/// <summary>
+		/// Starts listening for requests.
+		/// </summary>
 		public async Task Start()
 		{
 			Log.WriteLine($"GlidingSquirrel v{Version}");
@@ -141,6 +163,12 @@ namespace SBRL.GlidingSquirrel.Http
 			}
 		}
 
+		/// <summary>
+		/// Handles a single HTTP client connection. Usually you don't want to call this
+		/// directly - Start() will for you :-)
+		/// </summary>
+		/// <param name="client">The client to handle.</param>
+		/// <returns>What should be done with the underlying connection.</returns>
 		public async Task<HttpConnectionAction> HandleClient(TcpClient client)
 		{
 			client.ReceiveTimeout = IdleTimeout;
@@ -186,7 +214,7 @@ namespace SBRL.GlidingSquirrel.Http
 					request.Headers.Remove("connection");
 				}
 
-				nextAction = await doHandleRequest(request, response);
+				nextAction = await DoHandleRequest(request, response);
 
 				if(nextAction == HttpConnectionAction.LeaveAlone ||
 				   nextAction == HttpConnectionAction.KillConnection)
@@ -223,7 +251,13 @@ namespace SBRL.GlidingSquirrel.Http
 			return nextAction;
 		}
 
-		public async Task<HttpConnectionAction> doHandleRequest(HttpRequest request, HttpResponse response)
+		/// <summary>
+		/// Handles a single request from a client.
+		/// </summary>
+		/// <param name="request">The request to handle.</param>
+		/// <param name="response">The response to send back to the client.</param>
+		/// <returns>What should be done with the underlying connection.</returns>
+		public async Task<HttpConnectionAction> DoHandleRequest(HttpRequest request, HttpResponse response)
 		{
 			// Check the http version of the request
 			if(request.HttpVersion < 1.0f || request.HttpVersion >= 2.0f)
