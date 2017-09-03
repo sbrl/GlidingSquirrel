@@ -283,8 +283,21 @@ namespace SBRL.GlidingSquirrel.Http
 			return nextAction;
 		}
 
+		/// <summary>
+		/// Called once the server is listening for requests, but before the first request is accepted.
+		/// Use to perform setup logic, obviously :P
+		/// </summary>
+		/// <returns>The setup.</returns>
 		protected abstract Task setup();
 
+		/// <summary>
+		/// Used to handle a request. Called in a separate thread. If an exception is thrown
+		/// here, it's caught and sent back to the user - which may not be what you want.
+		/// todo: Upgrades to that part of the system are pending.
+		/// </summary>
+		/// <param name="request">The request made by the client.</param>
+		/// <param name="response">The response to send to the client.</param>
+		/// <returns>What to do with the connection.</returns>
 		public abstract Task<HttpConnectionAction> HandleRequest(HttpRequest request, HttpResponse response);
 	}
 }
