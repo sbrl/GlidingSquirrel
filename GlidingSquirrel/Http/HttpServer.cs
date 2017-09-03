@@ -38,7 +38,7 @@ namespace SBRL.GlidingSquirrel.Http
 
 	public abstract class HttpServer
 	{
-		public static readonly string Version = "0.2-alpha";
+		public static readonly string Version = "0.4-alpha";
 
 		public readonly IPAddress BindAddress;
 		public readonly int Port;
