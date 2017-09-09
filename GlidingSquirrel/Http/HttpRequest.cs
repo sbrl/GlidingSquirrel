@@ -8,33 +8,56 @@ using System.Net.Sockets;
 
 namespace SBRL.GlidingSquirrel.Http
 {
+	/// <summary>
+	/// Represents an http requeest.
+	/// </summary>
 	public class HttpRequest : HttpMessage
 	{
+		/// <summary>
+		/// The underlying conenction to the remote client.
+		/// </summary>
         public TcpClient ClientConnection;
-
+		/// <summary>
+		/// The address that the client is connecting from.
+		/// </summary>
 		public IPEndPoint ClientAddress;
-
+		/// <summary>
+		/// The method used in this http request.
+		/// </summary>
 		public HttpMethod Method;
+		/// <summary>
+		/// The url requested by this request. Not processed according to the host header at all.
+		/// </summary>
 		public string Url;
 
-
+		/// <summary>
+		/// Quick access to the host http header.
+		/// </summary>
 		public string Host {
 			get {
 				return GetHeaderValue("host", "");
 			}
 		}
+		/// <summary>
+		/// Quick access to the user-agent http header.
+		/// </summary>
 		public string UserAgent {
 			get {
 				return GetHeaderValue("user-agent", "");
 			}
 		}
+		/// <summary>
+		/// Quick access to the accepts http header.
+		/// </summary>
 		public string Accepts {
 			get {
 				return GetHeaderValue("accepts", "");
 			}
 		}
 
-
+		/// <summary>
+		/// Creates a new http request.
+		/// </summary>
 		public HttpRequest() : base()
 		{
 		}
@@ -79,6 +102,12 @@ namespace SBRL.GlidingSquirrel.Http
 
 		//--------------------------------------------------------------------------------------
 
+		/// <summary>
+		/// Builds a new HttpRequest instance from the supplied data stream.
+		/// May throw an exception if unsuccessful.
+		/// </summary>
+		/// <param name="source">The source stream to build the HttpRequest instance from.</param>
+		/// <returns>The completed http request.</returns>
 		public static async Task<HttpRequest> FromStream(StreamReader source)
 		{
 			HttpRequest request = new HttpRequest();
@@ -128,11 +157,22 @@ namespace SBRL.GlidingSquirrel.Http
 			);
 		}
 
+		/// <summary>
+		/// Converts a http method stored in a string to the HttpMethod enum.
+		/// Multiple header defintions are concatenated in the order that they appear, delimited by a comma.
+		/// </summary>
+		/// <param name="methodText">The http method as a string to convert.</param>
+		/// <returns>The http method as an enum.</returns>
 		public static HttpMethod MethodFromString(string methodText)
 		{
 			return (HttpMethod)Enum.Parse(typeof(HttpMethod), methodText);
 		}
 
+		/// <summary>
+		/// Parses a raw lsit of headers into a dictionary of headers keys and values.
+		/// </summary>
+		/// <param name="rawHeaders">The raw headers to parse.</param>
+		/// <returns>The parsed headers.</returns>
 		public static Dictionary<string, string> ParseHeaders(List<string> rawHeaders)
 		{
 			Dictionary<string, string> result = new Dictionary<string, string>();

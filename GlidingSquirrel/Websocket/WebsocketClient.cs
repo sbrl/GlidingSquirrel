@@ -15,24 +15,51 @@ namespace SBRL.GlidingSquirrel.Websocket
 	/// Something went wrong during the websocket handshake.
 	/// </summary>
 	public class WebsocketClientHandshakeException : Exception {
+		/// <summary>
+		/// Creates a new WebsocketClientHandshakeException.
+		/// Normally, you won't need to call this directly.
+		/// </summary>
+		/// <param name="message">The exception message..</param>
+		/// <param name="innerException">The inner exception that was thrown, if any.</param>
 		public WebsocketClientHandshakeException(string message, Exception innerException = null)
 			: base(message, innerException)
 		{
 		}
 	}
 
+	/// <summary>
+	/// The delegate definition for the websockets OnFrameRecieved event.
+	/// </summary>
 	public delegate Task NextFrameEventHandler(object sender, NextFrameEventArgs eventArgs);
-
-    public delegate Task TextMessageEventHandler(object sender, TextMessageEventArgs eventArgs);
+	/// <summary>
+	/// The delegate definition for the websockets OnTextMessage event.
+	/// </summary>
+	public delegate Task TextMessageEventHandler(object sender, TextMessageEventArgs eventArgs);
+	/// <summary>
+	/// The delegate definition for the websockets OnBinaryMessage event.
+	/// </summary>
 	public delegate Task BinaryMessageEventHandler(object sender, BinaryMessageEventArgs eventArgs);
+	/// <summary>
+	/// The delegate definition for the websockets OnDisconnection event on both the websocket server and the client classes.
+	/// </summary>
 	public delegate Task ClientDisconnectedEventHandler(object sender, ClientDisconnectedEventArgs eventArgs);
 
+	/// <summary>
+	/// Represents a websockets connection to a remote client.
+	/// Also used by the <see cref="WebsocketServer">WebsocketServer</see> class to represent
+	/// a currently conencted client, since they practically use the same handling code and all :P
+	/// </summary>
 	public class WebsocketClient
 	{
 		private TcpClient connection;
-
+		/// <summary>
+		/// An instance of C#'s built-in random number generator. 
+		/// </summary>
 		protected Random rand = new Random();
-
+		/// <summary>
+		/// The date and time that the last communication from this websockets client was received.
+		/// Useful for dropping idle connections, since this value takes pong frames into account.
+		/// </summary>
 		public DateTime LastCommunication = DateTime.Now;
 
 		/// <summary>
@@ -71,14 +98,26 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// Defaults to 2MiB.
 		/// </summary>
 		public int MaximumTransmissionSize { get; set; } = 2 * 1024 * 1024;
-
+		/// <summary>
+		/// The remote endpoint that this websocket client is connected to.
+		/// </summary>
+		/// <value>The remote endpoint.</value>
 		public IPEndPoint RemoteEndpoint { get; private set; }
-
+		/// <summary>
+		/// Occurs when a frame is recieved from the remote host. You probably want OnTextMessage or OnBinaryMessage ;-)
+		/// </summary>
 		public event NextFrameEventHandler OnFrameRecieved;
-
+		/// <summary>
+		/// Occurs when a text message is received from the remote host. The default encoding is UTF8.
+		/// </summary>
 		public event TextMessageEventHandler OnTextMessage;
+		/// <summary>
+		/// Occurs when a binary message is received.
+		/// </summary>
 		public event BinaryMessageEventHandler OnBinaryMessage;
-
+		/// <summary>
+		/// Occurs when this client disconnects. Don't try to send any more frames after this event has been fired!
+		/// </summary>
 		public event ClientDisconnectedEventHandler OnDisconnection;
 
 		/// <summary>
@@ -102,6 +141,10 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 		#region Frame Handling
 
+		/// <summary>
+		/// Called when the listening socket is being setup. Useful for, ummm setup logic that needs
+		/// variables to be preinitialised. May be overridden, but make sure that this method is still called!
+		/// </summary>
 		protected void setup()
 		{
 			// Record the remote endpoint
@@ -109,6 +152,9 @@ namespace SBRL.GlidingSquirrel.Websocket
 			RemoteEndpoint = (IPEndPoint)connection.Client.RemoteEndPoint;
 		}
 
+		/// <summary>
+		/// Listens for frames from this Websockets client and handles them appropriately, firing the right events.
+		/// </summary>
 		public async Task Listen()
 		{
 			while(true)
@@ -135,6 +181,11 @@ namespace SBRL.GlidingSquirrel.Websocket
 			await frame.SendTo(connection.GetStream());
 		}
 
+		/// <summary>
+		/// Handles a single WebsocketFrame.
+		/// </summary>
+		/// <param name="sender">The sending websockets client.</param>
+		/// <param name="nextFrameEventArgs">The ${ParameterType} instance containing the event data to process - including the all-important websockets frame.</param>
 		protected async Task handleNextFrame(object sender, NextFrameEventArgs nextFrameEventArgs)
 		{
 			WebsocketClient client = sender as WebsocketClient;
