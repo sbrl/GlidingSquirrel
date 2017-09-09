@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Package</id>
+    <version>0.0.1</version>
+    <authors>Starbeamrainbowlabs</authors>
+    <owners>sbrl</owners>
+    <licenseUrl>https://git.starbeamrainbowlabs.com/sbrl/GlidingSquirrel/raw/master/LICENSE</licenseUrl>
+    <projectUrl>https://git.starbeamrainbowlabs.com/sbrl/GlidingSquirrel/</projectUrl>
+    <!-- <iconUrl></iconUrl> -->
+    <repository type="git" url="https://git.starbeamrainbowlabs.com/sbrl/GlidingSquirrel" />
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>A brand-new http and websockets server implementation. Does not use C#'s HttpServer class - only a TcpListener.</description>
+    <releaseNotes>Initial nuget release! Currently under heavy development.</releaseNotes>
+    <copyright>Copyright © Starbeamrainbowlabs 2017</copyright>
+    <tags>http server websockets</tags>
+    <dependencies>
+      <dependency id="MimeSharp" version="1.0" />
+      <dependency id="System.ValueTuple" version="4.4.0" />
+    </dependencies>
+  </metadata>
+</package>
