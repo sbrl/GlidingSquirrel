@@ -33,6 +33,7 @@ namespace SBRL.GlidingSquirrel.Http
 		public static HttpResponseCode Unauthorised = new HttpResponseCode(401, "Unauthorised");
 		public static HttpResponseCode Forbidden = new HttpResponseCode(403, "Forbidden");
 		public static HttpResponseCode NotFound = new HttpResponseCode(404, "Not Found");
+		public static HttpResponseCode MethodNotAllowed = new HttpResponseCode(405, "MethodNotAllowed");
 		public static HttpResponseCode NotAcceptable = new HttpResponseCode(406, "Not Acceptable");
 		public static HttpResponseCode LengthRequired = new HttpResponseCode(411, "Length Required");
 		public static HttpResponseCode RequestUrlTooLong = new HttpResponseCode(414, "Request-URI Too Long");
