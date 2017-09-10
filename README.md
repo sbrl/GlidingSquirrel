@@ -15,11 +15,12 @@ GlidingSquirrel is currently in alpha testing! Don't use this in production unle
  - Supports `HEAD` requests
  - Parses and respects the `Accepts` HTTP header
  - Supports keep-alive connections (HTTP 1.1 only, of course)
- - Supports Websockets (Initial implementation, Version 13 only - RFC 6455, needs thorough testing - detailed bug reports welcome :D)
+ - Supports Websockets (Initial implementation, version 13 only - RFC 6455, needs thorough testing - detailed bug reports welcome :D)
 
 ## Todo
  - Trailing headers
  - Make logging much more flexible (it logs to the console only at the moment)
+ - Give implementors of `WebsocketServer` a cleaner way to decide whether they want to accept a connection or not
 
 ## Getting Started
 A tutorial will be coming soon. For now, take a look at the `HttpServer` class and look at the abstract methods and their intellisense comments.
@@ -29,3 +30,4 @@ A tutorial will be coming soon. For now, take a look at the `HttpServer` class a
  - [Tackling Tuples: Understanding the New C# 7 Value Type](http://our.componentone.com/2017/01/30/tackling-tuples-understanding-the-new-c-7-value-type/)
  - [Writing Websocket Servers on MDN](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_servers)
  - [Websocket Spec RFC6455](https://tools.ietf.org/html/rfc6455#section-5.5.1)
+
