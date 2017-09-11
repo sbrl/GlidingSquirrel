@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace SBRL.GlidingSquirrel.Http
@@ -39,7 +40,7 @@ namespace SBRL.GlidingSquirrel.Http
 			await msInput.WriteAsync(body);
 			ms.Position = 0;
 			Body = new StreamReader(ms);
-			Headers.Add("content-length", body.Length.ToString());
+			ContentLength = Encoding.UTF8.GetByteCount(body);
 		}
 
 		/// <summary>
