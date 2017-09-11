@@ -40,14 +40,21 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		public int Opcode { get; private set; }
 		/// <summary>
-		/// The key used ot mask the payload.
+		/// The key used to mask the payload.
 		/// </summary>
 		public byte[] MaskingKey;
 
+		/// <summary>
+		/// The method used when encoding the payload length.
+		/// </summary>
 		public PayloadLengthType PayloadLengthType;
 
 		#endregion
 
+		/// <summary>
+		/// Whether this is the last frame in it's series.
+		/// Useful when dealing with continuation frames.
+		/// </summary>
 		public bool IsLastFrame {
 			get {
 				return Fin;
@@ -57,6 +64,9 @@ namespace SBRL.GlidingSquirrel.Websocket
 			}
 		}
 
+		/// <summary>
+		/// The type of websocket frame.
+		/// </summary>
 		public WebsocketFrameType Type {
 			get {
 				return (WebsocketFrameType)Enum.Parse(typeof(WebsocketFrameType), Opcode.ToString());
@@ -66,8 +76,15 @@ namespace SBRL.GlidingSquirrel.Websocket
 			}
 		}
 
+		/// <summary>
+		/// The raw byte-for-byte payload carried by this websocket frame.
+		/// </summary>
 		public byte[] RawPayload;
 
+		/// <summary>
+		/// The payload of this websocket frame, represented as a string.
+		/// </summary>
+		/// <value>The payload.</value>
 		public string Payload {
 			get {
 				return Encoding.UTF8.GetString(RawPayload);
@@ -77,21 +94,40 @@ namespace SBRL.GlidingSquirrel.Websocket
 			}
 		}
 
-
+		/// <summary>
+		/// Creates a new blank websocket frame.
+		/// Properties can be set with the { .... } syntax, since there are so many of them :P
+		/// </summary>
 		public WebsocketFrame()
 		{
 		}
 
-		public static WebsocketFrame GenerateCloseFrame(WebsocketCloseReason closeReason)
+		public static WebsocketFrame GenerateCloseFrame(WebsocketCloseReason closeReason, string closingMessage)
 		{
 			WebsocketFrame result = new WebsocketFrame();
 			result.Type = WebsocketFrameType.Close;
-			result.RawPayload = BitConverter.GetBytes((ushort)closeReason);
+			result.RawPayload = new byte[2 + Encoding.UTF8.GetByteCount(closingMessage)];
+
+			// Paste the close reason code into the new close frame
+			byte[] rawCloseReason = ByteUtilities.HostToNetworkByteOrder(
+				BitConverter.GetBytes((ushort)closeReason),
+				0, 2
+			);
+			Buffer.BlockCopy(rawCloseReason, 0, result.RawPayload, 0, 2);
+
+			// Paste the closing message into the new close frame
+			byte[] rawCloseMessage = Encoding.UTF8.GetBytes(closingMessage);
+			Buffer.BlockCopy(rawCloseMessage, 0, result.RawPayload, 2, rawCloseMessage.Length);
+
 			return result;
 		}
 
 		#region Sending / Receiving
 
+		/// <summary>
+		/// Transmits this websocket frame via the specified network stream.
+		/// </summary>
+		/// <param name="clientStream">The network stream to transmit this frame via.</param>
 		public async Task SendTo(NetworkStream clientStream)
 		{
 			byte[] headerBuffer = new byte[4];
@@ -130,12 +166,18 @@ namespace SBRL.GlidingSquirrel.Websocket
 			// Write the extended payload length (if any) to the stream
 			if(payloadLengthType == PayloadLengthType.Bit16)
 			{
-				byte[] payloadLength16 = BitConverter.GetBytes((ushort)RawPayload.Length);
+				byte[] payloadLength16 = ByteUtilities.HostToNetworkByteOrder(
+					BitConverter.GetBytes((ushort)RawPayload.Length),
+					0, 2
+				);
 				await clientStream.WriteAsync(payloadLength16, 0, 2);
 			}
 			if(payloadLengthType == PayloadLengthType.Bit64)
 			{
-				byte[] payloadLength64 = BitConverter.GetBytes((ulong)RawPayload.Length);
+				byte[] payloadLength64 = ByteUtilities.HostToNetworkByteOrder(
+					BitConverter.GetBytes((ulong)RawPayload.Length),
+					0, 8
+				);
 				await clientStream.WriteAsync(payloadLength64, 0, 8);
 			}
 
@@ -176,16 +218,19 @@ namespace SBRL.GlidingSquirrel.Websocket
 			switch(payloadLength)
 			{
 				case 126:
-					// It's a 16-bit header! (ab)use the headerBuffer to hold the payload size for decoding
+					// It's a 16-bit header!
 					payloadLengthType = PayloadLengthType.Bit16;
-					await clientStream.ReadAsync(headerBuffer, 0, 2);
-					payloadLength = BitConverter.ToUInt16(headerBuffer, 2);
+					byte[] rawPayloadLength16 = new byte[2];
+					await clientStream.ReadAsync(rawPayloadLength16, 0, 2);
+					payloadLength = BitConverter.ToUInt16(rawPayloadLength16, 0);
 					break;
 				case 127:
-					// It's a 64-bit header! (ab)use the headerBuffer to hold the payload size for decoding
+					// It's a 64-bit header!
 					payloadLengthType = PayloadLengthType.Bit64;
-					await clientStream.ReadAsync(headerBuffer, 0, 4);
-					payloadLength = BitConverter.ToUInt64(headerBuffer, 4);
+					byte[] rawPayloadLength64 = new byte[8];
+					await clientStream.ReadAsync(rawPayloadLength64, 0, 8);
+					headerBuffer = ByteUtilities.NetworkToHostByteOrder(rawPayloadLength64, 0, 8);
+					payloadLength = BitConverter.ToUInt64(headerBuffer, 0);
 					break;
 			}
 			result.PayloadLengthType = payloadLengthType;

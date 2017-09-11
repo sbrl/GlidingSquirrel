@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using SBRL.GlidingSquirrel.Http;
 
-namespace SBRL.GlidingSquirrel.Modes
+namespace SBRL.GlidingSquirrel.CLI.Modes
 {
 	public class FileHttpServer : HttpServer
 	{

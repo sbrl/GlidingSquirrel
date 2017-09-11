@@ -39,6 +39,7 @@
     <Compile Include="Modes\EchoWebsocketServer.cs" />
     <Compile Include="Modes\FileHttpServer.cs" />
     <Compile Include="Utilities\EmbeddedFiles.cs" />
+    <Compile Include="Modes\AutobahnWebsocketServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GlidingSquirrel\GlidingSquirrel.csproj">

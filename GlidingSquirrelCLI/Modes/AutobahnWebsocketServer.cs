@@ -8,28 +8,33 @@ using SBRL.Utilities;
 
 namespace SBRL.GlidingSquirrel.CLI.Modes
 {
-	public class EchoWebsocketServer : WebsocketServer
+	public class AutobahnWebsocketServer : WebsocketServer
 	{
-		public EchoWebsocketServer(IPAddress inBindAddress, int inPort) : base(inBindAddress, inPort)
+		public AutobahnWebsocketServer(IPAddress inBindAddress, int inPort) : base(inBindAddress, inPort)
 		{
 		}
 
-		public override async Task HandleClientConnected(object sender, ClientConnectedEventArgs eventArgs)
+		public override Task HandleClientConnected(object sender, ClientConnectedEventArgs eventArgs)
 		{
 			WebsocketClient client = eventArgs.ConnectingClient;
-			// Send a welcome message
-			await client.Send(
-				"Welcome to this sample websockets server!<br />\n" +
-				"This server will echo any frames you send it."
-			);
 
 			// Echo text and binary messages we get sent
 			client.OnTextMessage += async (object textSender, TextMessageEventArgs textEventArgs) => {
+				Log.WriteLine("[GlidingSquirrel/Autobahn] Replying to text frame with '{0}'", textEventArgs.Payload);
 				await client.Send(textEventArgs.Payload);
 			};
 			client.OnBinaryMessage += async (object binarySender, BinaryMessageEventArgs binaryEventArgs) => {
+				string binaryRepresentation = BitConverter.ToString(binaryEventArgs.Payload).Replace("-", " ");
+				if(binaryRepresentation.Length > 200)
+					binaryRepresentation = binaryRepresentation.Substring(0, 200) + "...";
+				Log.WriteLine(
+					"[GlidingSquirrel/Autobahn] Replying to binary frame with '{0}'",
+					binaryRepresentation
+				);
 				await client.Send(binaryEventArgs.Payload);
 			};
+
+			return Task.CompletedTask;
 		}
 
 		public override Task HandleClientDisconnected(object sender, ClientDisconnectedEventArgs eventArgs)

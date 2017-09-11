@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using SBRL.GlidingSquirrel.Http;
 using System.Linq;
 using System.Net;
+using System.Threading;
 
 namespace SBRL.GlidingSquirrel.Websocket
 {
@@ -63,6 +64,15 @@ namespace SBRL.GlidingSquirrel.Websocket
 		public DateTime LastCommunication = DateTime.Now;
 
 		/// <summary>
+		/// Whether the server should close the connection if a frame with an unknown frame type is receieved.
+		/// </summary>
+		public readonly bool CloseOnUnknownFrameType = true;
+		/// <summary>
+		/// The number of milliseconds to wait for a reply to close frames we send out.
+		/// </summary>
+		public int CloseFrameReplyWaitTime = 5000;
+
+		/// <summary>
 		/// Whether we've received a close frame from this client.
 		/// </summary>
 		public bool ReceivedCloseFrame { get; private set; } = false;
@@ -70,6 +80,10 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// Whether we've sent a close frame to this client.
 		/// </summary>
 		public bool SentCloseFrame { get; private set; } = false;
+		/// <summary>
+		/// Whether this connection was closed uncleanly or not.
+		/// </summary>
+		public bool UncleanExit { get; private set; } = false;
 		/// <summary>
 		/// The code with which this websocket client connection exited with.
 		/// </summary>
@@ -178,6 +192,8 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// <param name="frame">The frame to send..</param>
 		protected async Task sendFrame(WebsocketFrame frame)
 		{
+			if(!IsClosed)
+				return;
 			await frame.SendTo(connection.GetStream());
 		}
 
@@ -207,14 +223,23 @@ namespace SBRL.GlidingSquirrel.Websocket
 				case WebsocketFrameType.Close:
 					// Close the connection as requested
 					ReceivedCloseFrame = true;
-					if(BitConverter.IsLittleEndian)
-						Array.Reverse(nextFrame.RawPayload);
+
 
 					WebsocketCloseReason closeReason = WebsocketCloseReason.NoStatusCodePresent;
 					if(nextFrame.RawPayload.Length >= 2)
+					{
+						// Convert the close reason to host byte order for decoding, if present
+						nextFrame.RawPayload = ByteUtilities.NetworkToHostByteOrder(
+							nextFrame.RawPayload,
+							0, 2
+						);
+						// Actually decode the close reason
 						closeReason = (WebsocketCloseReason)BitConverter.ToUInt16(nextFrame.RawPayload, 0);
-					
-					await Close(closeReason);
+					}
+
+					string closeMessage = new string(Encoding.UTF8.GetChars(nextFrame.RawPayload, 2, nextFrame.RawPayload.Length - 2));
+
+					await Close(closeReason, closeMessage);
 					break;	
 
 				case WebsocketFrameType.ContinuationFrame:
@@ -225,7 +250,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 					if(nextFrame.RawPayload.Length > 125)
 					{
 						// The payload is too long! Drop it like a hot potato
-						await Close(WebsocketCloseReason.FrameTooBig);
+						await Close(WebsocketCloseReason.FrameTooBig, "That last ping frame was too big! This server supports a maximum of 125 bytes in a ping frame.");
 						return;
 					}
 
@@ -295,10 +320,19 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 				default:
 					Log.WriteLine(
-						"[GlidingSquirrel/WebsocketClient] Got unknown frame with opcode {0} from {1}",
+						"[GlidingSquirrel/WebsocketClient] Got unknown frame with opcode {0} from {1}" + (CloseOnUnknownFrameType ? " - closing connection" : " - ignoring"),
 						nextFrame.Type,
 						RemoteEndpoint
 					);
+
+					if(CloseOnUnknownFrameType)
+					{
+						Log.WriteLine("Closing connection becauses of unknown frame type");
+						await Close(
+							WebsocketCloseReason.NotAcceptableDataType,
+							$"The opcode {nextFrame.Opcode} is not supported by this server. Perhaps you're trying to use an old websockets draft?"
+						);
+					}
 					break;
 			}
 		}
@@ -356,9 +390,9 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 
 		/// <summary>
-		/// Gracefully closses the connection to thsi Websocket client.
+		/// Gracefully closses the connection to this Websocket client.
 		/// </summary>
-		public async Task Close(WebsocketCloseReason closeReason)
+		public async Task Close(WebsocketCloseReason closeReason, string closingMessage)
 		{
 			// If we haven't received a close frame yet, give them a chance to send one
 			if(!ReceivedCloseFrame)
@@ -372,28 +406,58 @@ namespace SBRL.GlidingSquirrel.Websocket
 					ReceivedCloseFrame = true;
 					await Destroy();
 				};
+
+				// Queue a task that kills the connection if the client is sluggish in responding to our close frame
+				ThreadPool.QueueUserWorkItem(async (object state) => {
+					await Task.Delay(CloseFrameReplyWaitTime);
+					if(!IsClosed) {
+						await Destroy();
+						UncleanExit = true;
+					}
+				});
 			}
 
 			// Record the reason we're closing this connection
 			ExitCode = closeReason;
 
+			// If we haven't yet sent a close frame, do so
 			if(!SentCloseFrame) {
-				await sendCloseFrame(closeReason);
+				// Send an empty close frame in response if we've already received a close frame
+				if(ReceivedCloseFrame)
+					await sendEmptyCloseFrame();
+				else
+					await sendCloseFrame(closeReason, closingMessage);
 			}
 
 			// If we've completed the closing handshake, go out in style :D
 			if(SentCloseFrame && ReceivedCloseFrame)
 				await Destroy();
+			
 		}
 
 		/// <summary>
 		/// Sends a close frame to this websocket client.
-		/// You don't normally want to call thsi directly - use the normal Close() method instead.
+		/// You don't normally want to call this directly - use the normal Close() method instead.
 		/// </summary>
 		/// <param name="closeReason">The reason for closing the connection.</param>
-		private async Task sendCloseFrame(WebsocketCloseReason closeReason)
+		/// <param name="closingMessage">An explanatory message to send in the close frame.</param>
+		private async Task sendCloseFrame(WebsocketCloseReason closeReason, string closingMessage)
 		{
-			WebsocketFrame closeFrame = WebsocketFrame.GenerateCloseFrame(closeReason);
+			WebsocketFrame closeFrame = WebsocketFrame.GenerateCloseFrame(closeReason, closingMessage);
+			await closeFrame.SendTo(connection.GetStream());
+			SentCloseFrame = true;
+		}
+
+		/// <summary>
+		/// Sends an empty close frame to this client.
+		/// Useful when replying to close frames sent to us.
+		/// </summary>
+		private async Task sendEmptyCloseFrame()
+		{
+			WebsocketFrame closeFrame = new WebsocketFrame() {
+				Type = WebsocketFrameType.Close,
+				RawPayload = new byte[0]
+			};
 			await closeFrame.SendTo(connection.GetStream());
 			SentCloseFrame = true;
 		}
@@ -411,6 +475,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 			SentCloseFrame = true;
 			ReceivedCloseFrame = true;
 
+			// Give everyone chance to clean up the mess
 			if(OnDisconnection != null)
 				await OnDisconnection(this, new ClientDisconnectedEventArgs() { CloseReason = ExitCode });
 		}

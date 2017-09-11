@@ -6,7 +6,7 @@ using SBRL.GlidingSquirrel.Http;
 using SBRL.GlidingSquirrel.Websocket;
 using SBRL.Utilities;
 
-namespace SBRL.GlidingSquirrel.Modes
+namespace SBRL.GlidingSquirrel.CLI.Modes
 {
 	public class ChatWebsocketServer : WebsocketServer
 	{

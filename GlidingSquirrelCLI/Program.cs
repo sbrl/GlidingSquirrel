@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using SBRL.GlidingSquirrel.Http;
-using SBRL.GlidingSquirrel.Modes;
-using SBRL.GlidingSquirrel.Websocket;
-using SBRL.Utilities;
 
-namespace SBRL.GlidingSquirrel
+using SBRL.Utilities;
+using SBRL.GlidingSquirrel.CLI.Modes;
+using SBRL.GlidingSquirrel.Http;
+using SBRL.GlidingSquirrel.Websocket;
+
+namespace SBRL.GlidingSquirrel.CLI
 {
     enum OperationMode
     {
         FileHttp,
         EchoWebsocket,
 		ChatWebsocket,
+		AutobahnWebsocket,
 		CompleteWebsocketChallenge
     }
 	class MainClass
@@ -95,6 +97,13 @@ namespace SBRL.GlidingSquirrel
 					EchoWebsocketServer echoWebsocketServer = new EchoWebsocketServer(IPAddress.Any, 9001);
 					echoWebsocketServer.Start().Wait();
                     break;
+
+				case OperationMode.AutobahnWebsocket:
+					Log.WriteLine("Running in autobahn echo mode.");
+					EmbeddedFiles.WriteResourceList();
+					AutobahnWebsocketServer autobahnWebsocketServer = new AutobahnWebsocketServer(IPAddress.Any, 9001);
+					autobahnWebsocketServer.Start().Wait();
+					break;
 
 				case OperationMode.ChatWebsocket:
 					Log.WriteLine("Running in chat mode.");
