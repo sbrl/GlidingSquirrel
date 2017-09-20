@@ -60,7 +60,7 @@ namespace SBRL.GlidingSquirrel.CLI
 						Console.WriteLine("    --help                Shows this help message");
 						Console.WriteLine("    --version             Display the version of GlidingSquirrel and then exit");
 						Console.WriteLine("    --port {port-number}  Sets the port number to listen on");
-                        Console.WriteLine("    --mode {mode}         Sets the operating mode. Possible values: FileHttp, EchoWebsocket");
+                        Console.WriteLine("    --mode {mode}         Sets the operating mode. Possible values: FileHttp, EchoWebsocket, ChatWebsocket, AutobahnWebsocket");
                         Console.WriteLine();
 						return;
 					
