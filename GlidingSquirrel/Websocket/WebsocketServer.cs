@@ -216,6 +216,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// Reflects the specified message to all connected clients who both aren't
 		/// the sender and aren't currently in the process of closing their connection.
 		/// </summary>
+		/// <param name="sender">The WebsocketClient sending the message.</param>
 		/// <param name="message">The message to broadcast.</param>
 		public async Task Reflect(WebsocketClient sender, string message)
 		{
@@ -232,6 +233,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// Reflects the specified binary message to all connected clients who both aren't
 		/// the sender and aren't currently in the process of closing their connection.
 		/// </summary>
+		/// <param name="sender">The WebsocketClient sending the message.</param>
 		/// <param name="message">The message to broadcast.</param>
 		public async Task Reflect(WebsocketClient sender, byte[] message)
 		{

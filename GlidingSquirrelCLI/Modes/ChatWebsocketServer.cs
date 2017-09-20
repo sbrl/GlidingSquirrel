@@ -25,9 +25,11 @@ namespace SBRL.GlidingSquirrel.CLI.Modes
 
 			// Echo text and binary messages we geet sent
 			client.OnTextMessage += async (object textSender, TextMessageEventArgs textEventArgs) => {
+				Console.WriteLine("Reflecting message '{0}'.", textEventArgs.Payload);
 				await Reflect(textSender as WebsocketClient, textEventArgs.Payload);
 			};
 			client.OnBinaryMessage += async (object binarySender, BinaryMessageEventArgs binaryEventArgs) => {
+				Console.WriteLine("Reflecting binary message.");
 				await Reflect(binarySender as WebsocketClient, binaryEventArgs.Payload);
 			};
 		}

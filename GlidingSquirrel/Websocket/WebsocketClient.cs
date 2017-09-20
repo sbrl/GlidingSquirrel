@@ -192,7 +192,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// <param name="frame">The frame to send..</param>
 		protected async Task sendFrame(WebsocketFrame frame)
 		{
-			if(!IsClosed)
+			if(IsClosed)
 				return;
 			await frame.SendTo(connection.GetStream());
 		}
@@ -410,7 +410,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 				// Queue a task that kills the connection if the client is sluggish in responding to our close frame
 				ThreadPool.QueueUserWorkItem(async (object state) => {
 					await Task.Delay(CloseFrameReplyWaitTime);
-					if(!IsClosed) {
+					if(!IsClosed)  {
 						await Destroy();
 						UncleanExit = true;
 					}

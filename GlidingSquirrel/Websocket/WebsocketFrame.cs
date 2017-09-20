@@ -222,6 +222,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 					payloadLengthType = PayloadLengthType.Bit16;
 					byte[] rawPayloadLength16 = new byte[2];
 					await clientStream.ReadAsync(rawPayloadLength16, 0, 2);
+					rawPayloadLength16 = ByteUtilities.NetworkToHostByteOrder(rawPayloadLength16, 0, 2);
 					payloadLength = BitConverter.ToUInt16(rawPayloadLength16, 0);
 					break;
 				case 127:

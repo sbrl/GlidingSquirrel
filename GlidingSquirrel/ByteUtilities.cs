@@ -29,5 +29,23 @@ namespace SBRL.GlidingSquirrel
 		{
 			return NetworkToHostByteOrder(hostArray, offset, length);
 		}
+
+		/// <summary>
+		/// Convert a sequence of bytes (in network byte order) to a long value
+		/// </summary>
+		/// <description>
+		/// Retrieved from https://github.com/sensaura-public/iotweb/blob/14b778b54b07e2e2b46b045869d5e4e8014d2de5/IotWeb%20Portable/Http/WebSocket.cs#L70-L83
+		/// Modified by Starbeamrainbowlabs
+		/// </description>
+		/// <param name="data">The data to convert.</param>
+		/// <param name="length">The numberof bytes the data contains.</param>
+		/// <returns></returns>
+		private static long LongFromNetworkBytes(byte[] data, int length)
+		{
+			UInt64 value = 0;
+			for(int i = 0; i < length; i++)
+				value = (value << 8) + (UInt64)data[i];
+			return (long)value;
+		}
 	}
 }
