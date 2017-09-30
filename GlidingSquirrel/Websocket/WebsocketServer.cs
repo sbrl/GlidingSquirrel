@@ -108,13 +108,15 @@ namespace SBRL.GlidingSquirrel.Websocket
 				await client.Listen();
 
 			}
-			catch(IOException)
+			catch(IOException error)
 			{
 				Log.WriteLine("[GlidingSquirrel/WebsocketClient] Caught IOException - a client probably disconnected uncleanly");
+				Log.WriteLine("[GlidingSquirrel/WebsocketClient] IOException Message: {0}", error.Message);
 			}
-			catch(SocketException)
+			catch(SocketException error)
 			{
 				Log.WriteLine("[GlidingSquirrel/WebsocketClient] Caught SocketException - a client probably disconnected uncleanly");
+				Log.WriteLine("[GlidingSquirrel/WebsocketClient] SocketException Message: {0}", error.Message);
 			}
 			catch(Exception error)
 			{
