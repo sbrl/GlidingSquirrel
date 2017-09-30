@@ -237,7 +237,9 @@ namespace SBRL.GlidingSquirrel.Websocket
 						closeReason = (WebsocketCloseReason)BitConverter.ToUInt16(nextFrame.RawPayload, 0);
 					}
 
-					string closeMessage = new string(Encoding.UTF8.GetChars(nextFrame.RawPayload, 2, nextFrame.RawPayload.Length - 2));
+					// The close message must be at least 0 bytes long! :P
+					int closeMessageLength = Math.Max(nextFrame.RawPayload.Length - 2, 0);
+					string closeMessage = new string(Encoding.UTF8.GetChars(nextFrame.RawPayload, 2, closeMessageLength));
 
 					await Close(closeReason, closeMessage);
 					break;	
