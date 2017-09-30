@@ -226,6 +226,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 
 					WebsocketCloseReason closeReason = WebsocketCloseReason.NoStatusCodePresent;
+					string closeMessage = string.Empty;
 					if(nextFrame.RawPayload.Length >= 2)
 					{
 						// Convert the close reason to host byte order for decoding, if present
@@ -235,11 +236,13 @@ namespace SBRL.GlidingSquirrel.Websocket
 						);
 						// Actually decode the close reason
 						closeReason = (WebsocketCloseReason)BitConverter.ToUInt16(nextFrame.RawPayload, 0);
+
+						// The close message must be at least 0 bytes long! :P
+						int closeMessageLength = Math.Max(nextFrame.RawPayload.Length - 2, 0);
+						if(closeMessageLength > 0)
+							closeMessage = new string(Encoding.UTF8.GetChars(nextFrame.RawPayload, 2, closeMessageLength));
 					}
 
-					// The close message must be at least 0 bytes long! :P
-					int closeMessageLength = Math.Max(nextFrame.RawPayload.Length - 2, 0);
-					string closeMessage = new string(Encoding.UTF8.GetChars(nextFrame.RawPayload, 2, closeMessageLength));
 
 					await Close(closeReason, closeMessage);
 					break;	
