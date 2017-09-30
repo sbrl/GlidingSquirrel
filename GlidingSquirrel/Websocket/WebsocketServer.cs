@@ -131,7 +131,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 			}
 			else
 			{
-				Log.WriteLine("[GlidingSquirrel/Websockets] Client disconnected with code {0}.", client?.ExitCode ?? "?");
+				Log.WriteLine("[GlidingSquirrel/Websockets] Client disconnected with code {0}.", client?.ExitCode ?? WebsocketCloseReason.CloseReasonLost);
 			}
 		}
 
