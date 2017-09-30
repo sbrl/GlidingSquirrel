@@ -149,7 +149,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// <param name="remoteAddress">Remote address.</param>
 		public WebsocketClient(string remoteAddress) : this()
 		{
-			throw new NotImplementedException("Error: Websocket Client connections haven't been implementedd yet!");
+			throw new NotImplementedException("Error: Websocket Client connections haven't been implemented yet!");
 		}
 
 
@@ -332,7 +332,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 					if(CloseOnUnknownFrameType)
 					{
-						Log.WriteLine("Closing connection becauses of unknown frame type");
+						Log.WriteLine("Closing connection because of unknown frame type");
 						await Close(
 							WebsocketCloseReason.NotAcceptableDataType,
 							$"The opcode {nextFrame.Opcode} is not supported by this server. Perhaps you're trying to use an old websockets draft?"
@@ -395,7 +395,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 
 		/// <summary>
-		/// Gracefully closses the connection to this Websocket client.
+		/// Gracefully closes the connection to this Websocket client.
 		/// </summary>
 		public async Task Close(WebsocketCloseReason closeReason, string closingMessage)
 		{
@@ -418,6 +418,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 					if(!IsClosed)  {
 						await Destroy();
 						UncleanExit = true;
+						Log.WriteLine("[GlidingSquirrel/WebsocketClient] Killing unresponsive connection - we're  not waiting any longer for the ack close frame");
 					}
 				});
 			}

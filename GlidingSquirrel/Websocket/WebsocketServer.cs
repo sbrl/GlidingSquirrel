@@ -123,6 +123,10 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 			if(client != null)
 			{
+				// Make sure that the OnDisconnection event gets fired on the client
+				if(!client.IsClosed)
+					await client.Destroy();
+				
 				Log.WriteLine(
 					"[GlidingSquirrel/Websockets] Client from {0} disconnected with code {1}.",
 					client.RemoteEndpoint,
