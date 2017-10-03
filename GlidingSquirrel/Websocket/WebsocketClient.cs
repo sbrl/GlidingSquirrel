@@ -209,6 +209,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 			WebsocketFrame nextSeqFrame;
 
 			Log.WriteLine(
+				LogLevel.Debug,
 				"[GlidingSquirrel/WebsocketClient] Got {0} frame of length {1} ({2}) from {3}",
 				nextFrame.Type,
 				nextFrame.RawPayload.Length,
@@ -268,7 +269,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 					break;
 					
 				case WebsocketFrameType.Pong:
-					Log.WriteLine("[GlidingSquirrel/Websocket/FrameHandler] Received pong from {0}", RemoteEndpoint);
+					Log.WriteLine(LogLevel.Debug, "[GlidingSquirrel/Websocket/FrameHandler] Received pong from {0}", RemoteEndpoint);
 					break;
 
 				case WebsocketFrameType.TextData:
@@ -325,6 +326,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 				default:
 					Log.WriteLine(
+						LogLevel.Error,
 						"[GlidingSquirrel/WebsocketClient] Got unknown frame with opcode {0} from {1}" + (CloseOnUnknownFrameType ? " - closing connection" : " - ignoring"),
 						nextFrame.Type,
 						RemoteEndpoint
@@ -332,7 +334,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 					if(CloseOnUnknownFrameType)
 					{
-						Log.WriteLine("Closing connection because of unknown frame type");
+						Log.WriteLine(LogLevel.Error, "Closing connection because of unknown frame type");
 						await Close(
 							WebsocketCloseReason.NotAcceptableDataType,
 							$"The opcode {nextFrame.Opcode} is not supported by this server. Perhaps you're trying to use an old websockets draft?"
@@ -418,7 +420,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 					if(!IsClosed)  {
 						await Destroy();
 						UncleanExit = true;
-						Log.WriteLine("[GlidingSquirrel/WebsocketClient] Killing unresponsive connection - we're  not waiting any longer for the ack close frame");
+						Log.WriteLine(LogLevel.Warning, "[GlidingSquirrel/WebsocketClient] Killing unresponsive connection - we're  not waiting any longer for the ack close frame");
 					}
 				});
 			}

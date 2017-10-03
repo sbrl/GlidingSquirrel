@@ -20,7 +20,7 @@ namespace SBRL.GlidingSquirrel.CLI.Modes
 
 			// Echo text and binary messages we get sent
 			client.OnTextMessage += async (object textSender, TextMessageEventArgs textEventArgs) => {
-				Log.WriteLine("[GlidingSquirrel/Autobahn] Replying to text frame with '{0}'", textEventArgs.Payload);
+				Log.WriteLine(LogLevel.Debug, "[GlidingSquirrel/Autobahn] Replying to text frame with '{0}'", textEventArgs.Payload);
 				await client.Send(textEventArgs.Payload);
 			};
 			client.OnBinaryMessage += async (object binarySender, BinaryMessageEventArgs binaryEventArgs) => {
@@ -28,6 +28,7 @@ namespace SBRL.GlidingSquirrel.CLI.Modes
 				if(binaryRepresentation.Length > 200)
 					binaryRepresentation = binaryRepresentation.Substring(0, 200) + "...";
 				Log.WriteLine(
+					LogLevel.Debug,
 					"[GlidingSquirrel/Autobahn] Replying to binary frame with '{0}'",
 					binaryRepresentation
 				);

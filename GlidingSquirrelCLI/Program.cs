@@ -86,27 +86,27 @@ namespace SBRL.GlidingSquirrel.CLI
             switch(mode)
             {
 				case OperationMode.FileHttp:
-					Log.WriteLine("Running in file serving mode.");
+					Log.WriteLine(LogLevel.System, "Running in file serving mode.");
 					FileHttpServer server = new FileHttpServer(port, webrootPath);
 					server.Start().Wait();
                     break;
 
                 case OperationMode.EchoWebsocket:
-					Log.WriteLine("Running in echo mode.");
+					Log.WriteLine(LogLevel.System, "Running in echo mode.");
 					EmbeddedFiles.WriteResourceList();
 					EchoWebsocketServer echoWebsocketServer = new EchoWebsocketServer(IPAddress.Any, 9001);
 					echoWebsocketServer.Start().Wait();
                     break;
 
 				case OperationMode.AutobahnWebsocket:
-					Log.WriteLine("Running in autobahn echo mode.");
+					Log.WriteLine(LogLevel.System, "Running in autobahn echo mode.");
 					EmbeddedFiles.WriteResourceList();
 					AutobahnWebsocketServer autobahnWebsocketServer = new AutobahnWebsocketServer(IPAddress.Any, 9001);
 					autobahnWebsocketServer.Start().Wait();
 					break;
 
 				case OperationMode.ChatWebsocket:
-					Log.WriteLine("Running in chat mode.");
+					Log.WriteLine(LogLevel.System, "Running in chat mode.");
 					EmbeddedFiles.WriteResourceList();
 					ChatWebsocketServer chatWebsocketServer = new ChatWebsocketServer(IPAddress.Any, 9001);
 					chatWebsocketServer.Start().Wait();

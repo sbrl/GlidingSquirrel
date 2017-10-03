@@ -104,14 +104,14 @@ namespace SBRL.GlidingSquirrel.Http
 		/// </summary>
 		public async Task Start()
 		{
-			Log.WriteLine($"GlidingSquirrel v{Version}");
-			Log.Write("Starting server - ");
+			Log.WriteLine(LogLevel.System, $"GlidingSquirrel v{Version}");
+			Log.Write(LogLevel.System, "Starting server - ");
 
 			server = new TcpListener(new IPEndPoint(BindAddress, Port));
 			server.Start();
 
 			Console.WriteLine("done");
-			Log.WriteLine($"Listening for requests on http://{BindEndpoint}");
+			Log.WriteLine(LogLevel.System, $"Listening for requests on http://{BindEndpoint}");
 
 			await setup();
 
@@ -207,6 +207,7 @@ namespace SBRL.GlidingSquirrel.Http
 				if(request.HttpVersion <= 1.0f && request.Headers.ContainsKey("connection"))
 				{
 					Log.WriteLine(
+						LogLevel.Warning,
 						"{0} Removing rogue connection header (value: {1}) from request",
 						request.ClientAddress,
 						request.Headers["connection"]
@@ -221,6 +222,7 @@ namespace SBRL.GlidingSquirrel.Http
 					break;
 
 				Log.WriteLine(
+					LogLevel.Info,
 					"{0} [{1}:HTTP {2} {3}] [{4}] {5}",
 					request.ClientAddress,
 					requestsMade,

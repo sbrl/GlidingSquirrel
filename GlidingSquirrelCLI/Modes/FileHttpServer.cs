@@ -21,7 +21,7 @@ namespace SBRL.GlidingSquirrel.CLI.Modes
 
 		protected override Task setup()
 		{
-			Log.WriteLine($"Webroot set to {WebRoot}");
+			Log.WriteLine(LogLevel.System, $"Webroot set to {WebRoot}");
 
 			return Task.CompletedTask;
 		}
