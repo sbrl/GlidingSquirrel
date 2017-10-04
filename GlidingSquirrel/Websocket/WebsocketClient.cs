@@ -194,7 +194,21 @@ namespace SBRL.GlidingSquirrel.Websocket
 		{
 			if(IsClosed)
 				return;
-			await frame.SendTo(connection.GetStream());
+
+			try
+			{
+				await frame.SendTo(connection.GetStream());
+			}
+			catch(Exception error)
+			{
+				if(!(error is IOException || error is SocketException))
+					throw;
+
+				Log.WriteLine(LogLevel.Error, "Caught {0} whilst sending message to client - closing connection", error.GetType());
+				Log.WriteLine(LogLevel.Error, "{0} message: {1}", error.GetType(), error.Message);
+				// Close the connection and tell everyone about what has just happened
+				await Destroy();
+			}
 		}
 
 		/// <summary>
