@@ -111,7 +111,6 @@ namespace SBRL.GlidingSquirrel.Websocket
 			}
 			catch(IOException error)
 			{
-				throw;
 				Log.WriteLine(LogLevel.Error, "[GlidingSquirrel/WebsocketClient] Caught IOException - a client probably disconnected uncleanly");
 				Log.WriteLine(LogLevel.Error, "[GlidingSquirrel/WebsocketClient] IOException Message: {0}", error.Message);
 			}
