@@ -466,7 +466,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		private async Task sendCloseFrame(WebsocketCloseReason closeReason, string closingMessage)
 		{
 			WebsocketFrame closeFrame = WebsocketFrame.GenerateCloseFrame(closeReason, closingMessage);
-			await closeFrame.SendTo(connection.GetStream());
+			await sendFrame(closeFrame);
 			SentCloseFrame = true;
 		}
 
@@ -480,7 +480,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 				Type = WebsocketFrameType.Close,
 				RawPayload = new byte[0]
 			};
-			await closeFrame.SendTo(connection.GetStream());
+			await sendFrame(closeFrame);
 			SentCloseFrame = true;
 		}
 
