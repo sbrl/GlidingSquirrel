@@ -42,6 +42,18 @@ namespace SBRL.GlidingSquirrel.Http
 			Body = new StreamReader(ms);
 			ContentLength = Encoding.UTF8.GetByteCount(body);
 		}
+        /// <summary>
+        /// Sets the body to be the specified byte array.
+        /// </summary>
+        /// <param name="body">The byte array to set as the new body.</param>
+        public async Task SetBody(byte[] body)
+        {
+            MemoryStream ms = new MemoryStream();
+            await ms.WriteAsync(body, 0, body.Length);
+            ms.Position = 0;
+            Body = new StreamReader(ms);
+            ContentLength = body.Length;
+        }
 
 		/// <summary>
 		/// Sends this HttpResponse to the specified destination.
