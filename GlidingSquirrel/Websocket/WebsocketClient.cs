@@ -197,7 +197,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 			try
 			{
-				await frame.SendTo(connection.GetStream());
+				await frame.SendToAsync(connection.GetStream());
 			}
 			catch(Exception error)
 			{
