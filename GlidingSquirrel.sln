@@ -27,6 +27,6 @@ Global
 		{F3F21907-D5DE-4C63-A999-03E43701005A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		version = 0.4-alpha
+		version = 0.5-alpha
 	EndGlobalSection
 EndGlobal
