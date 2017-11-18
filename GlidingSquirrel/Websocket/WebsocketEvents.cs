@@ -10,6 +10,7 @@ namespace SBRL.GlidingSquirrel.Websocket
     public class NextFrameEventArgs : EventArgs
     {
         public WebsocketFrame Frame;
+		public bool IsStrayControlFrame;
     }
 
     public class TextMessageEventArgs : EventArgs

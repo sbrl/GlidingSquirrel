@@ -254,7 +254,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 			result.RawPayload = new byte[payloadLength];
 			await clientStream.ReadAsync(result.RawPayload, 0, (int)payloadLength);
 
-			// Unmask the payload if reequired
+			// Unmask the payload if required
 			if(result.Masked)
 			{
 				for(int i = 0; i < result.RawPayload.Length; i++)

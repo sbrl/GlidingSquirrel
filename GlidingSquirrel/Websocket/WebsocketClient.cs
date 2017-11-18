@@ -93,7 +93,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		public bool IsClosing {
 			get {
-				return ReceivedCloseFrame || SentCloseFrame;
+				return ReceivedCloseFrame || SentCloseFrame || ExitCode != WebsocketCloseReason.NotClosedYet;
 			}
 		}
 		/// <summary>
@@ -222,6 +222,13 @@ namespace SBRL.GlidingSquirrel.Websocket
 			WebsocketFrame nextFrame = nextFrameEventArgs.Frame;
 			WebsocketFrame nextSeqFrame;
 
+			// Don't bother handling it is we're in the middle of closing the connection and this isn't a close frame
+			if(IsClosing && nextFrame.Type != WebsocketFrameType.Close)
+				return;
+
+			if(nextFrame.Rsv1 || nextFrame.Rsv2 || nextFrame.Rsv3)
+				await Close(WebsocketCloseReason.ProtocolError, "Error: The RSV1, RSV2, and RSV3 bits must not be set.");
+
 			Log.WriteLine(
 				LogLevel.Debug,
 				"[GlidingSquirrel/WebsocketClient] Got {0} frame of length {1} ({2}) from {3}",
@@ -270,7 +277,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 					if(nextFrame.RawPayload.Length > 125)
 					{
 						// The payload is too long! Drop it like a hot potato
-						await Close(WebsocketCloseReason.FrameTooBig, "That last ping frame was too big! This server supports a maximum of 125 bytes in a ping frame.");
+						await Close(WebsocketCloseReason.ProtocolError, "That last ping frame was too big! This server supports a maximum of 125 bytes in a ping frame.");
 						return;
 					}
 
@@ -296,7 +303,8 @@ namespace SBRL.GlidingSquirrel.Websocket
 						if(nextSeqFrame.Type != WebsocketFrameType.ContinuationFrame)
 						{
 							// Handle any stray control frames we find
-							await handleNextFrame(this, new NextFrameEventArgs() { Frame = nextSeqFrame });
+							Log.WriteLine(LogLevel.Debug, "[GlidingSquirrel/Websocket/FrameHandler] Handling stray control frame in the middle of a sequence of text frames");
+							await handleNextFrame(this, new NextFrameEventArgs() { Frame = nextSeqFrame, IsStrayControlFrame = true });
 						}
 						recievedMessage += nextSeqFrame.Payload;
 					}
@@ -308,6 +316,12 @@ namespace SBRL.GlidingSquirrel.Websocket
 					break;
 
 				case WebsocketFrameType.BinaryData:
+					if(nextFrameEventArgs.IsStrayControlFrame)
+					{
+						Log.WriteLine(LogLevel.Warning, "[GlidingSquirrel/Websocket/FrameHandler] Refusing to handle binary frame when the previous text frame sequence is unfinished.");
+						return;
+					}
+
 					List<byte[]> receivedChunks = new List<byte[]>() {
 						nextFrame.RawPayload
 					};
@@ -319,7 +333,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 						if(nextSeqFrame.Type != WebsocketFrameType.ContinuationFrame)
 						{
 							// Handle any stray control frames we find
-							await handleNextFrame(this, new NextFrameEventArgs() { Frame = nextSeqFrame });
+							await handleNextFrame(this, new NextFrameEventArgs() { Frame = nextSeqFrame, IsStrayControlFrame = false });
 						}
 						receivedChunks.Add(nextSeqFrame.RawPayload);
 					}
@@ -350,7 +364,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 					{
 						Log.WriteLine(LogLevel.Error, "Closing connection because of unknown frame type");
 						await Close(
-							WebsocketCloseReason.NotAcceptableDataType,
+							WebsocketCloseReason.ProtocolError,
 							$"The opcode {nextFrame.Opcode} is not supported by this server. Perhaps you're trying to use an old websockets draft?"
 						);
 					}
