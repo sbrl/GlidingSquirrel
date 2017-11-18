@@ -34,6 +34,7 @@
 		</style>
 		<script>
 			window.addEventListener("load", function(event) {
+				logMessage("<em>Performing setup...</em>");
 				window.connection = new WebSocket(`ws://${location.host}/echo`);
 				
 				window.connection.addEventListener("open", function(event) {
@@ -56,6 +57,7 @@
 				document.getElementById("button-disconnect").addEventListener("click", function(event) {
 					window.connection.close();
 				});
+				logMessage("<em>Setup complete. Connecting to server...</em>");
 			});
 			
 			function sendMessage()
