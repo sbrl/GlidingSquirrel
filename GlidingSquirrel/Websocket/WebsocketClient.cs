@@ -525,6 +525,13 @@ namespace SBRL.GlidingSquirrel.Websocket
 				// todo handle this properly
 				throw new WebsocketClientHandshakeException("Error: That request didn't contain the required sec-websocket-version header set to '13'.");
 			}
+			if(handshakeRequest.Headers.ContainsKey("sec-websocket-protocol"))
+			{
+				handshakeResponse.Headers.Add(
+					"sec-websocket-protocol",
+					handshakeRequest.Headers["sec-websocket-protocol"]
+				);
+			}
 
 			// Disable the read timeout set to kill idle http connections, as we're setting up a websocket naow!
 			handshakeRequest.ClientConnection.ReceiveTimeout = 0;
