@@ -1,13 +1,13 @@
 # GlidingSquirrel
 
-A http (and websockets!) server, implemented in C#.
+A http (and Websockets!) server, implemented in C#.
 
 Originally built for the /r/dailyprogrammer [hard challenge #322](https://www.reddit.com/r/dailyprogrammer/comments/6lti17/20170707_challenge_322_hard_static_http_server/).
 
 GlidingSquirrel is currently in alpha testing! Don't use this in production unless you really know what you're doing :P
 
 ## Features
- - HTTP 1.0 / 1.1 implemented so far
+ - HTTP 1.0 / 1.1 (RFC 1945 / RFC 1616) supported (mostly - bug reports & pull requests welcome :D)
  - Uses C&sharp; 7
  - Does not have anything to do with `System.Net.HttpServer` whatsoever at all
  - Easily extendable (it's an abstract class)
@@ -15,7 +15,7 @@ GlidingSquirrel is currently in alpha testing! Don't use this in production unle
  - Supports `HEAD` requests
  - Parses and respects the `Accepts` HTTP header
  - Supports keep-alive connections (HTTP 1.1 only, of course)
- - Supports Websockets (Initial implementation, version 13 only - RFC 6455, needs thorough testing - detailed bug reports welcome :D)
+ - Supports Websockets (RFC 6455, Initial implementation, version 13 only, needs thorough testing - detailed bug reports welcome :D)
 
 ## Todo
  - Trailing headers
