@@ -66,6 +66,7 @@
     <Compile Include="Websocket\WebsocketFrame.cs" />
     <Compile Include="Websocket\Values.cs" />
     <Compile Include="ByteUtilities.cs" />
+    <Compile Include="Http\HttpBasicAuthCredentials.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

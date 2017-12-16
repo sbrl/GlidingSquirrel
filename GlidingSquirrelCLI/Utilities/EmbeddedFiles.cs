@@ -90,7 +90,7 @@ namespace SBRL.Utilities
 		/// <returns>The specified embedded resource's content as a byte array.</returns>
 		public static async Task<byte[]> ReadAllBytesAsync(string filename)
 		{
-			using(Stream resourceStream = Assembly.GetCallingAssembly().GetManifestResourceStream(filename))
+			using(Stream resourceStream = Assembly.GetEntryAssembly().GetManifestResourceStream(filename))
 			using(MemoryStream temp = new MemoryStream())
 			{
 				await resourceStream.CopyToAsync(temp);

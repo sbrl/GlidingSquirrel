@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text.RegularExpressions;
+using System.Text;
 
 namespace SBRL.GlidingSquirrel.Http
 {
@@ -55,12 +57,37 @@ namespace SBRL.GlidingSquirrel.Http
 			}
 		}
 
+		public HttpBasicAuthCredentials BasicAuthCredentials {
+			get {
+				string authHeader = GetHeaderValue("authorization", "");
+				if(authHeader.Length == 0)
+					return null;
+				
+				string[] authParts = authHeader.Split(" ".ToCharArray());
+				if(authParts.Length != 2 || authParts[0].ToLower() != "basic") {
+					Log.WriteLine(LogLevel.Warning, "[HttpRequest] Warning: Invalid Authorization header recieved.");
+					return null;
+				}
+				string[] authCredentials = Encoding.UTF8.GetString(
+					Convert.FromBase64String(authParts[1])
+				).Split(":".ToCharArray());
+				if(authParts.Length != 2){
+					Log.WriteLine(LogLevel.Warning, "[HttpRequest] Warning: Invalid username / password string encountered upon decoding the base64 authorization code.");
+					return null;
+				}
+
+				return new HttpBasicAuthCredentials(authCredentials[0], authCredentials[1]);
+			}
+		}
+
 		/// <summary>
 		/// Creates a new http request.
 		/// </summary>
 		public HttpRequest() : base()
 		{
 		}
+
+
 
 		/// <summary>
 		/// Works out whether this request will accept a given mime type as a response.

@@ -56,6 +56,17 @@ namespace SBRL.GlidingSquirrel.Http
         }
 
 		/// <summary>
+		/// Attaches a request for HTTP Basic Authentication to this request, and sets the 
+		/// HTTP response code to 401 Unauthorised.
+		/// </summary>
+		/// <param name="realm">The authentication realm to request from the client.</param>
+		public void RequireHttpBasicAuthentication(string realm)
+		{
+			ResponseCode = HttpResponseCode.Unauthorised;
+			Headers["WWW-Authenticate"] = $"Basic realm=\"{realm}\"";
+		}
+
+		/// <summary>
 		/// Sends this HttpResponse to the specified destination.
 		/// </summary>
 		/// <param name="destination">The StreamWriter to send the response to.</param>

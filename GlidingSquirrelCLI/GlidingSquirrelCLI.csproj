@@ -40,6 +40,7 @@
     <Compile Include="Modes\FileHttpServer.cs" />
     <Compile Include="Utilities\EmbeddedFiles.cs" />
     <Compile Include="Modes\AutobahnWebsocketServer.cs" />
+    <Compile Include="Modes\HttpBasicAuthDemoServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GlidingSquirrel\GlidingSquirrel.csproj">
@@ -50,6 +51,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Modes\Resources\EchoWebsocketClient.html" />
     <EmbeddedResource Include="Modes\Resources\ChatWebsocketClient.html" />
+    <EmbeddedResource Include="Modes\Resources\HttpBasicAuthDemo.html" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

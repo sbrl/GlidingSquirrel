@@ -16,8 +16,10 @@ namespace SBRL.GlidingSquirrel.CLI
         EchoWebsocket,
 		ChatWebsocket,
 		AutobahnWebsocket,
+		HttpBasicAuthDemo,
 		CompleteWebsocketChallenge
     }
+
 	class MainClass
 	{
 		public static void Main(string[] args)
@@ -70,7 +72,7 @@ namespace SBRL.GlidingSquirrel.CLI
 						Console.WriteLine();
 						Console.WriteLine("By Starbeamrainbowlabs");
 						Console.WriteLine("Licensed under the Mozilla Public License 2.0.");
-						Console.WriteLine("You can review a copy of this license here: https://git.starbeamrainbowlabs.com/sbrl/GlidingSquirrel/src/master/LICENSE");
+						Console.WriteLine("You can review a copy of this license here: https://github.com/sbrl/GlidingSquirrel/blob/master/LICENSE-");
 						Console.WriteLine();
 						Console.WriteLine("The name comes from FlyingSquirrel, my earlier attempt at" +
 						                  "building a http server in Node.JS. That version even supported" +
@@ -110,6 +112,13 @@ namespace SBRL.GlidingSquirrel.CLI
 					EmbeddedFiles.WriteResourceList();
 					ChatWebsocketServer chatWebsocketServer = new ChatWebsocketServer(IPAddress.Any, 9001);
 					chatWebsocketServer.Start().Wait();
+					break;
+
+				case OperationMode.HttpBasicAuthDemo:
+					Log.WriteLine(LogLevel.System, "Running in Http Basic Authentication Demo mode.");
+					EmbeddedFiles.WriteResourceList();
+					HttpBasicAuthDemoServer authBasicServer = new HttpBasicAuthDemoServer(port);
+					authBasicServer.Start().Wait();
 					break;
 
 				case OperationMode.CompleteWebsocketChallenge:
