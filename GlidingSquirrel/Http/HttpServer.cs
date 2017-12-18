@@ -36,6 +36,11 @@ namespace SBRL.GlidingSquirrel.Http
 		LeaveAlone
 	}
 
+	/// <summary>
+	/// The main HTTP Server implementation class. Inherit from this class to build your own HTTP server!
+	/// Please note that for WebSockets support you'll need to inherit from the seperate <see cref="Websocket.WebsocketServer" />
+	/// class instead.
+	/// </summary>
 	public abstract class HttpServer
 	{
 		/// <summary>
@@ -90,11 +95,20 @@ namespace SBRL.GlidingSquirrel.Http
 			[".html"] = "text/html"
 		};
 
+		/// <summary>
+		/// Initialises a new HttpServer.
+		/// </summary>
+		/// <param name="inBindAddress">The IP address to bind to.</param>
+		/// <param name="inPort">The port to listen on.</param>
 		public HttpServer(IPAddress inBindAddress, int inPort)
 		{
 			BindAddress = inBindAddress;
 			Port = inPort;
 		}
+		/// <summary>
+		/// Initializes a new HttpServer that's listens for connections from all IPv6 addresses.
+		/// </summary>
+		/// <param name="inPort">The port to listen on.</param>
 		public HttpServer(int inPort) : this(IPAddress.IPv6Any, inPort)
 		{
 		}

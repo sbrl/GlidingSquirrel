@@ -15,6 +15,11 @@ namespace SBRL.GlidingSquirrel.Http
 		/// </summary>
 		public readonly string Password;
 
+		/// <summary>
+		/// Creates a new HttpBasicAuthCredentials class instance.
+		/// </summary>
+		/// <param name="inUsername">The username.</param>
+		/// <param name="inPassword">The password.</param>
 		public HttpBasicAuthCredentials(string inUsername, string inPassword)
 		{
 			Username = inUsername;

@@ -57,6 +57,9 @@ namespace SBRL.GlidingSquirrel.Http
 			}
 		}
 
+		/// <summary>
+		/// Decodes, parses, and returns the credentials supplied in the request via Http Basic Authentication.
+		/// </summary>
 		public HttpBasicAuthCredentials BasicAuthCredentials {
 			get {
 				string authHeader = GetHeaderValue("authorization", "");

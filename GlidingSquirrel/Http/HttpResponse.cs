@@ -30,9 +30,10 @@ namespace SBRL.GlidingSquirrel.Http
 
 		/// <summary>
 		/// Sets the body to be the specified string. This is a utility method that converts the supplied
-		/// string into a stream compatible with HttpMessage and sets the appropriate property.
+		/// string into a stream compatible with HttpMessage and sets the appropriate properties to have the
+		/// body accepted by the client, such as the ContentLength.
 		/// </summary>
-		/// <param name="body">The string to set as tthe body.</param>
+		/// <param name="body">The string to set as the body.</param>
 		public async Task SetBody(string body)
 		{
 			MemoryStream ms = new MemoryStream();

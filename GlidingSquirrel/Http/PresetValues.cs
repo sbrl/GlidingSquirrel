@@ -58,6 +58,12 @@ namespace SBRL.GlidingSquirrel.Http
 		/// </summary>
 		public static readonly string Upgrade = "Upgrade";
 
+		/// <summary>
+		/// Works out whether a given connection header value contains the specified connection mode.
+		/// </summary>
+		/// <param name="connectionHeaderValue">The connection header value to search.</param>
+		/// <param name="targetHeaderValue">The connection mode to look for.</param>
+		/// <returns>Whether the given connection header value contains the specified connection mode.</returns>
 		public static bool Contains(string connectionHeaderValue, string targetHeaderValue)
 		{
 			string[] parts = Regex.Split(connectionHeaderValue.Trim().ToLower(), ", ?");

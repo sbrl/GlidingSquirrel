@@ -9,15 +9,36 @@ using SBRL.GlidingSquirrel.Http;
 
 namespace SBRL.GlidingSquirrel.Websocket
 {
+	/// <summary>
+	/// Represents a connecting websocket client.
+	/// </summary>
 	class ClientConnectionRequest
 	{
+		/// <summary>
+		/// The raw client connection.
+		/// </summary>
 		public TcpClient RawClient;
+		/// <summary>
+		/// The HTTP request they sent to us.
+		/// </summary>
 		public HttpRequest Request;
+		/// <summary>
+		/// The response we will send back to them to complete the websocket handshake.
+		/// </summary>
 		public HttpResponse Response;
 	}
 
+	/// <summary>
+	/// The delegate type used in the ClientConnected event in the WebsocketServer.
+	/// This event is fired when a new client connects to the server.
+	/// </summary>
 	public delegate Task ClientConnectedEventHandler(object sender, ClientConnectedEventArgs ev);
 
+	/// <summary>
+	/// The main Websockets Server class. Inherit from this to create your own websockets-capable HTTP server!
+	/// Note that if you don't want or need the Websockets support, you should inherit from 
+	/// <see cref="HttpServer" /> instead.
+	/// </summary>
 	public abstract class WebsocketServer : HttpServer
 	{
 		/// <summary>
@@ -35,6 +56,11 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		public TimeSpan PingInterval = TimeSpan.FromSeconds(60);
 
+		/// <summary>
+		/// Initialises a new WebsocketServer.
+		/// </summary>
+		/// <param name="inBindAddress">The IP address to bind to.</param>
+		/// <param name="inPort">The port to listen on.</param>
 		public WebsocketServer(IPAddress inBindAddress, int inPort) : base(inBindAddress, inPort)
 		{
 			OnClientConnected += HandleClientConnected;
@@ -53,7 +79,15 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 		#region Request Handling
 
-
+		/// <summary>
+		/// Handles incoming HTTP requests. WebsocketServer implements this as it needs to eat certain 
+		/// requests that are actually Websocket handshakes.
+		/// You'll probably want to take a look at the requests too - that's what 
+		/// <see cref="HandleHttpRequest" /> is for.
+		/// </summary>
+		/// <param name="request">The HTTP request to handle.</param>
+		/// <param name="response">The HTTP response to send back to the client.</param>
+		/// <returns>Tells HttpServer to leave the request alone.</returns>
 		public sealed override async Task<HttpConnectionAction> HandleRequest(HttpRequest request, HttpResponse response)
 		{
 			if(!request.Headers.ContainsKey("upgrade") || request.Headers["upgrade"].ToLower() != "websocket")
