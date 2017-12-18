@@ -11,7 +11,7 @@
     
     <licenseUrl>https://github.com/sbrl/GlidingSquirrel/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/sbrl/GlidingSquirrel</projectUrl>
-    <!-- <iconUrl></iconUrl> -->
+    <iconUrl>https://raw.githubusercontent.com/sbrl/GlidingSquirrel/master/logo.png</iconUrl>
     
     <releaseNotes>Initial Release.</releaseNotes>
     
