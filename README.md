@@ -1,10 +1,12 @@
-# GlidingSquirrel
+# ![](https://github.com/sbrl/GlidingSquirrel/blob/master/logo.png?raw=true) GlidingSquirrel
 
 A http (and Websockets!) server, implemented in C#.
 
 Originally built for the /r/dailyprogrammer [hard challenge #322](https://www.reddit.com/r/dailyprogrammer/comments/6lti17/20170707_challenge_322_hard_static_http_server/).
 
 GlidingSquirrel is currently in alpha testing! Don't use this in production unless you really know what you're doing :P
+
+The logo is temporary!
 
 ## Features
  - HTTP 1.0 / 1.1 (RFC 1945 / RFC 1616) supported (mostly - bug reports & pull requests welcome :D)
