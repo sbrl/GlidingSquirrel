@@ -11,7 +11,7 @@ using System.Text;
 namespace SBRL.GlidingSquirrel.Http
 {
 	/// <summary>
-	/// Represents an http requeest.
+	/// Represents an http request.
 	/// </summary>
 	public class HttpRequest : HttpMessage
 	{
