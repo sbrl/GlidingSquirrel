@@ -35,7 +35,7 @@ namespace SBRL.GlidingSquirrel
 	}
 
 	/// <summary>
-	/// The internal logging class for the http / websockets server. (Will) have properties that let
+	/// The internal logging class for the http / websockets server. Has properties that let
 	/// you customise the logging level for debugging purposes.
 	/// </summary>
 	public static class Log

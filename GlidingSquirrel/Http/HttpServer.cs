@@ -124,7 +124,7 @@ namespace SBRL.GlidingSquirrel.Http
 			server = new TcpListener(new IPEndPoint(BindAddress, Port));
 			server.Start();
 
-			Console.WriteLine("done");
+			Log.WriteLine(LogLevel.System, "done");
 			Log.WriteLine(LogLevel.System, $"Listening for requests on http://{BindEndpoint}");
 
 			await setup();
@@ -168,7 +168,7 @@ namespace SBRL.GlidingSquirrel.Http
 			}
 			catch(Exception error)
 			{
-				Console.WriteLine(error);
+				Log.WriteLine(LogLevel.Error, error.ToString());
 			}
 			finally
 			{
