@@ -42,6 +42,8 @@ Start by making sure your project is using the .NET framework 4.6.2 or higher, a
 
 The best way I'm currently aware of to get an idea as to how to utilise this library for yourself is to take a look at the [demo server modes](https://github.com/sbrl/GlidingSquirrel/tree/master/GlidingSquirrelCLI/Modes) built into the CLI project that's part of the main GlidingSquirrel solution.
 
+While GlidingSquirrel is now fully documented with intellisense comments, I've yet to find a way to automatically turn these into useful API documentation that I can host via GitHub Pages.
+
 ### Things to watch out for
  - If you don't set the response body (either with `response.SetBody()` or `response.Body = StreamReader`), then no response will be sent to the browser and clients will sit there waiting for a response indefinitely!
  - If you set the response body directly via `response.Body = StreamReader`, some clients may require the `ContentLength` property to be specified also (`response.SetBody()` does this automatically) - especially if a client is using a persistent connection.
