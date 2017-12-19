@@ -6,6 +6,9 @@ using System.IO;
 
 namespace SBRL.GlidingSquirrel.Websocket
 {
+	/// <summary>
+	/// Represents a single frame that's either receieved or about to be sent to or from a websockets client.
+	/// </summary>
 	public class WebsocketFrame
 	{
 		/// <summary>
@@ -102,6 +105,12 @@ namespace SBRL.GlidingSquirrel.Websocket
 		{
 		}
 
+		/// <summary>
+		/// Generates a new close frame.
+		/// </summary>
+		/// <param name="closeReason">The reason that the connection is being closed.</param>
+		/// <param name="closingMessage">The reason message to include in the closing frame.</param>
+		/// <returns>The generated close frame.</returns>
 		public static WebsocketFrame GenerateCloseFrame(WebsocketCloseReason closeReason, string closingMessage)
 		{
 			WebsocketFrame result = new WebsocketFrame();
@@ -124,6 +133,10 @@ namespace SBRL.GlidingSquirrel.Websocket
 
 		#region Sending / Receiving
 
+		/// <summary>
+		/// Sends this frame to the specified NetworkStream.
+		/// </summary>
+		/// <param name="clientStream">The client stream to send the WebsocketFrame to.</param>
 		public async Task SendToAsync(NetworkStream clientStream)
 		{
 			await Task.Run(() => SendTo(clientStream));
@@ -202,7 +215,11 @@ namespace SBRL.GlidingSquirrel.Websocket
 			}
 		}
 
-
+		/// <summary>
+		/// Receives and decodes a new WebsocketFrame from a remote client.
+		/// </summary>
+		/// <param name="clientStream">The client stream to receive the frame from.</param>
+		/// <returns>The decoded frame.</returns>
 		public static async Task<WebsocketFrame> Decode(NetworkStream clientStream)
 		{
 			// todo change this to use a stream so that we can blow up on payloads that are too large without reading them

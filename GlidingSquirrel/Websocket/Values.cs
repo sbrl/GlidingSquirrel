@@ -7,8 +7,17 @@ namespace SBRL.GlidingSquirrel.Websocket
 	/// </summary>
 	public enum PayloadLengthType
 	{
+		/// <summary>
+		/// A 7-bit payload length.
+		/// </summary>
 		Bit7 = 0,
+		/// <summary>
+		/// A 16-bit payload length.
+		/// </summary>
 		Bit16 = 16,
+		/// <summary>
+		/// A 64-bit payload length.
+		/// </summary>
 		Bit64 = 64
 	}
 
@@ -17,13 +26,31 @@ namespace SBRL.GlidingSquirrel.Websocket
 	/// </summary>
 	public enum WebsocketFrameType
 	{
+		/// <summary>
+		/// A frame that continues on from a previous frame.
+		/// </summary>
 		ContinuationFrame = 0x0,
+		/// <summary>
+		/// A text message frame.
+		/// </summary>
 		TextData = 0x1,
+		/// <summary>
+		/// A binary message frame.
+		/// </summary>
 		BinaryData = 0x2,
 
+		/// <summary>
+		/// A close frame.
+		/// </summary>
 		Close = 0x8,
 
+		/// <summary>
+		/// A ping frame.
+		/// </summary>
 		Ping = 0x9,
+		/// <summary>
+		/// A pong frame.
+		/// </summary>
 		Pong = 0xA
 	}
 

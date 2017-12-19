@@ -105,7 +105,9 @@ namespace SBRL.GlidingSquirrel.Websocket
 			return HttpConnectionAction.LeaveAlone;
 		}
 
-
+		/// <summary>
+		/// Performs websockets-specific setup logic.
+		/// </summary>
 		protected override Task setup()
 		{
 			ThreadPool.QueueUserWorkItem(doMaintenance);
@@ -113,6 +115,10 @@ namespace SBRL.GlidingSquirrel.Websocket
 			return Task.CompletedTask;
 		}
 
+		/// <summary>
+		/// Handles a websocket client connection. Designed to be called in a separate thread.
+		/// </summary>
+		/// <param name="rawClientConnectionRequest">Raw client connection request.</param>
 		protected async void handleClientConnection(object rawClientConnectionRequest)
 		{
 			ClientConnectionRequest connectionRequest = rawClientConnectionRequest as ClientConnectionRequest;
@@ -177,6 +183,12 @@ namespace SBRL.GlidingSquirrel.Websocket
 			}
 		}
 
+		/// <summary>
+		/// Fired when a client disconnects from the server. This is attached to the ClientDisconnected event
+		/// on the WebsocketClient by the websocket server to track when clients disconnect.
+		/// </summary>
+		/// <param name="sender">The sender of this ClientDisconnected event.</param>
+		/// <param name="eventArgs">The event arguments attached to this ClientDisconnected event.</param>
 		protected async Task handleClientDisconnection(object sender, ClientDisconnectedEventArgs eventArgs)
 		{
 			WebsocketClient disconnectedClient = (WebsocketClient)sender;

@@ -1,6 +1,10 @@
 ﻿using System;
+
 namespace SBRL.GlidingSquirrel
 {
+	/// <summary>
+	/// Contains a collection of utilities related to manipulating byte arrays.
+	/// </summary>
 	public static class ByteUtilities
 	{
 		/// <summary>
