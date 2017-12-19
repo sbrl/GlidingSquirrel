@@ -1,0 +1,884 @@
+<html>
+  <head>
+    <title>SBRL.GlidingSquirrel.Http.HttpRequest</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+      a { text-decoration: none }
+
+      div.SideBar {
+        padding-left: 1em;
+        padding-right: 1em;
+        right: 0;
+        float: right;
+        border: thin solid black;
+        background-color: #f2f2f2;
+      }
+    
+      .CollectionTitle { font-weight: bold }
+      .PageTitle { font-size: 150%; font-weight: bold }
+
+      .Summary { }
+      .Signature { }          
+      .Remarks { }
+      .Members { }
+      .Copyright { }
+      
+      .Section { font-size: 125%; font-weight: bold }
+      p.Summary {
+        margin-left: 1em;
+      }
+      .SectionBox { margin-left: 2em }
+      .NamespaceName { font-size: 105%; font-weight: bold }
+      .NamespaceSumary { }
+      .MemberName { font-size: 115%; font-weight: bold; margin-top: 1em }
+      .Subsection { font-size: 105%; font-weight: bold }
+      .SubsectionBox { margin-left: 2em; margin-bottom: 1em }
+
+      .CodeExampleTable { background-color: #f5f5dd; border: thin solid black; padding: .25em; }
+      
+      .TypesListing {
+        border-collapse: collapse;
+      }
+
+      td {
+        vertical-align: top;
+      }
+      th {
+        text-align: left;
+      }
+
+      .TypesListing td { 
+        margin: 0px;  
+        padding: .25em;
+        border: solid gray 1px;
+      }
+
+      .TypesListing th { 
+        margin: 0px;  
+        padding: .25em;
+        background-color: #f2f2f2;
+        border: solid gray 1px;
+      }
+
+      div.Footer {
+        border-top: 1px solid gray;
+        margin-top: 1.5em;
+        padding-top: 0.6em;
+        text-align: center;
+        color: gray;
+      }
+
+      span.NotEntered /* Documentation for this section has not yet been entered */ {
+        font-style: italic;
+        color: red;	
+      }
+
+      div.Header {
+        background: #B0C4DE;
+        border: double;
+        border-color: white;
+        border-width: 7px;
+        padding: 0.5em;
+      }
+
+      div.Header * {
+        font-size: smaller;
+      }
+
+      div.Note {
+      }
+
+      i.ParamRef {
+      }
+
+      i.subtitle {
+      }
+
+      ul.TypeMembersIndex {
+        text-align: left;
+        background: #F8F8F8;
+      }
+
+      ul.TypeMembersIndex li {
+        display: inline;
+        margin:  0.5em;
+      }
+
+      table.HeaderTable {
+      }
+
+      table.SignatureTable {
+      }
+
+      table.Documentation, table.Enumeration, table.TypeDocumentation {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      table.Documentation tr th, table.TypeMembers tr th, table.Enumeration tr th, table.TypeDocumentation tr th {
+        background: whitesmoke;
+        padding: 0.8em;
+        border: 1px solid gray;
+        text-align: left;
+        vertical-align: bottom;
+      }
+
+      table.Documentation tr td, table.TypeMembers tr td, table.Enumeration tr td, table.TypeDocumentation tr td {
+        padding: 0.5em;
+        border: 1px solid gray;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      table.TypeMembers {
+        border: 1px solid #C0C0C0;
+        width: 100%;
+      }
+
+      table.TypeMembers tr td {
+        background: #F8F8F8;
+        border: white;
+      }
+
+      table.Documentation {
+      }
+
+      table.TypeMembers {
+      }
+
+      div.CodeExample {
+        width: 100%;
+        border: 1px solid #DDDDDD;
+        background-color: #F8F8F8;
+      }
+
+      div.CodeExample p {
+        margin: 0.5em;
+        border-bottom: 1px solid #DDDDDD;
+      }
+
+      div.CodeExample div {
+        margin: 0.5em;
+      }
+
+      h4 {
+        margin-bottom: 0;
+      }
+
+      div.Signature {
+        border: 1px solid #C0C0C0;
+        background: #F2F2F2;
+        padding: 1em;
+      }
+    </style>
+    <script type="text/JavaScript">
+      function toggle_display (block) {
+        var w = document.getElementById (block);
+        var t = document.getElementById (block + ":toggle");
+        if (w.style.display == "none") {
+          w.style.display = "block";
+          t.innerHTML = "⊟";
+        } else {
+          w.style.display = "none";
+          t.innerHTML = "⊞";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="CollectionTitle">
+      <a href="../index.html">GlidingSquirrel</a> : <a href="index.html">SBRL.GlidingSquirrel.Http Namespace</a></div>
+    <div class="SideBar">
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Http.HttpRequest">Overview</a>
+      </p>
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Http.HttpRequest:Signature">Signature</a>
+      </p>
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Http.HttpRequest:Docs">Remarks</a>
+      </p>
+      <p>
+        <a href="#Members">Members</a>
+      </p>
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Http.HttpRequest:Members">Member Details</a>
+      </p>
+    </div>
+    <h1 class="PageTitle" id="T:SBRL.GlidingSquirrel.Http.HttpRequest">HttpRequest  Class</h1>
+    <p class="Summary" id="T:SBRL.GlidingSquirrel.Http.HttpRequest:Summary">
+            Represents an http requeest.
+            </p>
+    <div>
+      <h2>Syntax</h2>
+      <div class="Signature" id="T:SBRL.GlidingSquirrel.Http.HttpRequest:Signature">public class  <b>HttpRequest</b> : <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html">HttpMessage</a></div>
+    </div>
+    <div class="Remarks" id="T:SBRL.GlidingSquirrel.Http.HttpRequest:Docs">
+      <h2 class="Section">Remarks</h2>
+      <div class="SectionBox" id="T:SBRL.GlidingSquirrel.Http.HttpRequest:Docs:Remarks">
+        <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+      </div>
+      <h2 class="Section">Requirements</h2>
+      <div class="SectionBox" id="T:SBRL.GlidingSquirrel.Http.HttpRequest:Docs:Version Information">
+        <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+      <h2 class="Section" id="Members">Members</h2>
+      <div class="SectionBox" id="_Members">
+        <p>
+								See Also: Inherited members from
+								<a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html">HttpMessage</a>.
+							</p>
+        <h2 class="Section">Public Constructors</h2>
+        <div class="SectionBox" id="Public Constructors">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <b>
+                      <a href="#C:SBRL.GlidingSquirrel.Http.HttpRequest()">HttpRequest</a>
+                    </b>()</div>
+                </td>
+                <td>
+            Creates a new http request.
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Fields</h2>
+        <div class="SectionBox" id="Public Fields">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html#F:SBRL.GlidingSquirrel.Http.HttpMessage.Body">Body</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.IO.StreamReader">System.IO.StreamReader</a>
+                  </i>. 
+            The request body.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html">HttpMessage</a>.</i>)</td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpRequest.ClientAddress">ClientAddress</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.IPEndPoint">System.Net.IPEndPoint</a>
+                  </i>. 
+            The address that the client is connecting from.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpRequest.ClientConnection">ClientConnection</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.Sockets.TcpClient">System.Net.Sockets.TcpClient</a>
+                  </i>. 
+            The underlying conenction to the remote client.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html#F:SBRL.GlidingSquirrel.Http.HttpMessage.Headers">Headers</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Collections.Generic.Dictionary`2">Dictionary&lt;string, string&gt;</a>
+                  </i>. 
+            A dictionary of key =&gt; value headers present in the message. 
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html">HttpMessage</a>.</i>)</td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html#F:SBRL.GlidingSquirrel.Http.HttpMessage.HttpVersion">HttpVersion</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Single">float</a>
+                  </i>. 
+            The version of the HTTP protocol in use.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html">HttpMessage</a>.</i>)</td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpRequest.Method">Method</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpMethod.html">HttpMethod</a>
+                  </i>. 
+            The method used in this http request.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpRequest.Url">Url</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            The url requested by this request. Not processed according to the host header at all.
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Properties</h2>
+        <div class="SectionBox" id="Public Properties">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:SBRL.GlidingSquirrel.Http.HttpRequest.Accepts">Accepts</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            Quick access to the accepts http header.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:SBRL.GlidingSquirrel.Http.HttpRequest.BasicAuthCredentials">BasicAuthCredentials</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpBasicAuthCredentials.html">HttpBasicAuthCredentials</a>
+                  </i>. 
+            Decodes, parses, and returns the credentials supplied in the request via Http Basic Authentication.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html#P:SBRL.GlidingSquirrel.Http.HttpMessage.ContentLength">ContentLength</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a>
+                  </i>. 
+            Quality of life property providing quick access to the length of the body of the message.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html">HttpMessage</a>.</i>)</td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html#P:SBRL.GlidingSquirrel.Http.HttpMessage.ContentType">ContentType</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            Quality of life property providing quick access to the content type of the message.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html">HttpMessage</a>.</i>)</td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:SBRL.GlidingSquirrel.Http.HttpRequest.Host">Host</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            Quick access to the host http header.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html#P:SBRL.GlidingSquirrel.Http.HttpMessage.TransferEncoding">TransferEncoding</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            Quality of life property providing quick access to the transfer encoding of the body of the message.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html">HttpMessage</a>.</i>)</td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:SBRL.GlidingSquirrel.Http.HttpRequest.UserAgent">UserAgent</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            Quick access to the user-agent http header.
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Methods</h2>
+        <div class="SectionBox" id="Public Methods">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Http.HttpRequest.FromStream(System.IO.StreamReader)">FromStream</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.IO.StreamReader">System.IO.StreamReader</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task`1">System.Threading.Tasks.Task&lt;HttpRequest&gt;</a></nobr><blockquote>
+            Builds a new HttpRequest instance from the supplied data stream.
+            May throw an exception if unsuccessful.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html#M:SBRL.GlidingSquirrel.Http.HttpMessage.GetHeaderValue(System.String,System.String)">GetHeaderValue</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a></nobr><blockquote>
+            Fetches the value of a header present in the message. Returns the specified default
+            value if no value was found.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpMessage.html">HttpMessage</a>.</i>)</blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Http.HttpRequest.MethodFromString(System.String)">MethodFromString</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>)<nobr> : <a href="../SBRL.GlidingSquirrel.Http/HttpMethod.html">HttpMethod</a></nobr><blockquote>
+            Converts a http method stored in a string to the HttpMethod enum.
+            Multiple header defintions are concatenated in the order that they appear, delimited by a comma.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseFirstLine(System.String)">ParseFirstLine</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.ValueTuple`3">ValueTuple&lt;float, HttpMethod, string&gt;</a></nobr><blockquote>
+            Parses the first line of a http request, and return the result as a C# 7 tuple.
+            Don't panic if your editor doesn't appear to like this - it'll compile just fine :P
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseHeaders(System.Collections.Generic.List{System.String})">ParseHeaders</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Collections.Generic.List`1">List&lt;string&gt;</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Collections.Generic.Dictionary`2">Dictionary&lt;string, string&gt;</a></nobr><blockquote>
+            Parses a raw lsit of headers into a dictionary of headers keys and values.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Http.HttpRequest.WillAccept(System.String)">WillAccept</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a></nobr><blockquote>
+            Works out whether this request will accept a given mime type as a response.
+            </blockquote></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="Members" id="T:SBRL.GlidingSquirrel.Http.HttpRequest:Members">
+      <h2 class="Section" id="MemberDetails">Member Details</h2>
+      <div class="SectionBox" id="_MemberDetails">
+        <h3 id="C:SBRL.GlidingSquirrel.Http.HttpRequest()">HttpRequest Constructor</h3>
+        <blockquote id="C:SBRL.GlidingSquirrel.Http.HttpRequest():member">
+          <div class="msummary">
+            Creates a new http request.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public  <b>HttpRequest</b> ()</div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="C:SBRL.GlidingSquirrel.Http.HttpRequest():Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="C:SBRL.GlidingSquirrel.Http.HttpRequest():Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:SBRL.GlidingSquirrel.Http.HttpRequest.Accepts">Accepts Property</h3>
+        <blockquote id="P:SBRL.GlidingSquirrel.Http.HttpRequest.Accepts:member">
+          <div class="msummary">
+            Quick access to the accepts http header.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>Accepts</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:SBRL.GlidingSquirrel.Http.HttpRequest.Accepts:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Http.HttpRequest.Accepts:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Http.HttpRequest.Accepts:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:SBRL.GlidingSquirrel.Http.HttpRequest.BasicAuthCredentials">BasicAuthCredentials Property</h3>
+        <blockquote id="P:SBRL.GlidingSquirrel.Http.HttpRequest.BasicAuthCredentials:member">
+          <div class="msummary">
+            Decodes, parses, and returns the credentials supplied in the request via Http Basic Authentication.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="../SBRL.GlidingSquirrel.Http/HttpBasicAuthCredentials.html">HttpBasicAuthCredentials</a> <b>BasicAuthCredentials</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:SBRL.GlidingSquirrel.Http.HttpRequest.BasicAuthCredentials:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Http.HttpRequest.BasicAuthCredentials:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Http.HttpRequest.BasicAuthCredentials:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpRequest.ClientAddress">ClientAddress Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpRequest.ClientAddress:member">
+          <div class="msummary">
+            The address that the client is connecting from.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.IPEndPoint">System.Net.IPEndPoint</a> <b>ClientAddress</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpRequest.ClientAddress:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpRequest.ClientAddress:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpRequest.ClientConnection">ClientConnection Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpRequest.ClientConnection:member">
+          <div class="msummary">
+            The underlying conenction to the remote client.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.Sockets.TcpClient">System.Net.Sockets.TcpClient</a> <b>ClientConnection</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpRequest.ClientConnection:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpRequest.ClientConnection:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Http.HttpRequest.FromStream(System.IO.StreamReader)">FromStream Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Http.HttpRequest.FromStream(System.IO.StreamReader):member">
+          <div class="msummary">
+            Builds a new HttpRequest instance from the supplied data stream.
+            May throw an exception if unsuccessful.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[System.Diagnostics.DebuggerStepThrough]<br />[System.Runtime.CompilerServices.AsyncStateMachine(typeof(SBRL.GlidingSquirrel.Http.HttpRequest/&lt;FromStream&gt;d__14))]<br />public static <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task`1">System.Threading.Tasks.Task&lt;HttpRequest&gt;</a> <b>FromStream</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.IO.StreamReader">System.IO.StreamReader</a> source)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.FromStream(System.IO.StreamReader):Parameters">
+            <dl>
+              <dt>
+                <i>source</i>
+              </dt>
+              <dd>The source stream to build the HttpRequest instance from.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.FromStream(System.IO.StreamReader):Returns">The completed http request.</blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.FromStream(System.IO.StreamReader):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.FromStream(System.IO.StreamReader):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:SBRL.GlidingSquirrel.Http.HttpRequest.Host">Host Property</h3>
+        <blockquote id="P:SBRL.GlidingSquirrel.Http.HttpRequest.Host:member">
+          <div class="msummary">
+            Quick access to the host http header.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>Host</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:SBRL.GlidingSquirrel.Http.HttpRequest.Host:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Http.HttpRequest.Host:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Http.HttpRequest.Host:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpRequest.Method">Method Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpRequest.Method:member">
+          <div class="msummary">
+            The method used in this http request.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="../SBRL.GlidingSquirrel.Http/HttpMethod.html">HttpMethod</a> <b>Method</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpRequest.Method:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpRequest.Method:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Http.HttpRequest.MethodFromString(System.String)">MethodFromString Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Http.HttpRequest.MethodFromString(System.String):member">
+          <div class="msummary">
+            Converts a http method stored in a string to the HttpMethod enum.
+            Multiple header defintions are concatenated in the order that they appear, delimited by a comma.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpMethod.html">HttpMethod</a> <b>MethodFromString</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> methodText)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.MethodFromString(System.String):Parameters">
+            <dl>
+              <dt>
+                <i>methodText</i>
+              </dt>
+              <dd>The http method as a string to convert.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.MethodFromString(System.String):Returns">The http method as an enum.</blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.MethodFromString(System.String):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.MethodFromString(System.String):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseFirstLine(System.String)">ParseFirstLine Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseFirstLine(System.String):member">
+          <div class="msummary">
+            Parses the first line of a http request, and return the result as a C# 7 tuple.
+            Don't panic if your editor doesn't appear to like this - it'll compile just fine :P
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[return:System.Runtime.CompilerServices.TupleElementNames(Mono.Cecil.CustomAttributeArgument[])]<br />public static <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.ValueTuple`3">ValueTuple&lt;float, HttpMethod, string&gt;</a> <b>ParseFirstLine</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> firstLine)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseFirstLine(System.String):Parameters">
+            <dl>
+              <dt>
+                <i>firstLine</i>
+              </dt>
+              <dd>
+                <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+              </dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseFirstLine(System.String):Returns">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseFirstLine(System.String):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseFirstLine(System.String):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseHeaders(System.Collections.Generic.List{System.String})">ParseHeaders Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseHeaders(System.Collections.Generic.List{System.String}):member">
+          <div class="msummary">
+            Parses a raw lsit of headers into a dictionary of headers keys and values.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Collections.Generic.Dictionary`2">Dictionary&lt;string, string&gt;</a> <b>ParseHeaders</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Collections.Generic.List`1">List&lt;string&gt;</a> rawHeaders)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseHeaders(System.Collections.Generic.List{System.String}):Parameters">
+            <dl>
+              <dt>
+                <i>rawHeaders</i>
+              </dt>
+              <dd>The raw headers to parse.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseHeaders(System.Collections.Generic.List{System.String}):Returns">The parsed headers.</blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseHeaders(System.Collections.Generic.List{System.String}):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.ParseHeaders(System.Collections.Generic.List{System.String}):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpRequest.Url">Url Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpRequest.Url:member">
+          <div class="msummary">
+            The url requested by this request. Not processed according to the host header at all.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>Url</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpRequest.Url:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpRequest.Url:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:SBRL.GlidingSquirrel.Http.HttpRequest.UserAgent">UserAgent Property</h3>
+        <blockquote id="P:SBRL.GlidingSquirrel.Http.HttpRequest.UserAgent:member">
+          <div class="msummary">
+            Quick access to the user-agent http header.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>UserAgent</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:SBRL.GlidingSquirrel.Http.HttpRequest.UserAgent:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Http.HttpRequest.UserAgent:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Http.HttpRequest.UserAgent:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Http.HttpRequest.WillAccept(System.String)">WillAccept Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Http.HttpRequest.WillAccept(System.String):member">
+          <div class="msummary">
+            Works out whether this request will accept a given mime type as a response.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>WillAccept</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> targetMimeType)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.WillAccept(System.String):Parameters">
+            <dl>
+              <dt>
+                <i>targetMimeType</i>
+              </dt>
+              <dd>The mime type to check.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.WillAccept(System.String):Returns">Whether the specified mime type is acceptable as a response to this request..</blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.WillAccept(System.String):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpRequest.WillAccept(System.String):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+      </div>
+    </div>
+    <hr size="1" />
+    <div class="Copyright">
+    </div>
+  </body>
+</html>

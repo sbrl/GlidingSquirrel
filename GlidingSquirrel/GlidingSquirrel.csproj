@@ -49,6 +49,7 @@
     </Reference>
     <Reference Include="mscorlib" />
   </ItemGroup>
+  
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Log.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="ByteUtilities.cs" />
     <Compile Include="Http\HttpBasicAuthCredentials.cs" />
   </ItemGroup>
+  
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
@@ -75,5 +77,13 @@
     <Folder Include="Http\" />
     <Folder Include="Websocket\" />
   </ItemGroup>
+  
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  
+  <Target Name="AfterBuild">
+    <Message Importance="high" Text="----------[ Building documentation ]----------" />
+    
+    <Exec Command="mdoc update -o docs_xml/ -i GlidingSquirrel.xml GlidingSquirrel.dll" WorkingDirectory="$(TargetDir)" IgnoreExitCode="true" />
+    <Exec Command="mdoc export-html --out $(SolutionDir)/docs docs_xml" WorkingDirectory="$(TargetDir)" IgnoreExitCode="true" />
+  </Target>
 </Project>

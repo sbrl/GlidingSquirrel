@@ -106,7 +106,7 @@ namespace SBRL.GlidingSquirrel.Http
 			Port = inPort;
 		}
 		/// <summary>
-		/// Initializes a new HttpServer that's listens for connections from all IPv6 addresses.
+		/// Initializes a new HttpServer that listens for connections from all IPv6 addresses.
 		/// </summary>
 		/// <param name="inPort">The port to listen on.</param>
 		public HttpServer(int inPort) : this(IPAddress.IPv6Any, inPort)

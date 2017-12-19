@@ -1,0 +1,1216 @@
+<html>
+  <head>
+    <title>SBRL.GlidingSquirrel.Websocket.WebsocketServer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+      a { text-decoration: none }
+
+      div.SideBar {
+        padding-left: 1em;
+        padding-right: 1em;
+        right: 0;
+        float: right;
+        border: thin solid black;
+        background-color: #f2f2f2;
+      }
+    
+      .CollectionTitle { font-weight: bold }
+      .PageTitle { font-size: 150%; font-weight: bold }
+
+      .Summary { }
+      .Signature { }          
+      .Remarks { }
+      .Members { }
+      .Copyright { }
+      
+      .Section { font-size: 125%; font-weight: bold }
+      p.Summary {
+        margin-left: 1em;
+      }
+      .SectionBox { margin-left: 2em }
+      .NamespaceName { font-size: 105%; font-weight: bold }
+      .NamespaceSumary { }
+      .MemberName { font-size: 115%; font-weight: bold; margin-top: 1em }
+      .Subsection { font-size: 105%; font-weight: bold }
+      .SubsectionBox { margin-left: 2em; margin-bottom: 1em }
+
+      .CodeExampleTable { background-color: #f5f5dd; border: thin solid black; padding: .25em; }
+      
+      .TypesListing {
+        border-collapse: collapse;
+      }
+
+      td {
+        vertical-align: top;
+      }
+      th {
+        text-align: left;
+      }
+
+      .TypesListing td { 
+        margin: 0px;  
+        padding: .25em;
+        border: solid gray 1px;
+      }
+
+      .TypesListing th { 
+        margin: 0px;  
+        padding: .25em;
+        background-color: #f2f2f2;
+        border: solid gray 1px;
+      }
+
+      div.Footer {
+        border-top: 1px solid gray;
+        margin-top: 1.5em;
+        padding-top: 0.6em;
+        text-align: center;
+        color: gray;
+      }
+
+      span.NotEntered /* Documentation for this section has not yet been entered */ {
+        font-style: italic;
+        color: red;	
+      }
+
+      div.Header {
+        background: #B0C4DE;
+        border: double;
+        border-color: white;
+        border-width: 7px;
+        padding: 0.5em;
+      }
+
+      div.Header * {
+        font-size: smaller;
+      }
+
+      div.Note {
+      }
+
+      i.ParamRef {
+      }
+
+      i.subtitle {
+      }
+
+      ul.TypeMembersIndex {
+        text-align: left;
+        background: #F8F8F8;
+      }
+
+      ul.TypeMembersIndex li {
+        display: inline;
+        margin:  0.5em;
+      }
+
+      table.HeaderTable {
+      }
+
+      table.SignatureTable {
+      }
+
+      table.Documentation, table.Enumeration, table.TypeDocumentation {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      table.Documentation tr th, table.TypeMembers tr th, table.Enumeration tr th, table.TypeDocumentation tr th {
+        background: whitesmoke;
+        padding: 0.8em;
+        border: 1px solid gray;
+        text-align: left;
+        vertical-align: bottom;
+      }
+
+      table.Documentation tr td, table.TypeMembers tr td, table.Enumeration tr td, table.TypeDocumentation tr td {
+        padding: 0.5em;
+        border: 1px solid gray;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      table.TypeMembers {
+        border: 1px solid #C0C0C0;
+        width: 100%;
+      }
+
+      table.TypeMembers tr td {
+        background: #F8F8F8;
+        border: white;
+      }
+
+      table.Documentation {
+      }
+
+      table.TypeMembers {
+      }
+
+      div.CodeExample {
+        width: 100%;
+        border: 1px solid #DDDDDD;
+        background-color: #F8F8F8;
+      }
+
+      div.CodeExample p {
+        margin: 0.5em;
+        border-bottom: 1px solid #DDDDDD;
+      }
+
+      div.CodeExample div {
+        margin: 0.5em;
+      }
+
+      h4 {
+        margin-bottom: 0;
+      }
+
+      div.Signature {
+        border: 1px solid #C0C0C0;
+        background: #F2F2F2;
+        padding: 1em;
+      }
+    </style>
+    <script type="text/JavaScript">
+      function toggle_display (block) {
+        var w = document.getElementById (block);
+        var t = document.getElementById (block + ":toggle");
+        if (w.style.display == "none") {
+          w.style.display = "block";
+          t.innerHTML = "⊟";
+        } else {
+          w.style.display = "none";
+          t.innerHTML = "⊞";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="CollectionTitle">
+      <a href="../index.html">GlidingSquirrel</a> : <a href="index.html">SBRL.GlidingSquirrel.Websocket Namespace</a></div>
+    <div class="SideBar">
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Websocket.WebsocketServer">Overview</a>
+      </p>
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Websocket.WebsocketServer:Signature">Signature</a>
+      </p>
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Websocket.WebsocketServer:Docs">Remarks</a>
+      </p>
+      <p>
+        <a href="#Members">Members</a>
+      </p>
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Websocket.WebsocketServer:Members">Member Details</a>
+      </p>
+    </div>
+    <h1 class="PageTitle" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketServer">WebsocketServer  Class</h1>
+    <p class="Summary" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketServer:Summary">
+            The main Websockets Server class. Inherit from this to create your own websockets-capable HTTP server!
+            Note that if you don't want or need the Websockets support, you should inherit from 
+            <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a> instead.
+            </p>
+    <div>
+      <h2>Syntax</h2>
+      <div class="Signature" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketServer:Signature">public abstract class  <b>WebsocketServer</b> : <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a></div>
+    </div>
+    <div class="Remarks" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketServer:Docs">
+      <h2 class="Section">Remarks</h2>
+      <div class="SectionBox" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketServer:Docs:Remarks">
+        <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+      </div>
+      <h2 class="Section">Requirements</h2>
+      <div class="SectionBox" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketServer:Docs:Version Information">
+        <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+      <h2 class="Section" id="Members">Members</h2>
+      <div class="SectionBox" id="_Members">
+        <p>
+								See Also: Inherited members from
+								<a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.
+							</p>
+        <h2 class="Section">Public Constructors</h2>
+        <div class="SectionBox" id="Public Constructors">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <b>
+                      <a href="#C:SBRL.GlidingSquirrel.Websocket.WebsocketServer(System.Net.IPAddress,System.Int32)">WebsocketServer</a>
+                    </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.IPAddress">System.Net.IPAddress</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a>)</div>
+                </td>
+                <td>
+            Initialises a new WebsocketServer.
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Fields</h2>
+        <div class="SectionBox" id="Public Fields">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>readonly </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#F:SBRL.GlidingSquirrel.Http.HttpServer.BindAddress">BindAddress</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.IPAddress">System.Net.IPAddress</a>
+                  </i>. 
+            The address the server will bind to.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Clients">Clients</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Collections.Generic.List`1">List&lt;WebsocketClient&gt;</a>
+                  </i>. 
+            A list of currently connected clients.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#F:SBRL.GlidingSquirrel.Http.HttpServer.IdleTimeout">IdleTimeout</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a>
+                  </i>. 
+            The maximum allowed time to wait for data from the client, in milliseconds.
+            After this time has elapsed the connection will be closed.
+            Note that this doesn't affect a connection once a websocket has been fully initialised.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static readonly </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.MagicChallengeKey">MagicChallengeKey</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            The magic challenge key. Used in the initial handshake.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#F:SBRL.GlidingSquirrel.Http.HttpServer.MaximumUrlLength">MaximumUrlLength</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a>
+                  </i>. 
+            The maximum allowed length for urls.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#F:SBRL.GlidingSquirrel.Http.HttpServer.MimeTypeOverrides">MimeTypeOverrides</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Collections.Generic.Dictionary`2">Dictionary&lt;string, string&gt;</a>
+                  </i>. 
+            Override MIME type mappings. Values specified here will be sued in place of any found in MimeSharp's database.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.PingInterval">PingInterval</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.TimeSpan">TimeSpan</a>
+                  </i>. 
+            The time that a client is allowed to remain idle beforer a ping packet is sent to it.
+            Defaults to 1 minute.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>readonly </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#F:SBRL.GlidingSquirrel.Http.HttpServer.Port">Port</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a>
+                  </i>. 
+            The port the server will listen on.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Protected Fields</h2>
+        <div class="SectionBox" id="Protected Fields">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#F:SBRL.GlidingSquirrel.Http.HttpServer.server">server</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.Sockets.TcpListener">System.Net.Sockets.TcpListener</a>
+                  </i>. 
+            The underlying tcp listener.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Properties</h2>
+        <div class="SectionBox" id="Public Properties">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#P:SBRL.GlidingSquirrel.Http.HttpServer.BindEndpoint">BindEndpoint</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            The endpoint the server will listen on. Useful for logging.
+            You can change this value via the BindAddress and Port properties.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Methods</h2>
+        <div class="SectionBox" id="Public Methods">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.Byte[])">Broadcast</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Byte">byte</a>[])<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a></nobr><blockquote>
+            Broadcasts the specified binary message to all connected clients who aren't
+            currently in the process of closing their connection.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.String)">Broadcast</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a></nobr><blockquote>
+            Broadcasts the specified message to all connected clients who aren't
+            currently in the process of closing their connection.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#M:SBRL.GlidingSquirrel.Http.HttpServer.DoHandleRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">DoHandleRequest</a>
+                  </b>(<a href="../SBRL.GlidingSquirrel.Http/HttpRequest.html">SBRL.GlidingSquirrel.Http.HttpRequest</a>, <a href="../SBRL.GlidingSquirrel.Http/HttpResponse.html">SBRL.GlidingSquirrel.Http.HttpResponse</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task`1">System.Threading.Tasks.Task&lt;SBRL.GlidingSquirrel.Http.HttpConnectionAction&gt;</a></nobr><blockquote>
+            Handles a single request from a client.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#M:SBRL.GlidingSquirrel.Http.HttpServer.HandleClient(System.Net.Sockets.TcpClient)">HandleClient</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.Sockets.TcpClient">System.Net.Sockets.TcpClient</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task`1">System.Threading.Tasks.Task&lt;SBRL.GlidingSquirrel.Http.HttpConnectionAction&gt;</a></nobr><blockquote>
+            Handles a single HTTP client connection. Usually you don't want to call this
+            directly - Start() will for you :-)
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>abstract </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientConnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientConnectedEventArgs)">HandleClientConnected</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a>, <a href="../SBRL.GlidingSquirrel.Websocket/ClientConnectedEventArgs.html">ClientConnectedEventArgs</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a></nobr><blockquote>
+            Gets called automatically when a client has connected.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>abstract </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientDisconnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs)">HandleClientDisconnected</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a>, <a href="../SBRL.GlidingSquirrel.Websocket/ClientDisconnectedEventArgs.html">ClientDisconnectedEventArgs</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a></nobr><blockquote>
+            Gets called automatically when a client has disconnected.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>abstract </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">HandleHttpRequest</a>
+                  </b>(<a href="../SBRL.GlidingSquirrel.Http/HttpRequest.html">SBRL.GlidingSquirrel.Http.HttpRequest</a>, <a href="../SBRL.GlidingSquirrel.Http/HttpResponse.html">SBRL.GlidingSquirrel.Http.HttpResponse</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a></nobr><blockquote>
+            Gets called automatically to handle regular HTTP requests.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>override </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">HandleRequest</a>
+                  </b>(<a href="../SBRL.GlidingSquirrel.Http/HttpRequest.html">SBRL.GlidingSquirrel.Http.HttpRequest</a>, <a href="../SBRL.GlidingSquirrel.Http/HttpResponse.html">SBRL.GlidingSquirrel.Http.HttpResponse</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task`1">System.Threading.Tasks.Task&lt;SBRL.GlidingSquirrel.Http.HttpConnectionAction&gt;</a></nobr><blockquote>
+            Handles incoming HTTP requests. WebsocketServer implements this as it needs to eat certain 
+            requests that are actually Websocket handshakes.
+            You'll probably want to take a look at the requests too - that's what 
+            <a href="../SBRL.GlidingSquirrel.Websocket/WebsocketServer.html#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest, SBRL.GlidingSquirrel.Http.HttpResponse)</a> is for.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>abstract </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#M:SBRL.GlidingSquirrel.Http.HttpServer.HandleRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">HandleRequest</a>
+                  </b>(<a href="../SBRL.GlidingSquirrel.Http/HttpRequest.html">SBRL.GlidingSquirrel.Http.HttpRequest</a>, <a href="../SBRL.GlidingSquirrel.Http/HttpResponse.html">SBRL.GlidingSquirrel.Http.HttpResponse</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task`1">System.Threading.Tasks.Task&lt;SBRL.GlidingSquirrel.Http.HttpConnectionAction&gt;</a></nobr><blockquote>
+            Used to handle a request. Called in a separate thread. If an exception is thrown
+            here, it's caught and sent back to the user - which may not be what you want.
+            todo: Upgrades to that part of the system are pending.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#M:SBRL.GlidingSquirrel.Http.HttpServer.LookupMimeType(System.String)">LookupMimeType</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a></nobr><blockquote>
+            Fetches the mime type for a given file path.
+            This method applies  
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.Byte[])">Reflect</a>
+                  </b>(<a href="../SBRL.GlidingSquirrel.Websocket/WebsocketClient.html">WebsocketClient</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Byte">byte</a>[])<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a></nobr><blockquote>
+            Reflects the specified binary message to all connected clients who both aren't
+            the sender and aren't currently in the process of closing their connection.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.String)">Reflect</a>
+                  </b>(<a href="../SBRL.GlidingSquirrel.Websocket/WebsocketClient.html">WebsocketClient</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a></nobr><blockquote>
+            Reflects the specified message to all connected clients who both aren't
+            the sender and aren't currently in the process of closing their connection.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#M:SBRL.GlidingSquirrel.Http.HttpServer.Start()">Start</a>
+                  </b>()<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a></nobr><blockquote>
+            Starts listening for requests.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</blockquote></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Protected Methods</h2>
+        <div class="SectionBox" id="Protected Methods">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.doMaintenance(System.Object)">doMaintenance</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a>)<blockquote>
+            Performs maintenance at regular intervals.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientConnection(System.Object)">handleClientConnection</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a>)<blockquote>
+            Handles a websocket client connection. Designed to be called in a separate thread.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientDisconnection(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs)">handleClientDisconnection</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a>, <a href="../SBRL.GlidingSquirrel.Websocket/ClientDisconnectedEventArgs.html">ClientDisconnectedEventArgs</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a></nobr><blockquote>
+            Fired when a client disconnects from the server. This is attached to the ClientDisconnected event
+            on the WebsocketClient by the websocket server to track when clients disconnect.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#M:SBRL.GlidingSquirrel.Http.HttpServer.HandleClientThreadRoot(System.Object)">HandleClientThreadRoot</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a>)<blockquote>
+            Handles requests from a specified client.
+            This is the root method that is called when spawning a new thread to
+            handle the client.
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>override </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.setup()">setup</a>
+                  </b>()<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a></nobr><blockquote>
+            Performs websockets-specific setup logic.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>abstract </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html#M:SBRL.GlidingSquirrel.Http.HttpServer.setup()">setup</a>
+                  </b>()<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a></nobr><blockquote>
+            Called once the server is listening for requests, but before the first request is accepted.
+            Use to perform setup logic, obviously :P
+             (<i>Inherited from <a href="../SBRL.GlidingSquirrel.Http/HttpServer.html">SBRL.GlidingSquirrel.Http.HttpServer</a>.</i>)</blockquote></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Events</h2>
+        <div class="SectionBox" id="Public Events">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientConnected">OnClientConnected</a>
+                  </b>
+                </td>
+                <td>
+            Occurs when a new (websocket) client connects.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientDisconnected">OnClientDisconnected</a>
+                  </b>
+                </td>
+                <td>
+            Occurs when a (websocket) client disconnects.
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="Members" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketServer:Members">
+      <h2 class="Section" id="MemberDetails">Member Details</h2>
+      <div class="SectionBox" id="_MemberDetails">
+        <h3 id="C:SBRL.GlidingSquirrel.Websocket.WebsocketServer(System.Net.IPAddress,System.Int32)">WebsocketServer Constructor</h3>
+        <blockquote id="C:SBRL.GlidingSquirrel.Websocket.WebsocketServer(System.Net.IPAddress,System.Int32):member">
+          <div class="msummary">
+            Initialises a new WebsocketServer.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public  <b>WebsocketServer</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.IPAddress">System.Net.IPAddress</a> inBindAddress, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a> inPort)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="C:SBRL.GlidingSquirrel.Websocket.WebsocketServer(System.Net.IPAddress,System.Int32):Parameters">
+            <dl>
+              <dt>
+                <i>inBindAddress</i>
+              </dt>
+              <dd>The IP address to bind to.</dd>
+              <dt>
+                <i>inPort</i>
+              </dt>
+              <dd>The port to listen on.</dd>
+            </dl>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="C:SBRL.GlidingSquirrel.Websocket.WebsocketServer(System.Net.IPAddress,System.Int32):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="C:SBRL.GlidingSquirrel.Websocket.WebsocketServer(System.Net.IPAddress,System.Int32):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.Byte[])">Broadcast Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.Byte[]):member">
+          <div class="msummary">
+            Broadcasts the specified binary message to all connected clients who aren't
+            currently in the process of closing their connection.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[System.Diagnostics.DebuggerStepThrough]<br />[System.Runtime.CompilerServices.AsyncStateMachine(typeof(SBRL.GlidingSquirrel.Websocket.WebsocketServer/&lt;Broadcast&gt;d__16))]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a> <b>Broadcast</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Byte">byte</a>[] message)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.Byte[]):Parameters">
+            <dl>
+              <dt>
+                <i>message</i>
+              </dt>
+              <dd>The message to broadcast.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.Byte[]):Returns">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.Byte[]):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.Byte[]):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.String)">Broadcast Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.String):member">
+          <div class="msummary">
+            Broadcasts the specified message to all connected clients who aren't
+            currently in the process of closing their connection.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[System.Diagnostics.DebuggerStepThrough]<br />[System.Runtime.CompilerServices.AsyncStateMachine(typeof(SBRL.GlidingSquirrel.Websocket.WebsocketServer/&lt;Broadcast&gt;d__15))]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a> <b>Broadcast</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> message)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.String):Parameters">
+            <dl>
+              <dt>
+                <i>message</i>
+              </dt>
+              <dd>The message to broadcast.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.String):Returns">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.String):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.String):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Clients">Clients Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Clients:member">
+          <div class="msummary">
+            A list of currently connected clients.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Collections.Generic.List`1">List&lt;WebsocketClient&gt;</a> <b>Clients</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Clients:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Clients:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.doMaintenance(System.Object)">doMaintenance Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.doMaintenance(System.Object):member">
+          <div class="msummary">
+            Performs maintenance at regular intervals.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[System.Diagnostics.DebuggerStepThrough]<br />[System.Runtime.CompilerServices.AsyncStateMachine(typeof(SBRL.GlidingSquirrel.Websocket.WebsocketServer/&lt;doMaintenance&gt;d__14))]<br />protected <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Void">void</a> <b>doMaintenance</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a> state)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.doMaintenance(System.Object):Parameters">
+            <dl>
+              <dt>
+                <i>state</i>
+              </dt>
+              <dd>
+                <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+              </dd>
+            </dl>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.doMaintenance(System.Object):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.doMaintenance(System.Object):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientConnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientConnectedEventArgs)">HandleClientConnected Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientConnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientConnectedEventArgs):member">
+          <div class="msummary">
+            Gets called automatically when a client has connected.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public abstract <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a> <b>HandleClientConnected</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a> sender, <a href="../SBRL.GlidingSquirrel.Websocket/ClientConnectedEventArgs.html">ClientConnectedEventArgs</a> eventArgs)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientConnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientConnectedEventArgs):Parameters">
+            <dl>
+              <dt>
+                <i>sender</i>
+              </dt>
+              <dd>The WebsocketClient object representing the client that has connected.</dd>
+              <dt>
+                <i>eventArgs</i>
+              </dt>
+              <dd>The client connected event arguments.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientConnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientConnectedEventArgs):Returns">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientConnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientConnectedEventArgs):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientConnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientConnectedEventArgs):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientConnection(System.Object)">handleClientConnection Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientConnection(System.Object):member">
+          <div class="msummary">
+            Handles a websocket client connection. Designed to be called in a separate thread.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[System.Diagnostics.DebuggerStepThrough]<br />[System.Runtime.CompilerServices.AsyncStateMachine(typeof(SBRL.GlidingSquirrel.Websocket.WebsocketServer/&lt;handleClientConnection&gt;d__12))]<br />protected <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Void">void</a> <b>handleClientConnection</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a> rawClientConnectionRequest)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientConnection(System.Object):Parameters">
+            <dl>
+              <dt>
+                <i>rawClientConnectionRequest</i>
+              </dt>
+              <dd>Raw client connection request.</dd>
+            </dl>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientConnection(System.Object):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientConnection(System.Object):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientDisconnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs)">HandleClientDisconnected Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientDisconnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs):member">
+          <div class="msummary">
+            Gets called automatically when a client has disconnected.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public abstract <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a> <b>HandleClientDisconnected</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a> sender, <a href="../SBRL.GlidingSquirrel.Websocket/ClientDisconnectedEventArgs.html">ClientDisconnectedEventArgs</a> eventArgs)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientDisconnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs):Parameters">
+            <dl>
+              <dt>
+                <i>sender</i>
+              </dt>
+              <dd>The WebsocketClient object representing the client that has disconnected.</dd>
+              <dt>
+                <i>eventArgs</i>
+              </dt>
+              <dd>The client disconnected event arguments.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientDisconnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs):Returns">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientDisconnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientDisconnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientDisconnection(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs)">handleClientDisconnection Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientDisconnection(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs):member">
+          <div class="msummary">
+            Fired when a client disconnects from the server. This is attached to the ClientDisconnected event
+            on the WebsocketClient by the websocket server to track when clients disconnect.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[System.Diagnostics.DebuggerStepThrough]<br />[System.Runtime.CompilerServices.AsyncStateMachine(typeof(SBRL.GlidingSquirrel.Websocket.WebsocketServer/&lt;handleClientDisconnection&gt;d__13))]<br />protected <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a> <b>handleClientDisconnection</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a> sender, <a href="../SBRL.GlidingSquirrel.Websocket/ClientDisconnectedEventArgs.html">ClientDisconnectedEventArgs</a> eventArgs)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientDisconnection(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs):Parameters">
+            <dl>
+              <dt>
+                <i>sender</i>
+              </dt>
+              <dd>The sender of this ClientDisconnected event.</dd>
+              <dt>
+                <i>eventArgs</i>
+              </dt>
+              <dd>The event arguments attached to this ClientDisconnected event.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientDisconnection(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs):Returns">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientDisconnection(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientDisconnection(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">HandleHttpRequest Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):member">
+          <div class="msummary">
+            Gets called automatically to handle regular HTTP requests.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public abstract <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a> <b>HandleHttpRequest</b> (<a href="../SBRL.GlidingSquirrel.Http/HttpRequest.html">SBRL.GlidingSquirrel.Http.HttpRequest</a> request, <a href="../SBRL.GlidingSquirrel.Http/HttpResponse.html">SBRL.GlidingSquirrel.Http.HttpResponse</a> response)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Parameters">
+            <dl>
+              <dt>
+                <i>request</i>
+              </dt>
+              <dd>The HTTP request.</dd>
+              <dt>
+                <i>response</i>
+              </dt>
+              <dd>The HTTP response to send back.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Returns">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">HandleRequest Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):member">
+          <div class="msummary">
+            Handles incoming HTTP requests. WebsocketServer implements this as it needs to eat certain 
+            requests that are actually Websocket handshakes.
+            You'll probably want to take a look at the requests too - that's what 
+            <a href="../SBRL.GlidingSquirrel.Websocket/WebsocketServer.html#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest, SBRL.GlidingSquirrel.Http.HttpResponse)</a> is for.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[System.Diagnostics.DebuggerStepThrough]<br />[System.Runtime.CompilerServices.AsyncStateMachine(typeof(SBRL.GlidingSquirrel.Websocket.WebsocketServer/&lt;HandleRequest&gt;d__10))]<br />public override sealed <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task`1">System.Threading.Tasks.Task&lt;SBRL.GlidingSquirrel.Http.HttpConnectionAction&gt;</a> <b>HandleRequest</b> (<a href="../SBRL.GlidingSquirrel.Http/HttpRequest.html">SBRL.GlidingSquirrel.Http.HttpRequest</a> request, <a href="../SBRL.GlidingSquirrel.Http/HttpResponse.html">SBRL.GlidingSquirrel.Http.HttpResponse</a> response)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Parameters">
+            <dl>
+              <dt>
+                <i>request</i>
+              </dt>
+              <dd>The HTTP request to handle.</dd>
+              <dt>
+                <i>response</i>
+              </dt>
+              <dd>The HTTP response to send back to the client.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Returns">Tells HttpServer to leave the request alone.</blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.MagicChallengeKey">MagicChallengeKey Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.MagicChallengeKey:member">
+          <div class="msummary">
+            The magic challenge key. Used in the initial handshake.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static readonly <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>MagicChallengeKey</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.MagicChallengeKey:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.MagicChallengeKey:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientConnected">OnClientConnected Event</h3>
+        <blockquote id="E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientConnected:member">
+          <div class="msummary">
+            Occurs when a new (websocket) client connects.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public event <a href="../SBRL.GlidingSquirrel.Websocket/ClientConnectedEventHandler.html">ClientConnectedEventHandler</a> <b>OnClientConnected</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientConnected:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientConnected:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientDisconnected">OnClientDisconnected Event</h3>
+        <blockquote id="E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientDisconnected:member">
+          <div class="msummary">
+            Occurs when a (websocket) client disconnects.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public event <a href="../SBRL.GlidingSquirrel.Websocket/ClientDisconnectedEventHandler.html">ClientDisconnectedEventHandler</a> <b>OnClientDisconnected</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientDisconnected:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientDisconnected:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.PingInterval">PingInterval Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.PingInterval:member">
+          <div class="msummary">
+            The time that a client is allowed to remain idle beforer a ping packet is sent to it.
+            Defaults to 1 minute.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.TimeSpan">TimeSpan</a> <b>PingInterval</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.PingInterval:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.PingInterval:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.Byte[])">Reflect Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.Byte[]):member">
+          <div class="msummary">
+            Reflects the specified binary message to all connected clients who both aren't
+            the sender and aren't currently in the process of closing their connection.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[System.Diagnostics.DebuggerStepThrough]<br />[System.Runtime.CompilerServices.AsyncStateMachine(typeof(SBRL.GlidingSquirrel.Websocket.WebsocketServer/&lt;Reflect&gt;d__18))]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a> <b>Reflect</b> (<a href="../SBRL.GlidingSquirrel.Websocket/WebsocketClient.html">WebsocketClient</a> sender, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Byte">byte</a>[] message)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.Byte[]):Parameters">
+            <dl>
+              <dt>
+                <i>sender</i>
+              </dt>
+              <dd>The WebsocketClient sending the message.</dd>
+              <dt>
+                <i>message</i>
+              </dt>
+              <dd>The message to broadcast.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.Byte[]):Returns">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.Byte[]):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.Byte[]):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.String)">Reflect Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.String):member">
+          <div class="msummary">
+            Reflects the specified message to all connected clients who both aren't
+            the sender and aren't currently in the process of closing their connection.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[System.Diagnostics.DebuggerStepThrough]<br />[System.Runtime.CompilerServices.AsyncStateMachine(typeof(SBRL.GlidingSquirrel.Websocket.WebsocketServer/&lt;Reflect&gt;d__17))]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a> <b>Reflect</b> (<a href="../SBRL.GlidingSquirrel.Websocket/WebsocketClient.html">WebsocketClient</a> sender, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> message)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.String):Parameters">
+            <dl>
+              <dt>
+                <i>sender</i>
+              </dt>
+              <dd>The WebsocketClient sending the message.</dd>
+              <dt>
+                <i>message</i>
+              </dt>
+              <dd>The message to broadcast.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.String):Returns">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.String):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.String):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.setup()">setup Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.setup():member">
+          <div class="msummary">
+            Performs websockets-specific setup logic.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">protected override <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a> <b>setup</b> ()</div>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.setup():Returns">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.setup():Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.setup():Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+      </div>
+    </div>
+    <hr size="1" />
+    <div class="Copyright">
+    </div>
+  </body>
+</html>

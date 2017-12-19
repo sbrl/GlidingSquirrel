@@ -1,0 +1,916 @@
+<html>
+  <head>
+    <title>SBRL.GlidingSquirrel.Websocket.WebsocketFrame</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+      a { text-decoration: none }
+
+      div.SideBar {
+        padding-left: 1em;
+        padding-right: 1em;
+        right: 0;
+        float: right;
+        border: thin solid black;
+        background-color: #f2f2f2;
+      }
+    
+      .CollectionTitle { font-weight: bold }
+      .PageTitle { font-size: 150%; font-weight: bold }
+
+      .Summary { }
+      .Signature { }          
+      .Remarks { }
+      .Members { }
+      .Copyright { }
+      
+      .Section { font-size: 125%; font-weight: bold }
+      p.Summary {
+        margin-left: 1em;
+      }
+      .SectionBox { margin-left: 2em }
+      .NamespaceName { font-size: 105%; font-weight: bold }
+      .NamespaceSumary { }
+      .MemberName { font-size: 115%; font-weight: bold; margin-top: 1em }
+      .Subsection { font-size: 105%; font-weight: bold }
+      .SubsectionBox { margin-left: 2em; margin-bottom: 1em }
+
+      .CodeExampleTable { background-color: #f5f5dd; border: thin solid black; padding: .25em; }
+      
+      .TypesListing {
+        border-collapse: collapse;
+      }
+
+      td {
+        vertical-align: top;
+      }
+      th {
+        text-align: left;
+      }
+
+      .TypesListing td { 
+        margin: 0px;  
+        padding: .25em;
+        border: solid gray 1px;
+      }
+
+      .TypesListing th { 
+        margin: 0px;  
+        padding: .25em;
+        background-color: #f2f2f2;
+        border: solid gray 1px;
+      }
+
+      div.Footer {
+        border-top: 1px solid gray;
+        margin-top: 1.5em;
+        padding-top: 0.6em;
+        text-align: center;
+        color: gray;
+      }
+
+      span.NotEntered /* Documentation for this section has not yet been entered */ {
+        font-style: italic;
+        color: red;	
+      }
+
+      div.Header {
+        background: #B0C4DE;
+        border: double;
+        border-color: white;
+        border-width: 7px;
+        padding: 0.5em;
+      }
+
+      div.Header * {
+        font-size: smaller;
+      }
+
+      div.Note {
+      }
+
+      i.ParamRef {
+      }
+
+      i.subtitle {
+      }
+
+      ul.TypeMembersIndex {
+        text-align: left;
+        background: #F8F8F8;
+      }
+
+      ul.TypeMembersIndex li {
+        display: inline;
+        margin:  0.5em;
+      }
+
+      table.HeaderTable {
+      }
+
+      table.SignatureTable {
+      }
+
+      table.Documentation, table.Enumeration, table.TypeDocumentation {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      table.Documentation tr th, table.TypeMembers tr th, table.Enumeration tr th, table.TypeDocumentation tr th {
+        background: whitesmoke;
+        padding: 0.8em;
+        border: 1px solid gray;
+        text-align: left;
+        vertical-align: bottom;
+      }
+
+      table.Documentation tr td, table.TypeMembers tr td, table.Enumeration tr td, table.TypeDocumentation tr td {
+        padding: 0.5em;
+        border: 1px solid gray;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      table.TypeMembers {
+        border: 1px solid #C0C0C0;
+        width: 100%;
+      }
+
+      table.TypeMembers tr td {
+        background: #F8F8F8;
+        border: white;
+      }
+
+      table.Documentation {
+      }
+
+      table.TypeMembers {
+      }
+
+      div.CodeExample {
+        width: 100%;
+        border: 1px solid #DDDDDD;
+        background-color: #F8F8F8;
+      }
+
+      div.CodeExample p {
+        margin: 0.5em;
+        border-bottom: 1px solid #DDDDDD;
+      }
+
+      div.CodeExample div {
+        margin: 0.5em;
+      }
+
+      h4 {
+        margin-bottom: 0;
+      }
+
+      div.Signature {
+        border: 1px solid #C0C0C0;
+        background: #F2F2F2;
+        padding: 1em;
+      }
+    </style>
+    <script type="text/JavaScript">
+      function toggle_display (block) {
+        var w = document.getElementById (block);
+        var t = document.getElementById (block + ":toggle");
+        if (w.style.display == "none") {
+          w.style.display = "block";
+          t.innerHTML = "⊟";
+        } else {
+          w.style.display = "none";
+          t.innerHTML = "⊞";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="CollectionTitle">
+      <a href="../index.html">GlidingSquirrel</a> : <a href="index.html">SBRL.GlidingSquirrel.Websocket Namespace</a></div>
+    <div class="SideBar">
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Websocket.WebsocketFrame">Overview</a>
+      </p>
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Websocket.WebsocketFrame:Signature">Signature</a>
+      </p>
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Websocket.WebsocketFrame:Docs">Remarks</a>
+      </p>
+      <p>
+        <a href="#Members">Members</a>
+      </p>
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Websocket.WebsocketFrame:Members">Member Details</a>
+      </p>
+    </div>
+    <h1 class="PageTitle" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketFrame">WebsocketFrame  Class</h1>
+    <p class="Summary" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketFrame:Summary">
+            Represents a single frame that's either receieved or about to be sent to or from a websockets client.
+            </p>
+    <div>
+      <h2>Syntax</h2>
+      <div class="Signature" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketFrame:Signature">public class  <b>WebsocketFrame</b></div>
+    </div>
+    <div class="Remarks" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketFrame:Docs">
+      <h2 class="Section">Remarks</h2>
+      <div class="SectionBox" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketFrame:Docs:Remarks">
+        <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+      </div>
+      <h2 class="Section">Requirements</h2>
+      <div class="SectionBox" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketFrame:Docs:Version Information">
+        <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+      <h2 class="Section" id="Members">Members</h2>
+      <div class="SectionBox" id="_Members">
+        <p>
+								See Also: Inherited members from
+								<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a>.
+							</p>
+        <h2 class="Section">Public Constructors</h2>
+        <div class="SectionBox" id="Public Constructors">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <b>
+                      <a href="#C:SBRL.GlidingSquirrel.Websocket.WebsocketFrame()">WebsocketFrame</a>
+                    </b>()</div>
+                </td>
+                <td>
+            Creates a new blank websocket frame.
+            Properties can be set with the { .... } syntax, since there are so many of them :P
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Fields</h2>
+        <div class="SectionBox" id="Public Fields">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.MaskingKey">MaskingKey</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Byte">byte</a>[]</i>. 
+            The key used to mask the payload.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static readonly </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.MaximumPayloadSize">MaximumPayloadSize</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a>
+                  </i>. 
+            The maximum supported payload size, in bytes.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.PayloadLengthType">PayloadLengthType</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Websocket/PayloadLengthType.html">PayloadLengthType</a>
+                  </i>. 
+            The method used when encoding the payload length.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.RawPayload">RawPayload</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Byte">byte</a>[]</i>. 
+            The raw byte-for-byte payload carried by this websocket frame.
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Properties</h2>
+        <div class="SectionBox" id="Public Properties">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Fin">Fin</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            Whether the FIN bit is set in the websocket frame.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.IsLastFrame">IsLastFrame</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            Whether this is the last frame in it's series.
+            Useful when dealing with continuation frames.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Masked">Masked</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            Whether the websocket frame's payload is (or was) masked.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>[read-only]<div></div></td>
+                <td>
+                  <b>
+                    <a href="#P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Opcode">Opcode</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a>
+                  </i>. 
+            The frame type of this websocket frame.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Payload">Payload</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            The payload of this websocket frame, represented as a string.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv1">Rsv1</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            Whether the RSV1 bit is set in the websocket frame.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv2">Rsv2</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            Whether the RSV2 bit is set in the websocket frame.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv3">Rsv3</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a>
+                  </i>. 
+            Whether the RSV3 bit is set in the websocket frame.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Type">Type</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Websocket/WebsocketFrameType.html">WebsocketFrameType</a>
+                  </i>. 
+            The type of websocket frame.
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Methods</h2>
+        <div class="SectionBox" id="Public Methods">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Decode(System.Net.Sockets.NetworkStream)">Decode</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.Sockets.NetworkStream">System.Net.Sockets.NetworkStream</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task`1">System.Threading.Tasks.Task&lt;WebsocketFrame&gt;</a></nobr><blockquote>
+            Receives and decodes a new WebsocketFrame from a remote client.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.GenerateCloseFrame(SBRL.GlidingSquirrel.Websocket.WebsocketCloseReason,System.String)">GenerateCloseFrame</a>
+                  </b>(<a href="../SBRL.GlidingSquirrel.Websocket/WebsocketCloseReason.html">WebsocketCloseReason</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>)<nobr> : <a href="../SBRL.GlidingSquirrel.Websocket/WebsocketFrame.html">WebsocketFrame</a></nobr><blockquote>
+            Generates a new close frame.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.SendTo(System.Net.Sockets.NetworkStream)">SendTo</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.Sockets.NetworkStream">System.Net.Sockets.NetworkStream</a>)<blockquote>
+            Transmits this websocket frame via the specified network stream.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.SendToAsync(System.Net.Sockets.NetworkStream)">SendToAsync</a>
+                  </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.Sockets.NetworkStream">System.Net.Sockets.NetworkStream</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a></nobr><blockquote>
+            Sends this frame to the specified NetworkStream.
+            </blockquote></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="Members" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketFrame:Members">
+      <h2 class="Section" id="MemberDetails">Member Details</h2>
+      <div class="SectionBox" id="_MemberDetails">
+        <h3 id="C:SBRL.GlidingSquirrel.Websocket.WebsocketFrame()">WebsocketFrame Constructor</h3>
+        <blockquote id="C:SBRL.GlidingSquirrel.Websocket.WebsocketFrame():member">
+          <div class="msummary">
+            Creates a new blank websocket frame.
+            Properties can be set with the { .... } syntax, since there are so many of them :P
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public  <b>WebsocketFrame</b> ()</div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="C:SBRL.GlidingSquirrel.Websocket.WebsocketFrame():Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="C:SBRL.GlidingSquirrel.Websocket.WebsocketFrame():Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Decode(System.Net.Sockets.NetworkStream)">Decode Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Decode(System.Net.Sockets.NetworkStream):member">
+          <div class="msummary">
+            Receives and decodes a new WebsocketFrame from a remote client.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[System.Diagnostics.DebuggerStepThrough]<br />[System.Runtime.CompilerServices.AsyncStateMachine(typeof(SBRL.GlidingSquirrel.Websocket.WebsocketFrame/&lt;Decode&gt;d__41))]<br />public static <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task`1">System.Threading.Tasks.Task&lt;WebsocketFrame&gt;</a> <b>Decode</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.Sockets.NetworkStream">System.Net.Sockets.NetworkStream</a> clientStream)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Decode(System.Net.Sockets.NetworkStream):Parameters">
+            <dl>
+              <dt>
+                <i>clientStream</i>
+              </dt>
+              <dd>The client stream to receive the frame from.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Decode(System.Net.Sockets.NetworkStream):Returns">The decoded frame.</blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Decode(System.Net.Sockets.NetworkStream):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Decode(System.Net.Sockets.NetworkStream):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Fin">Fin Property</h3>
+        <blockquote id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Fin:member">
+          <div class="msummary">
+            Whether the FIN bit is set in the websocket frame.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>Fin</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Fin:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Fin:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Fin:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.GenerateCloseFrame(SBRL.GlidingSquirrel.Websocket.WebsocketCloseReason,System.String)">GenerateCloseFrame Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.GenerateCloseFrame(SBRL.GlidingSquirrel.Websocket.WebsocketCloseReason,System.String):member">
+          <div class="msummary">
+            Generates a new close frame.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Websocket/WebsocketFrame.html">WebsocketFrame</a> <b>GenerateCloseFrame</b> (<a href="../SBRL.GlidingSquirrel.Websocket/WebsocketCloseReason.html">WebsocketCloseReason</a> closeReason, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> closingMessage)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.GenerateCloseFrame(SBRL.GlidingSquirrel.Websocket.WebsocketCloseReason,System.String):Parameters">
+            <dl>
+              <dt>
+                <i>closeReason</i>
+              </dt>
+              <dd>The reason that the connection is being closed.</dd>
+              <dt>
+                <i>closingMessage</i>
+              </dt>
+              <dd>The reason message to include in the closing frame.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.GenerateCloseFrame(SBRL.GlidingSquirrel.Websocket.WebsocketCloseReason,System.String):Returns">The generated close frame.</blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.GenerateCloseFrame(SBRL.GlidingSquirrel.Websocket.WebsocketCloseReason,System.String):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.GenerateCloseFrame(SBRL.GlidingSquirrel.Websocket.WebsocketCloseReason,System.String):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.IsLastFrame">IsLastFrame Property</h3>
+        <blockquote id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.IsLastFrame:member">
+          <div class="msummary">
+            Whether this is the last frame in it's series.
+            Useful when dealing with continuation frames.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>IsLastFrame</b>  { get; set; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.IsLastFrame:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.IsLastFrame:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.IsLastFrame:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Masked">Masked Property</h3>
+        <blockquote id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Masked:member">
+          <div class="msummary">
+            Whether the websocket frame's payload is (or was) masked.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>Masked</b>  { get; set; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Masked:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Masked:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Masked:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.MaskingKey">MaskingKey Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.MaskingKey:member">
+          <div class="msummary">
+            The key used to mask the payload.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Byte">byte</a>[] <b>MaskingKey</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.MaskingKey:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.MaskingKey:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.MaximumPayloadSize">MaximumPayloadSize Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.MaximumPayloadSize:member">
+          <div class="msummary">
+            The maximum supported payload size, in bytes.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static readonly <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a> <b>MaximumPayloadSize</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.MaximumPayloadSize:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.MaximumPayloadSize:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Opcode">Opcode Property</h3>
+        <blockquote id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Opcode:member">
+          <div class="msummary">
+            The frame type of this websocket frame.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a> <b>Opcode</b>  { get; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Opcode:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Opcode:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Opcode:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Payload">Payload Property</h3>
+        <blockquote id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Payload:member">
+          <div class="msummary">
+            The payload of this websocket frame, represented as a string.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>Payload</b>  { get; set; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Payload:Value">The payload.</blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Payload:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Payload:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.PayloadLengthType">PayloadLengthType Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.PayloadLengthType:member">
+          <div class="msummary">
+            The method used when encoding the payload length.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="../SBRL.GlidingSquirrel.Websocket/PayloadLengthType.html">PayloadLengthType</a> <b>PayloadLengthType</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.PayloadLengthType:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.PayloadLengthType:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.RawPayload">RawPayload Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.RawPayload:member">
+          <div class="msummary">
+            The raw byte-for-byte payload carried by this websocket frame.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Byte">byte</a>[] <b>RawPayload</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.RawPayload:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.RawPayload:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv1">Rsv1 Property</h3>
+        <blockquote id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv1:member">
+          <div class="msummary">
+            Whether the RSV1 bit is set in the websocket frame.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>Rsv1</b>  { get; set; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv1:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv1:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv1:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv2">Rsv2 Property</h3>
+        <blockquote id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv2:member">
+          <div class="msummary">
+            Whether the RSV2 bit is set in the websocket frame.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>Rsv2</b>  { get; set; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv2:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv2:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv2:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv3">Rsv3 Property</h3>
+        <blockquote id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv3:member">
+          <div class="msummary">
+            Whether the RSV3 bit is set in the websocket frame.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>Rsv3</b>  { get; set; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv3:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv3:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Rsv3:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.SendTo(System.Net.Sockets.NetworkStream)">SendTo Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.SendTo(System.Net.Sockets.NetworkStream):member">
+          <div class="msummary">
+            Transmits this websocket frame via the specified network stream.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Void">void</a> <b>SendTo</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.Sockets.NetworkStream">System.Net.Sockets.NetworkStream</a> clientStream)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.SendTo(System.Net.Sockets.NetworkStream):Parameters">
+            <dl>
+              <dt>
+                <i>clientStream</i>
+              </dt>
+              <dd>The network stream to transmit this frame via.</dd>
+            </dl>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.SendTo(System.Net.Sockets.NetworkStream):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.SendTo(System.Net.Sockets.NetworkStream):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.SendToAsync(System.Net.Sockets.NetworkStream)">SendToAsync Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.SendToAsync(System.Net.Sockets.NetworkStream):member">
+          <div class="msummary">
+            Sends this frame to the specified NetworkStream.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">[System.Diagnostics.DebuggerStepThrough]<br />[System.Runtime.CompilerServices.AsyncStateMachine(typeof(SBRL.GlidingSquirrel.Websocket.WebsocketFrame/&lt;SendToAsync&gt;d__39))]<br />public <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a> <b>SendToAsync</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Net.Sockets.NetworkStream">System.Net.Sockets.NetworkStream</a> clientStream)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.SendToAsync(System.Net.Sockets.NetworkStream):Parameters">
+            <dl>
+              <dt>
+                <i>clientStream</i>
+              </dt>
+              <dd>The client stream to send the WebsocketFrame to.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.SendToAsync(System.Net.Sockets.NetworkStream):Returns">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.SendToAsync(System.Net.Sockets.NetworkStream):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.SendToAsync(System.Net.Sockets.NetworkStream):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Type">Type Property</h3>
+        <blockquote id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Type:member">
+          <div class="msummary">
+            The type of websocket frame.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public <a href="../SBRL.GlidingSquirrel.Websocket/WebsocketFrameType.html">WebsocketFrameType</a> <b>Type</b>  { get; set; }</div>
+          <h4 class="Subsection">Value</h4>
+          <blockquote class="SubsectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Type:Value">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Type:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="P:SBRL.GlidingSquirrel.Websocket.WebsocketFrame.Type:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+      </div>
+    </div>
+    <hr size="1" />
+    <div class="Copyright">
+    </div>
+  </body>
+</html>

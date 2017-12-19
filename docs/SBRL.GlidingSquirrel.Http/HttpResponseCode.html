@@ -1,0 +1,1074 @@
+<html>
+  <head>
+    <title>SBRL.GlidingSquirrel.Http.HttpResponseCode</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+      a { text-decoration: none }
+
+      div.SideBar {
+        padding-left: 1em;
+        padding-right: 1em;
+        right: 0;
+        float: right;
+        border: thin solid black;
+        background-color: #f2f2f2;
+      }
+    
+      .CollectionTitle { font-weight: bold }
+      .PageTitle { font-size: 150%; font-weight: bold }
+
+      .Summary { }
+      .Signature { }          
+      .Remarks { }
+      .Members { }
+      .Copyright { }
+      
+      .Section { font-size: 125%; font-weight: bold }
+      p.Summary {
+        margin-left: 1em;
+      }
+      .SectionBox { margin-left: 2em }
+      .NamespaceName { font-size: 105%; font-weight: bold }
+      .NamespaceSumary { }
+      .MemberName { font-size: 115%; font-weight: bold; margin-top: 1em }
+      .Subsection { font-size: 105%; font-weight: bold }
+      .SubsectionBox { margin-left: 2em; margin-bottom: 1em }
+
+      .CodeExampleTable { background-color: #f5f5dd; border: thin solid black; padding: .25em; }
+      
+      .TypesListing {
+        border-collapse: collapse;
+      }
+
+      td {
+        vertical-align: top;
+      }
+      th {
+        text-align: left;
+      }
+
+      .TypesListing td { 
+        margin: 0px;  
+        padding: .25em;
+        border: solid gray 1px;
+      }
+
+      .TypesListing th { 
+        margin: 0px;  
+        padding: .25em;
+        background-color: #f2f2f2;
+        border: solid gray 1px;
+      }
+
+      div.Footer {
+        border-top: 1px solid gray;
+        margin-top: 1.5em;
+        padding-top: 0.6em;
+        text-align: center;
+        color: gray;
+      }
+
+      span.NotEntered /* Documentation for this section has not yet been entered */ {
+        font-style: italic;
+        color: red;	
+      }
+
+      div.Header {
+        background: #B0C4DE;
+        border: double;
+        border-color: white;
+        border-width: 7px;
+        padding: 0.5em;
+      }
+
+      div.Header * {
+        font-size: smaller;
+      }
+
+      div.Note {
+      }
+
+      i.ParamRef {
+      }
+
+      i.subtitle {
+      }
+
+      ul.TypeMembersIndex {
+        text-align: left;
+        background: #F8F8F8;
+      }
+
+      ul.TypeMembersIndex li {
+        display: inline;
+        margin:  0.5em;
+      }
+
+      table.HeaderTable {
+      }
+
+      table.SignatureTable {
+      }
+
+      table.Documentation, table.Enumeration, table.TypeDocumentation {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      table.Documentation tr th, table.TypeMembers tr th, table.Enumeration tr th, table.TypeDocumentation tr th {
+        background: whitesmoke;
+        padding: 0.8em;
+        border: 1px solid gray;
+        text-align: left;
+        vertical-align: bottom;
+      }
+
+      table.Documentation tr td, table.TypeMembers tr td, table.Enumeration tr td, table.TypeDocumentation tr td {
+        padding: 0.5em;
+        border: 1px solid gray;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      table.TypeMembers {
+        border: 1px solid #C0C0C0;
+        width: 100%;
+      }
+
+      table.TypeMembers tr td {
+        background: #F8F8F8;
+        border: white;
+      }
+
+      table.Documentation {
+      }
+
+      table.TypeMembers {
+      }
+
+      div.CodeExample {
+        width: 100%;
+        border: 1px solid #DDDDDD;
+        background-color: #F8F8F8;
+      }
+
+      div.CodeExample p {
+        margin: 0.5em;
+        border-bottom: 1px solid #DDDDDD;
+      }
+
+      div.CodeExample div {
+        margin: 0.5em;
+      }
+
+      h4 {
+        margin-bottom: 0;
+      }
+
+      div.Signature {
+        border: 1px solid #C0C0C0;
+        background: #F2F2F2;
+        padding: 1em;
+      }
+    </style>
+    <script type="text/JavaScript">
+      function toggle_display (block) {
+        var w = document.getElementById (block);
+        var t = document.getElementById (block + ":toggle");
+        if (w.style.display == "none") {
+          w.style.display = "block";
+          t.innerHTML = "⊟";
+        } else {
+          w.style.display = "none";
+          t.innerHTML = "⊞";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="CollectionTitle">
+      <a href="../index.html">GlidingSquirrel</a> : <a href="index.html">SBRL.GlidingSquirrel.Http Namespace</a></div>
+    <div class="SideBar">
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Http.HttpResponseCode">Overview</a>
+      </p>
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Http.HttpResponseCode:Signature">Signature</a>
+      </p>
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Http.HttpResponseCode:Docs">Remarks</a>
+      </p>
+      <p>
+        <a href="#Members">Members</a>
+      </p>
+      <p>
+        <a href="#T:SBRL.GlidingSquirrel.Http.HttpResponseCode:Members">Member Details</a>
+      </p>
+    </div>
+    <h1 class="PageTitle" id="T:SBRL.GlidingSquirrel.Http.HttpResponseCode">HttpResponseCode  Class</h1>
+    <p class="Summary" id="T:SBRL.GlidingSquirrel.Http.HttpResponseCode:Summary">
+            Represents an HTTP response code and its associated descriptive message, such 
+            as "200 OK", and "404 Not Found".
+            </p>
+    <div>
+      <h2>Syntax</h2>
+      <div class="Signature" id="T:SBRL.GlidingSquirrel.Http.HttpResponseCode:Signature">public class  <b>HttpResponseCode</b></div>
+    </div>
+    <div class="Remarks" id="T:SBRL.GlidingSquirrel.Http.HttpResponseCode:Docs">
+      <h2 class="Section">Remarks</h2>
+      <div class="SectionBox" id="T:SBRL.GlidingSquirrel.Http.HttpResponseCode:Docs:Remarks">
+        <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+      </div>
+      <h2 class="Section">Requirements</h2>
+      <div class="SectionBox" id="T:SBRL.GlidingSquirrel.Http.HttpResponseCode:Docs:Version Information">
+        <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+      <h2 class="Section" id="Members">Members</h2>
+      <div class="SectionBox" id="_Members">
+        <p>
+								See Also: Inherited members from
+								<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Object">object</a>.
+							</p>
+        <h2 class="Section">Public Constructors</h2>
+        <div class="SectionBox" id="Public Constructors">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <b>
+                      <a href="#C:SBRL.GlidingSquirrel.Http.HttpResponseCode(System.Int32,System.String)">HttpResponseCode</a>
+                    </b>(<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>)</div>
+                </td>
+                <td>
+            Creates a new <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">SBRL.GlidingSquirrel.Http.HttpResponseCode</a> instance.
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Fields</h2>
+        <div class="SectionBox" id="Public Fields">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.BadGateway">BadGateway</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            502 Bad Gateway
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.BadRequest">BadRequest</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            400 Bad Request
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>readonly </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Code">Code</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a>
+                  </i>. 
+            The numeric status code.
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Continue">Continue</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            100 Continue
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Forbidden">Forbidden</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            403 Forbidden
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.HttpVersionNotSupported">HttpVersionNotSupported</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            505 HTTP Version Not Supported
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.ImATeapot">ImATeapot</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            401 I'm a teapot
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.InternalServerError">InternalServerError</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            500 Internal Server Error
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.LengthRequired">LengthRequired</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            411 Length Required
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>readonly </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Message">Message</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>
+                  </i>. 
+            The associated descriptive message, such as "OK", or "Not Found".
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.MethodNotAllowed">MethodNotAllowed</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            405 Method Not Allowed
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotAcceptable">NotAcceptable</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            406 Not Acceptable
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotFound">NotFound</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            404 Not Found
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotImplemented">NotImplemented</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            501 Not Implemented
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotModified">NotModified</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            304 Not Modified
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Ok">Ok</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            200 OK
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.PermanentRedirect">PermanentRedirect</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            308 Permanent Redirect
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.RequestUrlTooLong">RequestUrlTooLong</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            414 Request-URI Too Long
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.ServiceTemporarilyUnavailable">ServiceTemporarilyUnavailable</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            503 Service Temporarily Unavailable
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.SwitchingProtocols">SwitchingProtocols</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            101 Switching Protocols
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.SwitchingProtocotolsWebsocket">SwitchingProtocotolsWebsocket</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            101 Web Socket Procotol Handshake
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.TemporaryRedirect">TemporaryRedirect</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            307 Temporary Redirect
+            </td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>static </div>
+                </td>
+                <td>
+                  <b>
+                    <a href="#F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Unauthorised">Unauthorised</a>
+                  </b>
+                </td>
+                <td>
+                  <i>
+                    <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a>
+                  </i>. 
+            401 Unauthorised
+            </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <h2 class="Section">Public Methods</h2>
+        <div class="SectionBox" id="Public Methods">
+          <div class="SubsectionBox">
+            <table class="TypeMembers">
+              <tr valign="top">
+                <td>
+                  <div>override </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Http.HttpResponseCode.ToString()">ToString</a>
+                  </b>()<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a></nobr><blockquote>
+            Returns the string representation of this HTTP status code instance.
+            May be directly included in an outgoing HTTP response.
+            </blockquote></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="Members" id="T:SBRL.GlidingSquirrel.Http.HttpResponseCode:Members">
+      <h2 class="Section" id="MemberDetails">Member Details</h2>
+      <div class="SectionBox" id="_MemberDetails">
+        <h3 id="C:SBRL.GlidingSquirrel.Http.HttpResponseCode(System.Int32,System.String)">HttpResponseCode Constructor</h3>
+        <blockquote id="C:SBRL.GlidingSquirrel.Http.HttpResponseCode(System.Int32,System.String):member">
+          <div class="msummary">
+            Creates a new <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">SBRL.GlidingSquirrel.Http.HttpResponseCode</a> instance.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public  <b>HttpResponseCode</b> (<a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a> inCode, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> inMessage)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="C:SBRL.GlidingSquirrel.Http.HttpResponseCode(System.Int32,System.String):Parameters">
+            <dl>
+              <dt>
+                <i>inCode</i>
+              </dt>
+              <dd>The numberic status code.</dd>
+              <dt>
+                <i>inMessage</i>
+              </dt>
+              <dd>The associated descriptive message.</dd>
+            </dl>
+          </blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="C:SBRL.GlidingSquirrel.Http.HttpResponseCode(System.Int32,System.String):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="C:SBRL.GlidingSquirrel.Http.HttpResponseCode(System.Int32,System.String):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.BadGateway">BadGateway Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.BadGateway:member">
+          <div class="msummary">
+            502 Bad Gateway
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>BadGateway</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.BadGateway:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.BadGateway:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.BadRequest">BadRequest Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.BadRequest:member">
+          <div class="msummary">
+            400 Bad Request
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>BadRequest</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.BadRequest:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.BadRequest:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Code">Code Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Code:member">
+          <div class="msummary">
+            The numeric status code.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public readonly <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Int32">int</a> <b>Code</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Code:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Code:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Continue">Continue Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Continue:member">
+          <div class="msummary">
+            100 Continue
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>Continue</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Continue:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Continue:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Forbidden">Forbidden Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Forbidden:member">
+          <div class="msummary">
+            403 Forbidden
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>Forbidden</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Forbidden:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Forbidden:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.HttpVersionNotSupported">HttpVersionNotSupported Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.HttpVersionNotSupported:member">
+          <div class="msummary">
+            505 HTTP Version Not Supported
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>HttpVersionNotSupported</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.HttpVersionNotSupported:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.HttpVersionNotSupported:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.ImATeapot">ImATeapot Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.ImATeapot:member">
+          <div class="msummary">
+            401 I'm a teapot
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>ImATeapot</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.ImATeapot:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.ImATeapot:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.InternalServerError">InternalServerError Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.InternalServerError:member">
+          <div class="msummary">
+            500 Internal Server Error
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>InternalServerError</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.InternalServerError:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.InternalServerError:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.LengthRequired">LengthRequired Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.LengthRequired:member">
+          <div class="msummary">
+            411 Length Required
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>LengthRequired</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.LengthRequired:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.LengthRequired:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Message">Message Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Message:member">
+          <div class="msummary">
+            The associated descriptive message, such as "OK", or "Not Found".
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public readonly <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>Message</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Message:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Message:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.MethodNotAllowed">MethodNotAllowed Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.MethodNotAllowed:member">
+          <div class="msummary">
+            405 Method Not Allowed
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>MethodNotAllowed</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.MethodNotAllowed:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.MethodNotAllowed:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotAcceptable">NotAcceptable Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotAcceptable:member">
+          <div class="msummary">
+            406 Not Acceptable
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>NotAcceptable</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotAcceptable:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotAcceptable:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotFound">NotFound Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotFound:member">
+          <div class="msummary">
+            404 Not Found
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>NotFound</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotFound:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotFound:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotImplemented">NotImplemented Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotImplemented:member">
+          <div class="msummary">
+            501 Not Implemented
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>NotImplemented</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotImplemented:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotImplemented:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotModified">NotModified Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotModified:member">
+          <div class="msummary">
+            304 Not Modified
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>NotModified</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotModified:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.NotModified:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Ok">Ok Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Ok:member">
+          <div class="msummary">
+            200 OK
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>Ok</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Ok:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Ok:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.PermanentRedirect">PermanentRedirect Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.PermanentRedirect:member">
+          <div class="msummary">
+            308 Permanent Redirect
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>PermanentRedirect</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.PermanentRedirect:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.PermanentRedirect:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.RequestUrlTooLong">RequestUrlTooLong Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.RequestUrlTooLong:member">
+          <div class="msummary">
+            414 Request-URI Too Long
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>RequestUrlTooLong</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.RequestUrlTooLong:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.RequestUrlTooLong:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.ServiceTemporarilyUnavailable">ServiceTemporarilyUnavailable Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.ServiceTemporarilyUnavailable:member">
+          <div class="msummary">
+            503 Service Temporarily Unavailable
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>ServiceTemporarilyUnavailable</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.ServiceTemporarilyUnavailable:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.ServiceTemporarilyUnavailable:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.SwitchingProtocols">SwitchingProtocols Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.SwitchingProtocols:member">
+          <div class="msummary">
+            101 Switching Protocols
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>SwitchingProtocols</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.SwitchingProtocols:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.SwitchingProtocols:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.SwitchingProtocotolsWebsocket">SwitchingProtocotolsWebsocket Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.SwitchingProtocotolsWebsocket:member">
+          <div class="msummary">
+            101 Web Socket Procotol Handshake
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>SwitchingProtocotolsWebsocket</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.SwitchingProtocotolsWebsocket:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.SwitchingProtocotolsWebsocket:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.TemporaryRedirect">TemporaryRedirect Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.TemporaryRedirect:member">
+          <div class="msummary">
+            307 Temporary Redirect
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>TemporaryRedirect</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.TemporaryRedirect:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.TemporaryRedirect:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Http.HttpResponseCode.ToString()">ToString Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Http.HttpResponseCode.ToString():member">
+          <div class="msummary">
+            Returns the string representation of this HTTP status code instance.
+            May be directly included in an outgoing HTTP response.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public override <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> <b>ToString</b> ()</div>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpResponseCode.ToString():Returns">A <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a> that represents the current <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">SBRL.GlidingSquirrel.Http.HttpResponseCode</a> instance.</blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpResponseCode.ToString():Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Http.HttpResponseCode.ToString():Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Unauthorised">Unauthorised Field</h3>
+        <blockquote id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Unauthorised:member">
+          <div class="msummary">
+            401 Unauthorised
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public static <a href="../SBRL.GlidingSquirrel.Http/HttpResponseCode.html">HttpResponseCode</a> <b>Unauthorised</b> </div>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Unauthorised:Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Http.HttpResponseCode.Unauthorised:Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Http<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419</div>
+          <hr size="1" />
+        </blockquote>
+      </div>
+    </div>
+    <hr size="1" />
+    <div class="Copyright">
+    </div>
+  </body>
+</html>
