@@ -1,26 +1,31 @@
 <?xml version="1.0"?>
-<package >
-  <metadata>
-    <id>GlidingSquirrel</id>
-    <version>0.5-alpha</version>
-    <title>GlidingSquirrel</title>
-    <authors>Starbeamrainbowlabs</authors>
-    <owners>Starbeamrainbowlabs</owners>
-    <description>A http and websockets server implementation, written in C#. Is not related to System.Net.HttpServer.</description>
-    <tags>Http Server Websockets</tags>
-    
-    <licenseUrl>https://github.com/sbrl/GlidingSquirrel/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/sbrl/GlidingSquirrel</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/sbrl/GlidingSquirrel/master/logo.png</iconUrl>
-    
-    <releaseNotes>Initial Release.</releaseNotes>
-    
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright Starbeamrainbowlabs 2017</copyright>
-    
-    <dependencies>
-		<dependency id="MimeSharp" version="1.0.0" />
-		<dependency id="System.ValueTuple" version="4.4.0" />
-	</dependencies>
-  </metadata>
+<package>
+	<metadata>
+		<id>GlidingSquirrel</id>
+		<version>0.6-alpha</version>
+		<title>GlidingSquirrel</title>
+		<authors>Starbeamrainbowlabs</authors>
+		<owners>Starbeamrainbowlabs</owners>
+		<summary>A http and websockets server implementation, written in C#. Is not related to System.Net.HttpServer.</summary>
+		<description>
+			A http and websockets server implementation, written in C#. Is not
+			related to System.Net.HttpServer. Currently in alpha, so please report
+			any bugs you find by opening an issue against this project repository :-)
+		</description>
+		<tags>Http Server Websockets</tags>
+
+		<licenseUrl>https://github.com/sbrl/GlidingSquirrel/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/sbrl/GlidingSquirrel</projectUrl>
+		<iconUrl>https://raw.githubusercontent.com/sbrl/GlidingSquirrel/master/logo.png</iconUrl>
+
+		<releaseNotes>Initial Release.</releaseNotes>
+
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<copyright>Copyright Starbeamrainbowlabs 2017</copyright>
+
+		<dependencies>
+			<dependency id="MimeSharp" version="1.0.0" />
+			<dependency id="System.ValueTuple" version="4.4.0" />
+		</dependencies>
+	</metadata>
 </package>

@@ -43,7 +43,7 @@ namespace SBRL.GlidingSquirrel
 		/// <summary>
 		/// The minimum logging level messages have to be in order to be displayed.
 		/// </summary>
-		public static LogLevel LoggingLevel = LogLevel.Debug;
+		public static LogLevel LoggingLevel = LogLevel.Warning;
 
 		/// <summary>
 		/// Writes a line of test to the standard output, prefixing it for readability purposes.
