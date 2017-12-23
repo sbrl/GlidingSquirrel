@@ -222,7 +222,7 @@
       </div>
       <h2 class="Section">Requirements</h2>
       <div class="SectionBox" id="T:SBRL.GlidingSquirrel.Websocket.WebsocketServer:Docs:Version Information">
-        <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+        <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
       <h2 class="Section" id="Members">Members</h2>
       <div class="SectionBox" id="_Members">
         <p>
@@ -530,6 +530,17 @@
               </tr>
               <tr valign="top">
                 <td>
+                  <div>abstract </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">HandleHttpRequest</a>
+                  </b>(<a href="../SBRL.GlidingSquirrel.Http/HttpRequest.html">SBRL.GlidingSquirrel.Http.HttpRequest</a>, <a href="../SBRL.GlidingSquirrel.Http/HttpResponse.html">SBRL.GlidingSquirrel.Http.HttpResponse</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task`1">System.Threading.Tasks.Task&lt;SBRL.GlidingSquirrel.Http.HttpConnectionAction&gt;</a></nobr><blockquote>
+            Gets called automatically to handle regular HTTP requests.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
                   <div>override </div>
                 </td>
                 <td colspan="2">
@@ -592,6 +603,17 @@
                   </b>(<a href="../SBRL.GlidingSquirrel.Websocket/WebsocketClient.html">WebsocketClient</a>, <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.String">string</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task">System.Threading.Tasks.Task</a></nobr><blockquote>
             Reflects the specified message to all connected clients who both aren't
             the sender and aren't currently in the process of closing their connection.
+            </blockquote></td>
+              </tr>
+              <tr valign="top">
+                <td>
+                  <div>abstract </div>
+                </td>
+                <td colspan="2">
+                  <b>
+                    <a href="#M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.ShouldAcceptConnection(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">ShouldAcceptConnection</a>
+                  </b>(<a href="../SBRL.GlidingSquirrel.Http/HttpRequest.html">SBRL.GlidingSquirrel.Http.HttpRequest</a>, <a href="../SBRL.GlidingSquirrel.Http/HttpResponse.html">SBRL.GlidingSquirrel.Http.HttpResponse</a>)<nobr> : <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a></nobr><blockquote>
+            Gets called automatically to determine if a connection should be accepted or not.
             </blockquote></td>
               </tr>
               <tr valign="top">
@@ -756,7 +778,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="C:SBRL.GlidingSquirrel.Websocket.WebsocketServer(System.Net.IPAddress,System.Int32):Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.Byte[])">Broadcast Method</h3>
@@ -786,7 +808,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.Byte[]):Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.String)">Broadcast Method</h3>
@@ -816,7 +838,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Broadcast(System.String):Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Clients">Clients Field</h3>
@@ -832,7 +854,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Clients:Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.doMaintenance(System.Object)">doMaintenance Method</h3>
@@ -859,7 +881,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.doMaintenance(System.Object):Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientConnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientConnectedEventArgs)">HandleClientConnected Method</h3>
@@ -892,7 +914,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientConnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientConnectedEventArgs):Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientConnection(System.Object)">handleClientConnection Method</h3>
@@ -917,7 +939,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientConnection(System.Object):Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientDisconnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs)">HandleClientDisconnected Method</h3>
@@ -950,7 +972,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleClientDisconnected(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs):Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientDisconnection(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs)">handleClientDisconnection Method</h3>
@@ -984,7 +1006,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.handleClientDisconnection(System.Object,SBRL.GlidingSquirrel.Websocket.ClientDisconnectedEventArgs):Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">HandleHttpRequest Method</h3>
@@ -1020,6 +1042,37 @@
             <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
           <hr size="1" />
         </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">HandleHttpRequest Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):member">
+          <div class="msummary">
+            Gets called automatically to handle regular HTTP requests.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public abstract <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Threading.Tasks.Task`1">System.Threading.Tasks.Task&lt;SBRL.GlidingSquirrel.Http.HttpConnectionAction&gt;</a> <b>HandleHttpRequest</b> (<a href="../SBRL.GlidingSquirrel.Http/HttpRequest.html">SBRL.GlidingSquirrel.Http.HttpRequest</a> request, <a href="../SBRL.GlidingSquirrel.Http/HttpResponse.html">SBRL.GlidingSquirrel.Http.HttpResponse</a> response)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Parameters">
+            <dl>
+              <dt>
+                <i>request</i>
+              </dt>
+              <dd>The HTTP request.</dd>
+              <dt>
+                <i>response</i>
+              </dt>
+              <dd>The HTTP response to send back.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Returns">What to do with the connection.</blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleHttpRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6566.37627</div>
+          <hr size="1" />
+        </blockquote>
         <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">HandleRequest Method</h3>
         <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):member">
           <div class="msummary">
@@ -1051,7 +1104,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.HandleRequest(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.MagicChallengeKey">MagicChallengeKey Field</h3>
@@ -1067,7 +1120,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.MagicChallengeKey:Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientConnected">OnClientConnected Event</h3>
@@ -1083,7 +1136,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientConnected:Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientDisconnected">OnClientDisconnected Event</h3>
@@ -1099,7 +1152,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="E:SBRL.GlidingSquirrel.Websocket.WebsocketServer.OnClientDisconnected:Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.PingInterval">PingInterval Field</h3>
@@ -1116,7 +1169,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="F:SBRL.GlidingSquirrel.Websocket.WebsocketServer.PingInterval:Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.Byte[])">Reflect Method</h3>
@@ -1150,7 +1203,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.Byte[]):Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.String)">Reflect Method</h3>
@@ -1184,7 +1237,7 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.Reflect(SBRL.GlidingSquirrel.Websocket.WebsocketClient,System.String):Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
         <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.setup()">setup Method</h3>
@@ -1204,7 +1257,41 @@
           </div>
           <h2 class="Section">Requirements</h2>
           <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.setup():Version Information">
-            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930</div>
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6562.35419, 1.0.6562.35930, 1.0.6566.37627</div>
+          <hr size="1" />
+        </blockquote>
+        <h3 id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.ShouldAcceptConnection(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse)">ShouldAcceptConnection Method</h3>
+        <blockquote id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.ShouldAcceptConnection(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):member">
+          <div class="msummary">
+            Gets called automatically to determine if a connection should be accepted or not.
+            </div>
+          <h2>Syntax</h2>
+          <div class="Signature">public abstract <a href="http://www.go-mono.com/docs/monodoc.ashx?link=T:System.Boolean">bool</a> <b>ShouldAcceptConnection</b> (<a href="../SBRL.GlidingSquirrel.Http/HttpRequest.html">SBRL.GlidingSquirrel.Http.HttpRequest</a> connectionRequest, <a href="../SBRL.GlidingSquirrel.Http/HttpResponse.html">SBRL.GlidingSquirrel.Http.HttpResponse</a> connectionResponse)</div>
+          <h4 class="Subsection">Parameters</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.ShouldAcceptConnection(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Parameters">
+            <dl>
+              <dt>
+                <i>connectionRequest</i>
+              </dt>
+              <dd>The connection request received.</dd>
+              <dt>
+                <i>connectionResponse</i>
+              </dt>
+              <dd>
+            The response to the connection that will be sent. If true is returned, then the contents 
+            of this may be largely overwritten. If false is returned, then this response will be sent 
+            verbatim to the client.</dd>
+            </dl>
+          </blockquote>
+          <h4 class="Subsection">Returns</h4>
+          <blockquote class="SubsectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.ShouldAcceptConnection(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Returns">Whether the connection should be accepted or not.</blockquote>
+          <h2 class="Section">Remarks</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.ShouldAcceptConnection(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Remarks">
+            <span class="NotEntered">Documentation for this section has not yet been entered.</span>
+          </div>
+          <h2 class="Section">Requirements</h2>
+          <div class="SectionBox" id="M:SBRL.GlidingSquirrel.Websocket.WebsocketServer.ShouldAcceptConnection(SBRL.GlidingSquirrel.Http.HttpRequest,SBRL.GlidingSquirrel.Http.HttpResponse):Version Information">
+            <b>Namespace: </b>SBRL.GlidingSquirrel.Websocket<br /><b>Assembly: </b>GlidingSquirrel (in GlidingSquirrel.dll)<br /><b>Assembly Versions: </b>1.0.6566.37627</div>
           <hr size="1" />
         </blockquote>
       </div>

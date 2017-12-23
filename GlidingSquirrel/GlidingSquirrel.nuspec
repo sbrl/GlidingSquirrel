@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>GlidingSquirrel</id>
-		<version>0.6-alpha</version>
+		<version>0.6.1-alpha</version>
 		<title>GlidingSquirrel</title>
 		<authors>Starbeamrainbowlabs</authors>
 		<owners>Starbeamrainbowlabs</owners>
@@ -17,9 +17,7 @@
 		<licenseUrl>https://github.com/sbrl/GlidingSquirrel/blob/master/LICENSE</licenseUrl>
 		<projectUrl>https://github.com/sbrl/GlidingSquirrel</projectUrl>
 		<iconUrl>https://raw.githubusercontent.com/sbrl/GlidingSquirrel/master/logo.png</iconUrl>
-
-		<releaseNotes>Initial Release.</releaseNotes>
-
+		
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<copyright>Copyright Starbeamrainbowlabs 2017</copyright>
 
