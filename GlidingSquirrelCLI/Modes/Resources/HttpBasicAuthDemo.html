@@ -8,6 +8,16 @@
 		<h1>HTTP Basic Authentication Demo</h1>
 		<p>If you can see this page, then you've successfully authenticated with the demo server using HTTP Basic Authencation.</p>
 		
+		<ul id="message-log">
+			
+		</ul>
+		
+		<input type="text" id="message-box" />
+		<button id="button-sendmessage">Send</button>
+		
+		<button id="button-disconnect">Disconnect</button>
+		
+		
 		<!---------------->
 		<style>
 			html, body { font-size: 100%; }
@@ -16,5 +26,50 @@
 			    font-family: sans-serif;
 			}
 		</style>
+		<script>
+			window.addEventListener("load", function(event) {
+				window.connection = new WebSocket(`ws://${location.host}/echo`);
+				
+				window.connection.addEventListener("open", function(event) {
+					logMessage("<em>Connection to server established!</em>");
+				});
+				window.connection.addEventListener("close", function(event) {
+					logMessage("<em>Connection to server lost.</em>");
+				});
+				window.connection.addEventListener("message", function(event) {
+					logMessage(`<strong>Server:</strong> ${event.data}`);
+				});
+				
+				document.getElementById("message-box").addEventListener("keyup", function(event) {
+					if(event.keyCode === 13)
+						sendMessage();
+				});
+				
+				document.getElementById("button-sendmessage").addEventListener("click", sendMessage);
+				
+				document.getElementById("button-disconnect").addEventListener("click", function(event) {
+					window.connection.close();
+				});
+			});
+			
+			function sendMessage()
+			{
+				var messageBox = document.getElementById("message-box");
+				
+				window.connection.send(
+					messageBox.value
+				);
+				logMessage(`<strong>You</strong> ${messageBox.value}`);
+				
+				messageBox.value = "";
+			}
+			
+			function logMessage(message)
+			{
+				var newItem = document.createElement("li");
+				newItem.innerHTML = `[${new Date()}] ${message}`;
+				document.getElementById("message-log").appendChild(newItem);
+			}
+		</script>
 	</body>
 </html>

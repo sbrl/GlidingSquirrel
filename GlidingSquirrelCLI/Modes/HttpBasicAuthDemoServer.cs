@@ -4,15 +4,15 @@ using System.Net;
 using System.Threading.Tasks;
 
 using SBRL.GlidingSquirrel.Http;
+using SBRL.GlidingSquirrel.Websocket;
 using SBRL.Utilities;
 
 namespace SBRL.GlidingSquirrel.CLI.Modes
 {
-	public class HttpBasicAuthDemoServer : HttpServer
+	public class HttpBasicAuthDemoServer : WebsocketServer
 	{
 		public readonly string AuthRealm = "Test realm";
 
-		private string username = "user";
 		private string password = "cheese";
 
 		public HttpBasicAuthDemoServer(IPAddress inBindAddress, int inPort) : base(inBindAddress, inPort)
@@ -27,7 +27,7 @@ namespace SBRL.GlidingSquirrel.CLI.Modes
 			return Task.CompletedTask;
 		}
 
-		public override async Task<HttpConnectionAction> HandleRequest(HttpRequest request, HttpResponse response)
+		public override async Task<HttpConnectionAction> HandleHttpRequest(HttpRequest request, HttpResponse response)
 		{
 			await Task.Delay(0);
 
@@ -43,8 +43,7 @@ namespace SBRL.GlidingSquirrel.CLI.Modes
 				return HttpConnectionAction.Continue;
 			}
 
-			if(!(request.BasicAuthCredentials.Username == username &&
-			     request.BasicAuthCredentials.Password == password)) {
+			if(request.BasicAuthCredentials.Password != password) {
 				response.RequireHttpBasicAuthentication(AuthRealm);
 				await response.SetBody("Invalid username or password! Please try again.\n");
 				return HttpConnectionAction.Continue;
@@ -58,5 +57,33 @@ namespace SBRL.GlidingSquirrel.CLI.Modes
 			return HttpConnectionAction.Continue;
 		}
 
+		public override bool ShouldAcceptConnection(HttpRequest connectionRequest, HttpResponse connectionResponse)
+		{
+			if(connectionRequest.BasicAuthCredentials.Password != password)
+			{
+				connectionResponse.RequireHttpBasicAuthentication("demo realm (anything/cheese)");
+				connectionResponse.ContentType = "text/plain";
+				connectionResponse.SetBody("Please authenticate via HTTP Basic authentication. The username is anything you like, and the password is cheese.").Wait();
+				return false;
+			}
+
+			return true;
+		}
+
+		public override async Task HandleClientConnected(object sender, ClientConnectedEventArgs eventArgs)
+		{
+			string name = eventArgs.ConnectingClient.HandshakeRequest.BasicAuthCredentials.Username;
+			await eventArgs.ConnectingClient.Send($"Welcome to the demo server, {name}! You've successfully authenticated.");
+			await eventArgs.ConnectingClient.Send("This is a demo server that will echo back any textual messages you send to it.");
+
+			eventArgs.ConnectingClient.OnTextMessage += async (object messageSender, TextMessageEventArgs messageEventArgs) => {
+				await eventArgs.ConnectingClient.Send(messageEventArgs.Payload);
+			};
+		}
+
+		public override Task HandleClientDisconnected(object sender, ClientDisconnectedEventArgs eventArgs)
+		{
+			return Task.CompletedTask;
+		}
 	}
 }

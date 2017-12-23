@@ -57,6 +57,13 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// An instance of C#'s built-in random number generator. 
 		/// </summary>
 		protected Random rand = new Random();
+
+		/// <summary>
+		/// The opening handshake HTTP request that this client sent whilst connecting.
+		/// </summary>
+		/// <value>The connection request.</value>
+		public HttpRequest HandshakeRequest { get; private set; }
+
 		/// <summary>
 		/// The date and time that the last communication from this websockets client was received.
 		/// Useful for dropping idle connections, since this value takes pong frames into account.
@@ -551,7 +558,8 @@ namespace SBRL.GlidingSquirrel.Websocket
 			handshakeRequest.ClientConnection.ReceiveTimeout = 0;
 
 			WebsocketClient client = new WebsocketClient() {
-				connection = handshakeRequest.ClientConnection
+				connection = handshakeRequest.ClientConnection,
+				HandshakeRequest = handshakeRequest
 			};
 			client.setup();
 

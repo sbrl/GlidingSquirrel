@@ -92,17 +92,24 @@ namespace SBRL.GlidingSquirrel.Websocket
 		{
 			if(!request.Headers.ContainsKey("upgrade") || request.Headers["upgrade"].ToLower() != "websocket")
 			{
-				await HandleHttpRequest(request, response);
-				return HttpConnectionAction.Continue;
+				return await HandleHttpRequest(request, response);
 			}
 
-			ThreadPool.QueueUserWorkItem(handleClientConnection, new ClientConnectionRequest() {
-				RawClient = request.ClientConnection,
-				Request = request,
-				Response = response
-			});
+			if(ShouldAcceptConnection(request, response))
+			{
+				// We're ok to allow the connection to continue!
+				// Put it through on a separate thread from the ThreadPool.
+				ThreadPool.QueueUserWorkItem(handleClientConnection, new ClientConnectionRequest() {
+					RawClient = request.ClientConnection,
+					Request = request,
+					Response = response
+				});
 
-			return HttpConnectionAction.LeaveAlone;
+				return HttpConnectionAction.LeaveAlone;
+			}
+
+			// Nope, this isn't a good connection to accept, apparently.
+			return HttpConnectionAction.SendAndKillConnection;
 		}
 
 		/// <summary>
@@ -313,7 +320,18 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		/// <param name="request">The HTTP request.</param>
 		/// <param name="response">The HTTP response to send back.</param>
-		public abstract Task HandleHttpRequest(HttpRequest request, HttpResponse response);
+		/// <returns>What to do with the connection.</returns>
+		public abstract Task<HttpConnectionAction> HandleHttpRequest(HttpRequest request, HttpResponse response);
+		/// <summary>
+		/// Gets called automatically to determine if a connection should be accepted or not.
+		/// </summary>
+		/// <param name="connectionRequest">The connection request received.</param>
+		/// <param name="connectionResponse">
+		/// The response to the connection that will be sent. If true is returned, then the contents 
+		/// of this may be largely overwritten. If false is returned, then this response will be sent 
+		/// verbatim to the client.</param>
+		/// <returns>Whether the connection should be accepted or not.</returns>
+		public abstract bool ShouldAcceptConnection(HttpRequest connectionRequest, HttpResponse connectionResponse);
 		/// <summary>
 		/// Gets called automatically when a client has connected.
 		/// </summary>

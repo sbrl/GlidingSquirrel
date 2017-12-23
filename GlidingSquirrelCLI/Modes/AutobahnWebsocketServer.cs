@@ -43,14 +43,14 @@ namespace SBRL.GlidingSquirrel.CLI.Modes
 			return Task.CompletedTask;
 		}
 
-		public override async Task HandleHttpRequest(HttpRequest request, HttpResponse response)
+		public override async Task<HttpConnectionAction> HandleHttpRequest(HttpRequest request, HttpResponse response)
 		{
 			if(request.Url != "/")
 			{
 				response.ResponseCode = HttpResponseCode.NotFound;
 				response.ContentType = "text/plain";
 				await response.SetBody("Couldn't find anything at '{request.Url}'.");
-				return;
+				return HttpConnectionAction.Continue;
 			}
 
 			response.ResponseCode = HttpResponseCode.Ok;
@@ -58,6 +58,12 @@ namespace SBRL.GlidingSquirrel.CLI.Modes
 			await response.SetBody(
 				await EmbeddedFiles.ReadAllTextAsync("SBRL.GlidingSquirrel.CLI.Modes.Resources.EchoWebsocketClient.html")
 			);
+			return HttpConnectionAction.Continue;
+		}
+
+		public override bool ShouldAcceptConnection(HttpRequest connectionRequest, HttpResponse connectionResponse)
+		{
+			return true;
 		}
 
 		protected override Task setup()
