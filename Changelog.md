@@ -1,5 +1,10 @@
 # GlidingSquirrel Changelog
 
+## v0.6.2-alpha
+
+### Fixed
+ - 503 errors are now sent with a `content-type` of `text/plain`.
+
 ## v0.6.1-alpha
 
 ### Added
