@@ -315,6 +315,7 @@ namespace SBRL.GlidingSquirrel.Http
 			catch(Exception error)
 			{
 				response.ResponseCode = new HttpResponseCode(503, "Server Error Occurred");
+				response.Headers.Add("content-type", "text/plain");
 				await response.SetBody(
 					$"An error ocurred whilst serving your request to '{request.Url}'. Details:\n\n" +
 					$"{error.ToString()}"
