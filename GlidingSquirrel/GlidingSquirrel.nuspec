@@ -2,7 +2,7 @@
 <package>
 	<metadata>
 		<id>GlidingSquirrel</id>
-		<version>0.6.1-alpha</version>
+		<version>0.6.2-alpha</version>
 		<title>GlidingSquirrel</title>
 		<authors>Starbeamrainbowlabs</authors>
 		<owners>Starbeamrainbowlabs</owners>
@@ -12,7 +12,7 @@
 			related to System.Net.HttpServer. Currently in alpha, so please report
 			any bugs you find by opening an issue against this project repository :-)
 		</description>
-		<tags>Http Server Websockets</tags>
+		<tags>Http Server WebSockets</tags>
 
 		<licenseUrl>https://github.com/sbrl/GlidingSquirrel/blob/master/LICENSE</licenseUrl>
 		<projectUrl>https://github.com/sbrl/GlidingSquirrel</projectUrl>

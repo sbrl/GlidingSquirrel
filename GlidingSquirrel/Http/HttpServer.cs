@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -46,7 +47,14 @@ namespace SBRL.GlidingSquirrel.Http
 		/// <summary>
 		/// The current version of GlidingSquirrel
 		/// </summary>
-		public static readonly string Version = "0.4-alpha";
+		public static string Version {
+			get {
+				using (StreamReader resourceReader = new StreamReader(Assembly.GetCallingAssembly().GetManifestResourceStream("SBRL.GlidingSquirrel.release-version.txt")))
+				{
+					return resourceReader.ReadToEnd().Trim();
+				}
+			}
+		}
 
 		/// <summary>
 		/// The address the server will bind to.

@@ -1,3 +1,6 @@
+release-version.txt
+commit-hash.txt
+
 tests/autobahn
 tests/reports
 # Created by https://www.gitignore.io/api/visualstudio,csharp,monodevelop

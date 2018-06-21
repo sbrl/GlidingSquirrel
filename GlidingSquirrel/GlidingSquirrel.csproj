@@ -8,7 +8,7 @@
     <RootNamespace>SBRL.GlidingSquirrel</RootNamespace>
     <AssemblyName>GlidingSquirrel</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <ReleaseVersion>0.6.2-alpha</ReleaseVersion>
+    <ReleaseVersion>0.6.3-alpha</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,6 +69,10 @@
     <Compile Include="ByteUtilities.cs" />
     <Compile Include="Http\HttpBasicAuthCredentials.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="release-version.txt" />
+    <EmbeddedResource Include="commit-hash.txt" />
+  </ItemGroup>
   
   <ItemGroup>
     <None Include="packages.config" />
@@ -79,6 +83,11 @@
   </ItemGroup>
   
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  
+  <Target Name="BeforeBuild">
+  	<Exec WorkingDirectory="$(ProjectDir)" Command="git rev-parse HEAD &gt;commit-hash.txt" />
+  	<Exec WorkingDirectory="$(ProjectDir)" Command="echo $(ReleaseVersion) &gt;release-version.txt" />
+  </Target>
   
   <Target Name="AfterBuild">
     <Message Importance="high" Text="----------[ Building documentation ]----------" />
