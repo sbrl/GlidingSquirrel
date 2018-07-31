@@ -19,6 +19,7 @@ The logo is temporary!
  - Supports keep-alive connections (HTTP 1.1 only, of course)
  - Supports Websockets (RFC 6455, Initial implementation, version 13 only, needs thorough testing - detailed bug reports welcome :D)
  - Global configurable logging level
+ - Ability to cleanly shut the server down
 
 ## Todo
  - Trailing headers

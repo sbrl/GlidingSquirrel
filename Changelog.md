@@ -1,5 +1,16 @@
 # GlidingSquirrel Changelog
 
+## v0.7-alpha
+
+### Added
+ - Added ability to cleanly shut the server down with `.Stop()`
+	 - `WebsocketServer` instances can optionally pass a reason message that will be sent to all clients in the close frame
+
+## v0.6.3-alpha
+
+### Fixed
+ - Correct version number when starting up
+
 ## v0.6.2-alpha
 
 ### Fixed
