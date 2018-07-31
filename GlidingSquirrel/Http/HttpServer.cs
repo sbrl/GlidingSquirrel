@@ -38,6 +38,21 @@ namespace SBRL.GlidingSquirrel.Http
 	}
 
 	/// <summary>
+	/// From https://stackoverflow.com/a/7857844/1460422
+	/// </summary>
+	public class TcpListenerExtended : TcpListener
+	{
+		public TcpListenerExtended(IPEndPoint endpoint) : base(endpoint) {  }
+		public TcpListenerExtended(IPAddress bindAddress, int port) : base(bindAddress, port) {  }
+
+		public new bool Active {
+			get { return base.Active; }
+		}
+	}
+
+	public delegate void OnServerShutdown();
+
+	/// <summary>
 	/// The main HTTP Server implementation class. Inherit from this class to build your own HTTP server!
 	/// Please note that for WebSockets support you'll need to inherit from the seperate <see cref="Websocket.WebsocketServer" />
 	/// class instead.
@@ -82,7 +97,7 @@ namespace SBRL.GlidingSquirrel.Http
 		/// <summary>
 		/// The underlying tcp listener.
 		/// </summary>
-		protected TcpListener server;
+		protected TcpListenerExtended server;
 
 		/// <summary>
 		/// The maximum allowed length for urls.
@@ -102,6 +117,21 @@ namespace SBRL.GlidingSquirrel.Http
 		public Dictionary<string, string> MimeTypeOverrides = new Dictionary<string, string>() {
 			[".html"] = "text/html"
 		};
+
+		/// <summary>
+		/// Fired when the server shuts down.
+		/// </summary>
+		public event OnServerShutdown OnShutdown;
+
+		/// <summary>
+		/// The cancellation token we use to stop the server and all it's threads
+		/// </summary>
+		protected CancellationTokenSource canceller = new CancellationTokenSource();
+		protected CancellationToken cancellationToken {
+			get {
+				return canceller.Token;
+			}
+		}
 
 		/// <summary>
 		/// Initialises a new HttpServer.
@@ -129,7 +159,8 @@ namespace SBRL.GlidingSquirrel.Http
 			Log.WriteLine(LogLevel.System, $"GlidingSquirrel v{Version}");
 			Log.Write(LogLevel.System, "Starting server - ");
 
-			server = new TcpListener(new IPEndPoint(BindAddress, Port));
+			server = new TcpListenerExtended(new IPEndPoint(BindAddress, Port));
+			cancellationToken.Register(server.Stop); // Stop the server when we cancel out
 			server.Start();
 
 			Log.WriteLine(LogLevel.System, "done");
@@ -137,11 +168,21 @@ namespace SBRL.GlidingSquirrel.Http
 
 			await setup();
 
-			while(true)
+			while(server.Active)
 			{
 				TcpClient nextClient = await server.AcceptTcpClientAsync();
 				ThreadPool.QueueUserWorkItem(new WaitCallback(HandleClientThreadRoot), nextClient);
 			}
+
+			OnShutdown?.Invoke();
+		}
+
+		/// <summary>
+		/// Stops the server. If overriding, please remember to call this method!
+		/// </summary>
+		public void Stop()
+		{
+			canceller.Cancel();
 		}
 
 		/// <summary>

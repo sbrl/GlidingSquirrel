@@ -45,6 +45,12 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// The magic challenge key. Used in the initial handshake.
 		/// </summary>
 		public static readonly string MagicChallengeKey = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
+
+		/// <summary>
+		/// The reason string that we should send to clients when shutting down.
+		/// </summary>
+		private string stopReason = "The server is shutting down.";
+
 		/// <summary>
 		/// A list of currently connected clients.
 		/// </summary>
@@ -118,8 +124,23 @@ namespace SBRL.GlidingSquirrel.Websocket
 		protected override Task setup()
 		{
 			ThreadPool.QueueUserWorkItem(doMaintenance);
-
+			cancellationToken.Register(async () => await CloseAll(stopReason));
 			return Task.CompletedTask;
+		}
+
+		/// <summary>
+		/// Stops the Websocket (and HTTP) server, sending the specified reason text to all currently
+		/// connected Websocket clients.
+		/// </summary>
+		/// <remarks>
+		/// Note that the regular .Stop() method does infact disconnect all Websocket clients cleanly - you
+		/// don't need to call this method explicitly in order to get a clean exit.
+		/// </remarks>
+		/// <param name="reason">The reason text to send to the clients when disconnecting them.</param>
+		public void Stop(string reason)
+		{
+			stopReason = reason;
+			base.Stop();
 		}
 
 		/// <summary>
@@ -209,7 +230,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 		/// </summary>
 		protected async void doMaintenance(object state)
 		{
-			while(true)
+			while(!cancellationToken.IsCancellationRequested)
 			{
 				try
 				{
@@ -228,7 +249,7 @@ namespace SBRL.GlidingSquirrel.Websocket
 					Log.WriteLine(LogLevel.Error, "[WebsocketServer/Maintenance] {0}", error);
 				}
 
-				await Task.Delay((int)PingInterval.TotalSeconds / 4);
+				await Task.Delay((int)PingInterval.TotalSeconds / 4, cancellationToken);
 			}
 
 			Log.WriteLine(LogLevel.System, "[WebsocketServer/Maintenance] Ending maintenance loop.");
@@ -308,6 +329,33 @@ namespace SBRL.GlidingSquirrel.Websocket
 			await Task.WhenAll(senders.ToArray());
 		}
 
+		/// <summary>
+		/// Closes all the currently open connections with the specified reason.
+		/// </summary>
+		/// <param name="reason">The reason message to send when closing connections.</param>
+		public async Task CloseAll(string reason)
+		{
+			await CloseAll(WebsocketCloseReason.Shutdown, reason);
+		}
+		/// <summary>
+		/// Closes all the currently open connections with the specified reason code and message.
+		/// </summary>
+		/// <remarks>
+		/// Unless you've got a very unusual use case, CloseAll(string) is probably what you want.
+		/// </remarks>
+		/// <param name="reason">The reason code to send when closing connections.</param>
+		/// <param name="closingMessage">The closing message text to send.</param>
+		public async Task CloseAll(WebsocketCloseReason reason, string closingMessage)
+		{
+			List<Task> senders = new List<Task>();
+			foreach (WebsocketClient client in Clients)
+			{
+				if (client.IsClosing)
+					continue;
+				senders.Add(client.Close(reason, closingMessage));
+			}
+			await Task.WhenAll(senders.ToArray());
+		}
 
 		#endregion
 
