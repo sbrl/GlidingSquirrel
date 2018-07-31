@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+project_name=GlidingSquirrel;
+
+build_output_folder="dist/";
+
+###############################################################################
+
+source $(dirname $0)/lantern-build-engine/lantern.sh
+
+if [[ "$#" -lt 1 ]]; then
+	echo -e "${FBLE}${project_name}${RS} build script";
+	echo -e "    by Starbeamrainbowlabs";
+	echo -e "${LC}Powered by the lantern build engine, v${version}${RS}";
+	echo -e "";
+	echo -e "${CSECTION}Usage${RS}";
+	echo -e "    ./build ${CTOKEN}{action}${RS} ${CTOKEN}{action}${RS} ${CTOKEN}{action}${RS} ...";
+	echo -e "";
+	echo -e "${CSECTION}Available actions${RS}";
+	echo -e "    ${CACTION}nuget-pack${RS}         - Pack the GlidingSquirrel into a .nupkg for NuGet";
+	echo -e "";
+	
+	exit 1;
+fi
+
+###############################################################################
+
+function task_nuget-pack {
+	task_begin "Packing .nupkg";
+	
+	check_command nuget;
+	
+	cd GlidingSquirrel;
+	
+	nuget pack GlidingSquirrel.csproj -MsbuildPath /usr/lib/mono/msbuild/15.0/bin/
+	
+	task_end 0;
+}
+
+
+###############################################################################
+
+tasks_run $@;

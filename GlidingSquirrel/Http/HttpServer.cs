@@ -45,11 +45,18 @@ namespace SBRL.GlidingSquirrel.Http
 		public TcpListenerExtended(IPEndPoint endpoint) : base(endpoint) {  }
 		public TcpListenerExtended(IPAddress bindAddress, int port) : base(bindAddress, port) {  }
 
+		/// <summary>
+		/// Whether the TcpListener is currently listening for connections.
+		/// </summary>
+		/// <value><c>true</c> if active; otherwise, <c>false</c>.</value>
 		public new bool Active {
 			get { return base.Active; }
 		}
 	}
 
+	/// <summary>
+	/// The delegate for the OnShutdown event on the HttpServer.
+	/// </summary>
 	public delegate void OnServerShutdown();
 
 	/// <summary>
@@ -127,6 +134,9 @@ namespace SBRL.GlidingSquirrel.Http
 		/// The cancellation token we use to stop the server and all it's threads
 		/// </summary>
 		protected CancellationTokenSource canceller = new CancellationTokenSource();
+		/// <summary>
+		/// Shortcut property to get the cancellation token directly.
+		/// </summary>
 		protected CancellationToken cancellationToken {
 			get {
 				return canceller.Token;
@@ -170,7 +180,12 @@ namespace SBRL.GlidingSquirrel.Http
 
 			while(server.Active)
 			{
-				TcpClient nextClient = await server.AcceptTcpClientAsync();
+				TcpClient nextClient;
+				try {
+					nextClient = await server.AcceptTcpClientAsync();
+				} catch (ObjectDisposedException) {
+					break; // break out - the server must have been shutdown
+				}
 				ThreadPool.QueueUserWorkItem(new WaitCallback(HandleClientThreadRoot), nextClient);
 			}
 

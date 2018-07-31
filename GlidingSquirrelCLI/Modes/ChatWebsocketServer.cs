@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using SBRL.GlidingSquirrel.Http;
@@ -25,6 +26,11 @@ namespace SBRL.GlidingSquirrel.CLI.Modes
 
 			// Echo text and binary messages we geet sent
 			client.OnTextMessage += async (object textSender, TextMessageEventArgs textEventArgs) => {
+				Console.WriteLine($"'{textEventArgs.Payload.Trim()}' / 'shutdown'");
+				if (Regex.Replace(textEventArgs.Payload, @"^\[[^\]]+\]\s+", "") == "shutdown") {
+					Console.WriteLine("Shutting down.");
+					Stop("Shutting chat server down!");
+				}
 				Console.WriteLine("Reflecting message '{0}'.", textEventArgs.Payload);
 				await Reflect(textSender as WebsocketClient, textEventArgs.Payload);
 			};
