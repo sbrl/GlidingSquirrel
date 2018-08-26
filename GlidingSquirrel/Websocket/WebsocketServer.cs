@@ -243,13 +243,14 @@ namespace SBRL.GlidingSquirrel.Websocket
 					}
 
 					Task.WaitAll(pingTasks.ToArray());
+
+					await Task.Delay((int)PingInterval.TotalSeconds / 4, cancellationToken);
 				}
 				catch(Exception error)
 				{
 					Log.WriteLine(LogLevel.Error, "[WebsocketServer/Maintenance] {0}", error);
 				}
 
-				await Task.Delay((int)PingInterval.TotalSeconds / 4, cancellationToken);
 			}
 
 			Log.WriteLine(LogLevel.System, "[WebsocketServer/Maintenance] Ending maintenance loop.");
